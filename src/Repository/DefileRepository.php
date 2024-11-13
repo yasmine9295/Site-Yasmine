@@ -2,15 +2,12 @@
 
 namespace App\Repository;
 
-
 use App\Entity\Defile;
-use App\Repository\DefileRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Artiste>
+ * @extends ServiceEntityRepository<Defile>
  *
  * @method Defile|null find($id, $lockMode = null, $lockVersion = null)
  * @method Defile|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,51 +16,33 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class DefileRepository extends ServiceEntityRepository
 {
-    public function __construct (ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Defile::class);
     }
 
-    public function listeDefilesComplete()
-    {
-        return $this->createQueryBuilder('def')
-           ->select('def','a')
-           ->leftJoin('def.albums','a')
-           ->orderBy('def.nom','ASC')
-           ->getQuery()
-           ->getResult();
-    }
+//    /**
+//     * @return Defile[] Returns an array of Defile objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('d')
+//            ->andWhere('d.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('d.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-    public function listeDefilesCompletePaginee()
-    {
-        return $this->createQueryBuilder('art')
-           ->select('def','a')
-           ->leftJoin('def.albums','a')
-           ->orderBy('def.nom','ASC')
-           ->getQuery()
-           ->getResult();
-    }
-    public function add(Defile $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    public function remove(Defile $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    public function listeDefileSimple()
-    {
-        return $this->createQueryBuilder('art')
-           ->orderBy('art.nom','ASC');
-    }
+//    public function findOneBySomeField($value): ?Defile
+//    {
+//        return $this->createQueryBuilder('d')
+//            ->andWhere('d.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }

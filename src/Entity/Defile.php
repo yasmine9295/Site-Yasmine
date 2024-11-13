@@ -2,153 +2,49 @@
 
 namespace App\Entity;
 
-use App\Entity\Album;
-use App\Entity\Defile;
 use App\Repository\DefileRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Collection;
-
-
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DefileRepository::class)]
-#[UniqueEntity(
-    fields: ['nom'],
-    message: 'Le nom de l\'artiste est déja utilisé dans la base.',
-)]
 class Defile
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"IDENTITY")]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message:"Le nom est obligatoire")]
-    private $nom;
+    #[ORM\Column(length: 255)]
+    private ?string $NomD = null;
 
-    #[ORM\Column(type: 'text')]
-    #[Assert\Length(
-    min: 10,
-    max: 15,
-    minMessage: 'La description doit comporter au minimum {{ limit }}',
-    maxMessage: 'La description doit comporter au maximum {{ limit }}')]
-    private $description;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $site;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $image;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $type;
-
-    #[ORM\OneToMany(mappedBy: 'artiste', targetEntity: Album::class)]
-    private $albums;
-
-    public function __construct()
-    {
-        $this->albums = new ArrayCollection();
-    }
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $Date = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function getNomD(): ?string
     {
-        $this->id = $id;
+        return $this->NomD;
+    }
+
+    public function setNomD(string $NomD): static
+    {
+        $this->NomD = $NomD;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->nom;
+        return $this->Date;
     }
 
-    public function setNom(string $nom): self
+    public function setDate(\DateTimeInterface $Date): static
     {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getdescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setdescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSite(): ?string
-    {
-        return $this->site;
-    }
-
-    public function setSite(?string $site): self
-    {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Album>
-     */
-    public function getAlbums(): Collection
-    {
-        return $this->albums;
-    }
-
-    public function addAlbum(Album $album): self
-    {
-        if (!$this->albums->contains($album)) {
-            $this->albums[] = $album;
-            $album->setArtiste($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAlbum(Album $album): self
-    {
-        if ($this->albums->removeElement($album)) {
-            // set the owning side to null (unless already changed)
-            if ($album->getArtiste() === $this) {
-                $album->setArtiste(null);
-            }
-        }
+        $this->Date = $Date;
 
         return $this;
     }
