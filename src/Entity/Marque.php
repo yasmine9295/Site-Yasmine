@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MarqueRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MarqueRepository::class)]
@@ -27,6 +29,14 @@ class Marque
 
     #[ORM\Column(length: 255)]
     private ?string $Image = null;
+
+    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Defile::class)]
+    private Collection $defiles;
+
+    public function __construct()
+    {
+        $this->defiles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Marque
     public function setImage(string $Image): static
     {
         $this->Image = $Image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Defile>
+     */
+    public function getDefiles(): Collection
+    {
+        return $this->defiles;
+    }
+
+    public function addDefile(Defile $defile): static
+    {
+        if (!$this->defiles->contains($defile)) {
+            $this->defiles->add($defile);
+            $defile->setMarque($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDefile(Defile $defile): static
+    {
+        if ($this->defiles->removeElement($defile)) {
+            // set the owning side to null (unless already changed)
+            if ($defile->getMarque() === $this) {
+                $defile->setMarque(null);
+            }
+        }
 
         return $this;
     }
