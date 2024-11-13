@@ -2,19 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ArtisteRepository;
+use App\Entity\Album;
+use App\Entity\Defile;
+use App\Repository\DefileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Collection;
 
-#[ORM\Entity(repositoryClass: ArtisteRepository::class)]
+
+
+#[ORM\Entity(repositoryClass: DefileRepository::class)]
 #[UniqueEntity(
     fields: ['nom'],
     message: 'Le nom de l\'artiste est déja utilisé dans la base.',
 )]
-class Artiste
+class Defile
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy:"IDENTITY")]
