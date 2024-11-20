@@ -21,7 +21,7 @@ class Marque
     #[ORM\Column(length: 255)]
     private ?string $CreateurM = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 3000)]
     private ?string $HistoireM = null;
 
     #[ORM\Column(length: 255)]
