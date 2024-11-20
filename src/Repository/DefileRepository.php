@@ -20,6 +20,21 @@ class DefileRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Defile::class);
     }
+    
+        /**
+    * @return Query Returns an array of Artiste objects
+     */
+    public function listeDefilesCompletePaginee()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d','m')
+            ->leftJoin('d.marques','m')
+            ->orderBy('d.nom', 'ASC')         
+            ->getQuery()
+           
+        ;
+   
+ }
 
 //    /**
 //     * @return Defile[] Returns an array of Defile objects

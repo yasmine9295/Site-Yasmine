@@ -31,6 +31,12 @@ class Defile
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
     private Collection $mannequin;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Thème = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
@@ -128,6 +134,30 @@ class Defile
     public function removeMannequin(Mannequins $mannequin): static
     {
         $this->mannequin->removeElement($mannequin);
+
+        return $this;
+    }
+
+    public function getThème(): ?string
+    {
+        return $this->Thème;
+    }
+
+    public function setThème(?string $Thème): static
+    {
+        $this->Thème = $Thème;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

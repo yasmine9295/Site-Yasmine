@@ -27,6 +27,9 @@ class Mannequins
     #[ORM\ManyToMany(targetEntity: Defile::class, mappedBy: 'mannequin')]
     private Collection $defiles;
 
+    #[ORM\Column(length: 1000)]
+    private ?string $biographieM = null;
+
     public function __construct()
     {
         $this->defiles = new ArrayCollection();
@@ -96,6 +99,18 @@ class Mannequins
         if ($this->defiles->removeElement($defile)) {
             $defile->removeMannequin($this);
         }
+
+        return $this;
+    }
+
+    public function getBiographieM(): ?string
+    {
+        return $this->biographieM;
+    }
+
+    public function setBiographieM(string $biographieM): static
+    {
+        $this->biographieM = $biographieM;
 
         return $this;
     }
