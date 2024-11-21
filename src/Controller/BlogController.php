@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
-    #[Route('/blogs', name: 'blogs' , methods:"GET")]
+    #[Route('/blogs', name: 'admin_blogs' , methods:"GET")]
 
     public function listeblogs(blogsController $repo, PaginatorInterface $paginator, Request $request)
     {

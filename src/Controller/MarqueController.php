@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MarqueController extends AbstractController
 {
-    #[Route('/marque', name: 'marque' , methods:"GET")]
+    #[Route('/marque', name: 'admin_marque' , methods:"GET")]
 
     public function listeMarques(MarqueController $repo, PaginatorInterface $paginator, Request $request)
     {

@@ -14,20 +14,20 @@
     <!-- Navigation bar -->
     <nav class="navbar">
         <a href="{{ path('accueil') }}" class="navbar-brand">Mon blog</a>
-        <button class="navbar-toggler" onclick="toggleMenu()">☰</button>
         <div class="navbar-menu">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{{ path('defiles') }}">Défilés</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('marque') }}">Marques</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('mannequins') }}">Mannequins</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('blogs') }}">Partie Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('admin_defiles') }}">Défilés</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('admin_marque') }}">Marques</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('admin_mannequins') }}">Mannequins</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('admin_blogs') }}">Partie Blog</a></li>
                 {% if app.user and is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#">Administration</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ path('admin_artistes') }}">Gestion des Défilés</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_styles') }}">Gestion des Marques</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_albums') }}">Gestion des Albums</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_defiles') }}">Gestion des Défilés</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_marque') }}">Gestion des Marques</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_mannequins') }}">Gestion des Mannequins</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_blogs') }}">Gestion du blog</a></li>
                     </ul>
                 </li>
                 {% endif %}

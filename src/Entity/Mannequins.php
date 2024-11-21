@@ -30,9 +30,13 @@ class Mannequins
     #[ORM\Column(length: 1000)]
     private ?string $biographieM = null;
 
+    #[ORM\OneToMany(mappedBy: 'mannequinId', targetEntity: ImageMannequin::class)]
+    private Collection $imageMannequins;
+
     public function __construct()
     {
         $this->defiles = new ArrayCollection();
+        $this->imageMannequins = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +115,36 @@ class Mannequins
     public function setBiographieM(string $biographieM): static
     {
         $this->biographieM = $biographieM;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageMannequin>
+     */
+    public function getImageMannequins(): Collection
+    {
+        return $this->imageMannequins;
+    }
+
+    public function addImageMannequin(ImageMannequin $imageMannequin): static
+    {
+        if (!$this->imageMannequins->contains($imageMannequin)) {
+            $this->imageMannequins->add($imageMannequin);
+            $imageMannequin->setMannequinId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageMannequin(ImageMannequin $imageMannequin): static
+    {
+        if ($this->imageMannequins->removeElement($imageMannequin)) {
+            // set the owning side to null (unless already changed)
+            if ($imageMannequin->getMannequinId() === $this) {
+                $imageMannequin->setMannequinId(null);
+            }
+        }
 
         return $this;
     }

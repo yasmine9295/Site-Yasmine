@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefileController extends AbstractController
 {
-    #[Route('/defiles', name: 'defiles' , methods:"GET")]
+    #[Route('/defiles', name: 'admin_defiles' , methods:"GET")]
 
     public function listeDefiles(DefileRepository $repo, PaginatorInterface $paginator, Request $request)
     {
@@ -23,7 +23,7 @@ class DefileController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('defile/listeDefiles.html.twig', [
+        return $this->render('admin/defile/listeDefiles.html.twig', [
             'lesDefiles' => $defiles
         ]);
     }
@@ -32,7 +32,7 @@ class DefileController extends AbstractController
 
     public function ficheDefile(Defile $defile)
     {
-        return $this->render('defile/ficheDefile.html.twig', [
+        return $this->render('admin/defile/ficheDefile.html.twig', [
             'leDefile' => $defile
         ]);
     }

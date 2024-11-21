@@ -32,4 +32,16 @@ class ImageVetement
 
         return $this;
     }
+
+    public function getDefile(): ?Defile
+    {
+        return $this->defile;
+    }
+
+    public function setDefile(?Defile $defile): static
+    {
+        $this->defile = $defile;
+
+        return $this;
+    }
 }

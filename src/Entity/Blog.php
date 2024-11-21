@@ -29,8 +29,8 @@ class Blog
     #[ORM\JoinColumn(nullable: true)]
     private ?Defile $defile = null;
 
-    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: ImageBlog::class)]
-    private Collection $imageBlogs;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -90,32 +90,14 @@ class Blog
         return $this;
     }
 
-    /**
-     * @return Collection<int, ImageBlog>
-     */
-    public function getImageBlogs(): Collection
+    public function getImage(): ?string
     {
-        return $this->imageBlogs;
+        return $this->image;
     }
 
-    public function addImageBlog(ImageBlog $imageBlog): static
+    public function setImage(?string $image): static
     {
-        if (!$this->imageBlogs->contains($imageBlog)) {
-            $this->imageBlogs->add($imageBlog);
-            $imageBlog->setBlog($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImageBlog(ImageBlog $imageBlog): static
-    {
-        if ($this->imageBlogs->removeElement($imageBlog)) {
-            // set the owning side to null (unless already changed)
-            if ($imageBlog->getBlog() === $this) {
-                $imageBlog->setBlog(null);
-            }
-        }
+        $this->image = $image;
 
         return $this;
     }

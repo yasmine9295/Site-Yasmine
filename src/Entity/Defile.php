@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\DefileRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DefileRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: DefileRepository::class)]
 class Defile
@@ -37,10 +38,12 @@ class Defile
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $description = null;
 
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
         $this->mannequin = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -65,7 +68,7 @@ class Defile
         return $this->Date;
     }
 
-    public function setDate(\DateTimeInterface $Date): static
+    public function setDate(DateTimeInterface $Date): static
     {
         $this->Date = $Date;
 

@@ -28,8 +28,8 @@ class DefileRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('d')
             ->select('d','m')
-            ->leftJoin('d.marques','m')
-            ->orderBy('d.nom', 'ASC')         
+            ->leftJoin('d.marque','m')
+            ->orderBy('d.NomD', 'ASC')         
             ->getQuery()
            
         ;
