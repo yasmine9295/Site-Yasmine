@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Mannequins;
-use App\Controller\MannequinsController;
+use App\Repository\MannequinsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ class MannequinsController extends AbstractController
 {
     #[Route('/mannequins', name: 'admin_mannequins' , methods:"GET")]
 
-    public function listeMannequins(MannequinsController $repo, PaginatorInterface $paginator, Request $request)
+    public function listeMannequins(MannequinsRepository $repo, PaginatorInterface $paginator, Request $request)
     {
         $mannequins=$paginator->paginate(
             $repo->listeMannequinsCompletePaginee(),

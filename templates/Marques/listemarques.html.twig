@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Marques{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary font-weight-bold">Gestion des Marques</h1>
+
+    <div class="d-flex justify-content-end mb-9">
+        <a href="{{ path('admin_marque') }}" class="btn btn-lg btn-outline-dark">Ajouter un Défilé</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for laMarque in lesmarques %}
+            <div class="col">
+                <div class="card shadow-lg">
+                    <img src="{{ asset('images/' ~ laMarque.image) }}" alt="{{ laMarque.nomM }}" class="card-img-top img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ laMarque.nomM }}</h5>
+                        <p class="card-text"><strong>Créateur :</strong> {{ laMarque.createurM }}</p>
+                        <p class="card-text"><strong>Histoire :</strong> {{ laMarque.histoireM }}</p>
+                        <p class="card-text"><strong>Représentants :</strong> {{ laMarque.representantM }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ path('admin_defile_modif', {'id': laMarque.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Modifier</a>
+                        <a class="btn btn-danger btn-sm"
+                           data-bs-toggle="modal" 
+                           data-bs-target="#modalSimple"
+                           data-titre="Suppression de la Marque"
+                           data-message="Etes-vous sûr de vouloir supprimer la marque : {{ laMarque.nomM }} ?"
+                           data-libelleBouton="Supprimer la Marque"
+                           {# data-lien="{{ path('admin_marque_suppression', {'id': laMarque.id}) }}"> #}
+                           <i class="far fa-trash-alt"></i> Supprimer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="navigation mx-auto mt-4">
+        {{ knp_pagination_render(lesmarques) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {% include "include/_modale.html.twig" %}
+{% endblock %}

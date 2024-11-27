@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Marque;
-use App\Controller\MarqueController;
+use App\Repository\MarqueRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +14,14 @@ class MarqueController extends AbstractController
 {
     #[Route('/marque', name: 'admin_marque' , methods:"GET")]
 
-    public function listeMarques(MarqueController $repo, PaginatorInterface $paginator, Request $request)
+    public function listeMarques(MarqueRepository $repo, PaginatorInterface $paginator, Request $request)
     {
         $marques=$paginator->paginate(
             $repo->listemarquesCompletePaginee(),
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('defile/listemarques.html.twig', [
+        return $this->render('marques/listemarques.html.twig', [
             'lesmarques' => $marques
         ]);
     }
@@ -30,7 +30,7 @@ class MarqueController extends AbstractController
 
     public function ficheMarque(Marque $marque)
     {
-        return $this->render('marque/ficheMarque.html.twig', [
+        return $this->render('marques/ficheMarque.html.twig', [
             'laMarque' => $marque
         ]);
     }

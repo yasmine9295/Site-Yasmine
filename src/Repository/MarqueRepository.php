@@ -21,6 +21,17 @@ class MarqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Marque::class);
     }
 
+       /**
+ * @return Query
+ */
+public function listemarquesCompletePaginee()
+{
+    return $this->createQueryBuilder('m')
+        ->select('m')  // Sélectionnez toutes les colonnes que vous souhaitez
+        ->orderBy('m.nomM', 'ASC')  // Tri par nom
+        ->getQuery();
+}
+
 //    /**
 //     * @return Marque[] Returns an array of Marque objects
 //     */

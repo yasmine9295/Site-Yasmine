@@ -1,30 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fiche de l'album{% endblock %}
+{% block title %}Fiche de l'marque{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Fiche de l'album</h1>
+<h1 class="pt-2 text-center">Fiche de l'marque</h1>
 <hr>
     <div class="card mb-3">
-        <h3 class="card-header">{{leAlbum.nom}}</h3>
+        <h3 class="card-header">{{lemarque.nom}}</h3>
         <div class="row">        
             <div class="col-3 d-flex align-items-center mx-auto">
-                <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{leAlbum.image}}" alt="Card image">
+                <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{lemarque.image}}" alt="Card image">
             </div>
             <div class="col"><div class="card-body">
                 <h5 class="card-title">
-                    <a href="  {{path('ficheArtiste', {'id': leAlbum.artiste.id})}}" class="badge bg-dark">  {{leAlbum.artiste.nom}}</a>
+                    <a href="  {{path('ficheArtiste', {'id': lemarque.artiste.id})}}" class="badge bg-dark">  {{lemarque.artiste.nom}}</a>
                 </h5>
-                <p class="card-text">{{leAlbum.date}}</p>
+                <p class="card-text">{{lemarque.date}}</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> 
-                    {% for leStyle in leAlbum.styles %}
+                    {% for leStyle in lemarque.styles %}
                 <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
                 {% endfor %}
                 </li>
                 <li class="list-group-item">
-                {% set nb = leAlbum.morceaux|length %}
+                {% set nb = lemarque.morceaux|length %}
                 {{nb}} {% if nb > 1 %} morceaux {% else %} morceau {% endif %}
             </li>
         </ul>
@@ -40,7 +40,7 @@
       <th scope="col-3">Note</th>
     </tr>
      </tbody>
-     {% for leMorceau in leAlbum.morceaux %}
+     {% for leMorceau in lemarque.morceaux %}
     <tr>
         <td scope="row">{{leMorceau.piste}}</td>
         <td>{{leMorceau.titre}}</td>

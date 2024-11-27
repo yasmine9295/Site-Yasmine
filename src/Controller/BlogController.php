@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Blog;
-use App\Controller\BlogController;
+use App\Repository\BlogRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ class BlogController extends AbstractController
 {
     #[Route('/blogs', name: 'admin_blogs' , methods:"GET")]
 
-    public function listeblogs(blogsController $repo, PaginatorInterface $paginator, Request $request)
+    public function listeblogs(BlogRepository $repo, PaginatorInterface $paginator, Request $request)
     {
         $blogs=$paginator->paginate(
             $repo->listeblogsCompletePaginee(),
