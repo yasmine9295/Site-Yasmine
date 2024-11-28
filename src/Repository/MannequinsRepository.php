@@ -21,20 +21,16 @@ class MannequinsRepository extends ServiceEntityRepository
         parent::__construct($registry, Mannequins::class);
     }
 
-//    /**
-//     * @return Mannequins[] Returns an array of Mannequins objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+     /**
+ * @return Query
+ */
+public function listeMannequinsCompletePaginee()
+{
+    return $this->createQueryBuilder('a')
+        ->select('a')  // Sélectionnez toutes les colonnes que vous souhaitez
+        ->orderBy('a.Nom', 'ASC')  // Tri par nom
+        ->getQuery();
+}
 
 //    public function findOneBySomeField($value): ?Mannequins
 //    {

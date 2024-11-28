@@ -21,7 +21,7 @@ class MannequinsController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('mannequins/listeMannequins.html.twig', [
+        return $this->render('admin/Mannequins/listeMannequins.html.twig', [
             'lesmannequins' => $mannequins
         ]);
     }
@@ -30,7 +30,7 @@ class MannequinsController extends AbstractController
 
     public function ficheMannequin(Mannequins $mannequin)
     {
-        return $this->render('mannequin/ficheMannequin.html.twig', [
+        return $this->render('Mannequin/ficheMannequin.html.twig', [
             'leMannequin' => $mannequin
         ]);
     }

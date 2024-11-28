@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1 class="pt-2 text-center">Gestion des mannequins</h1>
-<a href=" {{path('admin_mannequin')}}" class="btn btn-dark">Ajouter un defile</a>
+{# <a href=" {{path('admin_mannequin')}}" class="btn btn-dark">Ajouter un defile</a> #}
 
 <hr> 
 <table class="table table-hover">
@@ -13,20 +13,18 @@
       <th scope="col-1">Nom</th>
       <th scope="col-3">Prenom</th>
       <th scope="col-1">Nationalité</th>
-      <th scope="col-2">Défilés</th>
       <th scope="col-1">Biographie</th>
     
     </tr>
 </thead>  
     <tbody>
-        {% for ledefile in lesDefiles %}
+        {% for lemannequin in lesmannequins %}
             <tr>
-            <td class="col-3">{{ledefile.id}}</td>
-            <td class="col-1">{{ledefile.Nom}}</td>
-            <td class="col-1">{{ledefile.Prenom}}</td>
-            <td class="col-1">{{ledefile.Nationalite}}</td>
-            <td class="col-1">{{ledefile.defiles}}</td>
-             <td class="col-1">{{ledefile.biographieM}}</td>
+            <td class="col-3">{{lemannequin.id}}</td>
+            <td class="col-1">{{lemannequin.Nom}}</td>
+            <td class="col-1">{{lemannequin.Prenom}}</td>
+            <td class="col-1">{{lemannequin.Nationalite}}</td>
+             <td class="col-1">{{lemannequin.biographieM}}</td>
             <td class="col-1">
             {# {% for leStyle in ledefile.styles %} 
             <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
@@ -35,23 +33,23 @@
             <td class="col-2">
             <span class="align-self-center badge bg-dark"> {{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</span>
             {# </td> #}
-            <td class="col-2">
-                <a href=" {{path('admin_defile_modif', {'id': lemannequin.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
+            {# <td class="col-2">
+                <a href=" {{path('admin_mannequins_modif', {'id': lemannequin.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
                 <a class="btn btn-dark"
                 data-bs-toggle="modal" 
                 data-bs-target="#modalSimple"
                 data-titre="Suppression d'un mannequin"
-                data-message="Etes vous sur de vouloir supprimer l'mannequin : {{lemannequin.NomD}}"
+                data-message="Etes vous sur de vouloir supprimer l'mannequin : {{lemannequin.Nom}}"
                 data-libelleBouton="Supprimer l'mannequin"
-                data-lien="{{path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                data-lien="{{path('admin_mannequins_suppression', {'id': lemannequin.id}) }}">
                 <i class="far fa-trash-alt"></i></a>
-            </td>
+            </td> #}
             </tr>
             {% endfor %}
     </tbody>
 </table>
 <div class="navigation mx-auto">
-		{{ knp_pagination_render(lesMannequins) }}
+		{{ knp_pagination_render(lesmannequins) }}
 	</div>
 </div>
 {% endblock %}

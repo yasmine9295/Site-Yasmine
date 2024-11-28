@@ -12,25 +12,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
-    #[Route('/blogs', name: 'admin_blogs' , methods:"GET")]
+    #[Route('/blog', name: 'admin_blog' , methods:"GET")]
 
-    public function listeblogs(BlogRepository $repo, PaginatorInterface $paginator, Request $request)
+    public function listeBlogs(BlogRepository $repo, PaginatorInterface $paginator, Request $request)
     {
         $blogs=$paginator->paginate(
-            $repo->listeblogsCompletePaginee(),
+            $repo->listeBlogsCompletePaginee(),
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('blogs/listeblogs.html.twig', [
+        return $this->render('blog/listeBlogs.html.twig', [
             'lesblogs' => $blogs
         ]);
     }
         
-    #[Route('/blog/{id}', name: 'ficheblog' , methods:"GET")]
+    #[Route('/blog/{id}', name: 'formAjoutMofifblog' , methods:"GET")]
 
     public function ficheblog(Blog $blog)
     {
-        return $this->render('blog/ficheblog.html.twig', [
+        return $this->render('blog/formAjoutMofifBlog.html.twig', [
             'leblog' => $blog
         ]);
     }
