@@ -13,42 +13,14 @@
         /* Global styles */
         body {
             font-family: 'Helvetica', sans-serif;
-            background-color: #f5f5f5; /* Light cream background */
-            color: #333333; /* Dark grey text */
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
         }
 
-        /* Background image for the fashion show theme */
-        .main-background {
-            background-image: url('https://cdn.photoroom.com/v1/assets-cached.jpg?path=backgrounds_v3/white/Photoroom_white_background_extremely_fine_texture_only_white_co_d285fc74-d562-4a9f-b0b8-8cf7500231d8.jpg'); /* Replace with your image path */
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-            height: 100vh;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .intro-text {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .intro-text p {
-            font-size: 1.2rem;
-            font-weight: normal;
-            margin-top: 10px;
-        }
-
-        /* Navigation Bar */
+        /* Navbar styles */
         .navbar {
-            background-color: #fff; /* White background */
+            background-color: #fff;
             padding: 15px 30px;
             position: fixed;
             top: 0;
@@ -88,32 +60,62 @@
 
         .nav-link:hover {
             color: #333;
-            transform: translateY(-2px); /* Elegant hover effect */
+            transform: translateY(-2px);
         }
 
-        .nav-item.dropdown .dropdown-menu {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .dropdown-item {
-            color: #555;
-            font-weight: 500;
-        }
-
-        .dropdown-item:hover {
-            background-color: #e4d9b2; /* Soft cream color */
-            color: #333;
-        }
-
-        .navbar-nav-right {
+        /* Main section with video */
+        .main-section {
             display: flex;
-            justify-content: flex-end;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .left-section {
+            width: 50%;
+            background-color: #222;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .right-section {
+            width: 50%;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* To keep the text on top */
+            filter: blur(5px);
+        }
+
+        .content-text {
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content-text h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .content-text p {
+            font-size: 1.2rem;
         }
 
         .btn {
-            background-color: #e4d9b2; /* Cream color */
+            background-color: #f1f1f1;
             color: #333;
             padding: 10px 20px;
             font-size: 1rem;
@@ -122,95 +124,61 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
         }
 
         .btn:hover {
-            background-color: #d1c59a; /* Slightly darker cream on hover */
-            transform: translateY(-2px); /* Elegant hover effect */
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
         }
-
-        /* Main content area */
-        .container {
-            padding: 40px 20px;
-            background-color: #fff8e1; /* Creamy light background */
-            border-radius: 8px;
-            margin-top: 100px; /* Avoid content being hidden behind navbar */
-        }
-
-        /* Alert styles */
-        .alert {
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        /* Styling for section headings */
-        h1, h2, h3 {
-            color: #333;
-            font-weight: bold;
-        }
-
     </style>
     {% endblock %}
 </head>
 <body>
 
-<!-- Background section for the fashion theme -->
-<div class="main-background">
-    <div class="intro-text">
-        <h1>𝒀&amp;𝑴</h1>
-        <p>Découvrez les dernières tendances de la mode</p>
-    </div>
-</div>
-
-<!-- Navigation bar -->
+<!-- Navbar -->
 <nav class="navbar">
     <a href="{{ path('accueil') }}" class="navbar-brand">
-        <img src="{{ asset('images.jpg/logo.png') }}" src="" class="navbar-logo">
-    </a
+        <img src="{{ asset('images/logo.png') }}" alt="Y&M Logo" class="navbar-logo">
+    </a>
     <div class="navbar-menu">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{{ path('admin_defiles') }}">Défilés</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ path('admin_marque') }}">Marques</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ path('admin_mannequins') }}">Mannequins</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ path('admin_blogs') }}">Partie Blog</a></li>
-            {% if app.user and is_granted('ROLE_ADMIN') %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#">Administration</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ path('admin_defiles') }}">Gestion des Défilés</a></li>
-                    <li><a class="dropdown-item" href="{{ path('admin_marque') }}">Gestion des Marques</a></li>
-                    <li><a class="dropdown-item" href="{{ path('admin_mannequins') }}">Gestion des Mannequins</a></li>
-                    <li><a class="dropdown-item" href="{{ path('admin_blogs') }}">Gestion du blog</a></li>
-                </ul>
-            </li>
-            {% endif %}
-        </ul>
-        <ul class="navbar-nav-right">
-            {% if app.user %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#"> {{ app.user.fullName }}</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                </ul>
-            </li>
-            {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Se Connecter</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a></li>
-            {% endif %}
         </ul>
     </div>
 </nav>
 
-<!-- Main content area -->
-<div class="">
-    {% for label, messages in app.flashes %}
-    <div class="alert alert-{{ label }} mt-3">
-        {% for message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %}
+<!-- Main content area with video background -->
+<div class="main-section">
+    <!-- Left section with video background -->
+    <div class="left-section">
+        <video autoplay muted loop class="video-container">
+            <source src="https://www.example.com/video.mp4" type="video/mp4"> 
+            Your browser does not support the video tag.
+        </video>
+        <div class="content-text">
+            <h1>Notre Présentation</h1>
+            <p>Plongez dans l'univers de Y&M </p>
+            <p>où l'élégance rencontre la mode.</p>
+            <a href="{{ path('accueil') }}" class="btn">Découvrir</a>
+        </div>
     </div>
-    {% endfor %}
+
+    <!-- Right section for presentation or other content -->
+    <div class="right-section">
+        <div class="content-text">
+           <h1>Bienvenue dans le monde du luxe</h1>
+             <p>Découvrez nos dernières collections et défilés</p>
+            <a href="{{ path('admin_blogs') }}" class="btn">Explorez le Blog</a>
+        </div>
+    </div>
+</div>
+
+<!-- Other content -->
+<div class="container">
     {% block body %}{% endblock %}
 </div>
 
