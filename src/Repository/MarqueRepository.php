@@ -24,11 +24,11 @@ class MarqueRepository extends ServiceEntityRepository
        /**
  * @return Query
  */
-public function listeblogsCompletePaginee()
+public function listemarquesCompletePaginee()
 {
-    return $this->createQueryBuilder('b')
-        ->select('b')  // Sélectionnez toutes les colonnes que vous souhaitez
-        ->orderBy('b.nom', 'ASC')  // Tri par nom
+    return $this->createQueryBuilder('m')
+        ->select('m')  // Sélectionnez toutes les colonnes que vous souhaitez
+        ->orderBy('m.nomM', 'ASC')  // Tri par nom
         ->getQuery();
 }
 
