@@ -1,31 +1,168 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion mannequin{% endblock %}
+{% block title %}Liste des mannequins{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Style général des cartes */
+        .card {
+            background-color: #f1f1f1f; /* Fond blanc crème */
+            border: none;
+            border-radius: 10px; /* Coins arrondis pour une apparence chic */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Ombre douce mais marquée */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Animation fluide */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Effet de survol avec brillance élégante */
+        .card:hover {
+            transform: translateY(-10px); /* Légère élévation */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Ombre élégante */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); /* Dégradé lumineux */
+        }
+
+        /* Effet pailleté subtil sur survol */
+        .card:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Texture pailletée discrète */
+            opacity: 0.1;
+            pointer-events: none;
+            animation: sparkle 1.5s ease-in-out infinite; /* Animation légère de scintillement */
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 0.1; }
+        }
+
+        /* Style du titre de la carte */
+        .card-title {
+            font-size: 1.75rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            color: #090706;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Style du sous-titre */
+        .card-subtitle {
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #090706;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Style du texte */
+        .card-text {
+            font-size: 1.1rem;
+            color: #090706;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1.75rem;
+        }
+
+            /* Style des boutons */
+        .card .btn {
+            font-size: 0.9rem;  /* Taille du texte réduite pour les rendre plus petits */
+            padding: 0.5rem 1rem;  /* Réduire le padding pour des boutons plus compacts */
+            text-transform: uppercase;
+            letter-spacing: 1.2px;  /* Espacement légèrement réduit */
+            border-radius: 0;  /* Enlever les coins arrondis pour rendre les boutons carrés */
+            background-color: #090706; /* Couleur élégante */
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-right: 0.75rem;  /* Espacement entre les boutons */
+        }
+
+        .card .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #34495e;  /* Changement subtil de couleur au survol */
+        }
+
+        /* Style des colonnes pour que les cartes soient 3 par ligne */
+        .row-cols-lg-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; /* Espacement plus large entre les cartes */
+        }
+
+        /* Pour les petits écrans */
+        @media (max-width: 768px) {
+            .row-cols-lg-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pour les écrans moyens */
+        @media (min-width: 769px) and (max-width: 991px) {
+            .row-cols-md-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Amélioration du titre principal */
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #090706;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .text-primary {
+            color: #090706 !important;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Gestion des mannequins</h1>
-{# <a href=" {{path('admin_mannequin')}}" class="btn btn-dark">Ajouter un defile</a> #}
+<h1 class="pt-2 text-center">Liste des mannequins</h1>
+  <div class="d-flex justify-content-end mb-9">
+        <a href="{{path('admin_mannequins')}}" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
+        </a>
 
-<hr> 
-<table class="table table-hover">
-<thead>
-    <tr>
-      <th scope="col-1">Nom</th>
-      <th scope="col-3">Prenom</th>
-      <th scope="col-1">Nationalité</th>
-      <th scope="col-1">Biographie</th>
-    
-    </tr>
-</thead>  
-    <tbody>
-        {% for lemannequin in lesmannequins %}
-            <tr>
-            <td class="col-3">{{lemannequin.id}}</td>
-            <td class="col-1">{{lemannequin.Nom}}</td>
-            <td class="col-1">{{lemannequin.Prenom}}</td>
-            <td class="col-1">{{lemannequin.Nationalite}}</td>
-             <td class="col-1">{{lemannequin.biographieM}}</td>
-            <td class="col-1">
+     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
+         {% for lemannequin in lesmannequins %}
+            <div class="col">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{lemannequin.id}}</h5>
+                        <h6 class="card-subtitle mb-2">{{lemannequin.Nom}} - {{lemannequin.Prenom}}</h6>
+                        <h6 class="card-subtitle mb-2">{{lemannequin.Nationalite}}</h6>
+                        <p class="card-text">
+                            <strong>Description:</strong> {{lemannequin.biographieM}}
+                        </p>
+                        {# <div class="d-flex justify-content-between">
+                            <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-pen"></i> Modifier
+                            </a>
+                            <a class="btn btn-danger btn-sm"
+                               data-bs-toggle="modal"
+                               data-bs-target="#modalSimple"
+                               data-titre="Suppression d'un défilé"
+                               data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
+                               data-libelleBouton="Supprimer ce défilé"
+                               data-lien="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}">
+                                <i class="far fa-trash-alt"></i> Supprimer
+                            </a> #}
+                        </div>
+                    </div>
+                </div>
             {# {% for leStyle in ledefile.styles %} 
             <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
             {# {% endfor %} 
@@ -47,7 +184,6 @@
             </tr>
             {% endfor %}
     </tbody>
-</table>
 <div class="navigation mx-auto">
 		{{ knp_pagination_render(lesmannequins) }}
 	</div>
