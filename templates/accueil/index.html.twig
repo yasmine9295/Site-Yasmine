@@ -49,6 +49,7 @@
             margin-right: 20px;
         }
 
+       
         .nav-link {
             color: #555;
             font-size: 1.1rem;
@@ -63,6 +64,7 @@
             transform: translateY(-2px);
         }
 
+      
         /* Main section with video */
         .main-section {
             display: flex;
@@ -155,12 +157,9 @@
 <div class="main-section">
     <!-- Left section with video background -->
     <div class="left-section">
-        <video autoplay muted loop class="video-container">
-            <source src="https://youtu.be/bMkd-ZitjhM?si=6l8qERZ9KeRi_VaE.mp4" type="video/mp4"> 
-            Your browser does not support the video tag.
-        </video>
+        <!-- YouTube embedded video -->
+        <iframe class="video-container" src="https://www.youtube.com/embed/bMkd-ZitjhM?autoplay=1&mute=1&loop=1&playlist=bMkd-ZitjhM" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <div class="content-text">
-        
             <h1>Notre Présentation</h1>
             <p>Plongez dans l'univers de Y&M </p>
             <p>où l'élégance rencontre la mode.</p>
@@ -170,9 +169,11 @@
 
     <!-- Right section for presentation or other content -->
     <div class="right-section">
+        <!-- YouTube embedded video -->
+        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <div class="content-text">
-           <h1>Bienvenue dans le monde du luxe</h1>
-             <p>Découvrez nos dernières collections et défilés</p>
+            <h1>Bienvenue dans le monde du luxe</h1>
+            <p>Découvrez nos dernières collections et défilés</p>
             <a href="{{ path('admin_blog') }}" class="btn">Explorez le Blog</a>
         </div>
     </div>
@@ -187,3 +188,12 @@
 
 </body>
 </html>
+
+ <style>
+       
+       
+
+        
+
+
+
