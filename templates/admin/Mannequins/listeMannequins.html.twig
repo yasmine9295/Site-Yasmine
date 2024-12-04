@@ -20,30 +20,27 @@
     <tbody>
         {% for lemannequin in lesmannequins %}
             <tr>
-            <td class="col-3">{{lemannequin.id}}</td>
+
             <td class="col-1">{{lemannequin.Nom}}</td>
             <td class="col-1">{{lemannequin.Prenom}}</td>
             <td class="col-1">{{lemannequin.Nationalite}}</td>
              <td class="col-1">{{lemannequin.biographieM}}</td>
             <td class="col-1">
-            {# {% for leStyle in ledefile.styles %} 
-            <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
-            {# {% endfor %} 
-            </td>
-            <td class="col-2">
-            <span class="align-self-center badge bg-dark"> {{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</span>
-            {# </td> #}
-            {# <td class="col-2">
-                <a href=" {{path('admin_mannequins_modif', {'id': lemannequin.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
-                <a class="btn btn-dark"
-                data-bs-toggle="modal" 
-                data-bs-target="#modalSimple"
-                data-titre="Suppression d'un mannequin"
-                data-message="Etes vous sur de vouloir supprimer l'mannequin : {{lemannequin.Nom}}"
-                data-libelleBouton="Supprimer l'mannequin"
-                data-lien="{{path('admin_mannequins_suppression', {'id': lemannequin.id}) }}">
-                <i class="far fa-trash-alt"></i></a>
-            </td> #}
+            {# <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-dark"> #}
+                        {# <i class="fas fa-pen"></i> #}
+                    </a>
+            <td class="col-1">
+    {# <img class="avatar mx-auto d-block" src="{{ lemannequin.imageMannequins }}" alt="Image du mannequin" width="50"></td>                 #}
+                    <a class="btn btn-dark"
+                       data-bs-toggle="modal" 
+                       data-bs-target="#modalSimple"
+                       data-titre="Suppression d'un mannequin"
+                       data-message="Etes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
+                       data-libelleBouton="Supprimer le mannequin"
+                       {# data-lien="{{ path('admin_mannequins_suppression', {'id': lemannequin.id}) }}"> #}
+                       {# <i class="far fa-trash-alt"></i> #}
+                    {# </a> #}
+                {# </td>  #}
             </tr>
             {% endfor %}
     </tbody>

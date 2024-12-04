@@ -32,6 +32,8 @@ class Blog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+  
+
     public function __construct()
     {
         $this->imageBlogs = new ArrayCollection();
@@ -101,4 +103,6 @@ class Blog
 
         return $this;
     }
+
+
 }
