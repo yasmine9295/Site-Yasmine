@@ -21,7 +21,7 @@ class BlogController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('blog/listeBlogs.html.twig', [
+        return $this->render('admin/blog/listeBlogs.html.twig', [
             'lesblogs' => $blogs
         ]);
     }
