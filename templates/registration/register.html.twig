@@ -2,6 +2,148 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding-top: 60px; /* Add space for the fixed navbar */
+        }
+
+        /* Navbar styles */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 10px 30px; /* Reduced padding for a smaller navbar */
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.6rem; /* Reduced font size */
+            font-weight: bold;
+            color: #222;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            color: #555;
+            font-size: 1rem; /* Reduced font size */
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Form section styles */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            color: #b08d57; /* Elegant gold color */
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 2px solid #d1c7b7;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            background-color: #f8f8f8;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #b08d57; /* Gold color on focus */
+            background-color: #fff;
+            box-shadow: 0 0 8px rgba(176, 141, 87, 0.4);
+        }
+
+        .form-check-label {
+            font-size: 1.1rem;
+            color: #777;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #b08d57; /* Elegant gold color */
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #9b7d4d; /* Darker gold on hover */
+        }
+
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+    </style>
+{% endblock %}
+
 {% block body %}
     <!-- Flash message error -->
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -23,12 +165,14 @@
                                 }) }}
                             </div>
 
-                            <div class="mb-3">
-                                {{ form_row(registrationForm.plainPassword, {
-                                    'label': 'Mot de passe',
+                                           {{ form_row(registrationForm.nom) }}
+                {{ form_row(registrationForm.prenom) }}
+                 <div class="mb-3">
+                                        {{ form_row(registrationForm.plainPassword, {
+                                            'label': 'Mot de passe',
                                     'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}
-                                }) }}
-                            </div>
+                                        }) }}
+                                    </div>
 
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-dark btn-block">S'inscrire</button>

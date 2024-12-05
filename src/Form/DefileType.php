@@ -2,7 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Artiste;
+
+use App\Form\DefileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,15 +13,15 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ArtisteType extends AbstractType
+class DefileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom', TextType::class,[
-                'label'=>"Nom de l'artiste",
+                'label'=>"Nom du defile",
                 'attr'=>[
-                    "placeholder"=>"Saisir le nom de l'artiste"
+                    "placeholder"=>"Saisir le nom du defile"
                 ]
             ])
             ->add('description', TextareaType::class)

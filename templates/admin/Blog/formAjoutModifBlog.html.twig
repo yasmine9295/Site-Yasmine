@@ -1,30 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout/modif Style{% endblock %}
+{% block title %}Ajout/modif Blog{% endblock %}
 
 {% block body %}
 <h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_style_ajout") %}
+{% if (app.request.attributes.get('_route')=="blog_ajout") %}
 Ajout
 {% else %}
 Modification
 {% endif %}
-d'un style</h1>
+d'un blog</h1>
 
-{{form_start(formStyle)}}
+{{form_start(formBlog)}}
 <div class="row">
-    <div class="col-7">{{form_row(formStyle.nom)}}</div>
-    <div class="col-5">{{form_row(formStyle.couleur)}}</div>
+    <div class="col-3">{{form_row(formBlog.NomArticle)}}</div>
+    <div class="col-2">{{form_row(formBlog.Contenu)}}</div>
+    <div class="col-2">{{form_row(formBlog.image)}}</div>
+    <div class="col-2">{{form_row(formBlog.Date)}}</div>
+    {# <div class="col-2">{{form_row(formBlog.)}}</div> #}
 </div>
 
 <div class="row">
     <div class="col"><a href=" {{path('admin_blog')}}" class="btn btn-dark btn-block">Annuler</a></div>
     <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_style_ajout") %}
-"Ajouter le style"
+    {% if (app.request.attributes.get('_route')=="blog_ajout") %}
+"Ajouter le Blog"
 {% else %}
-"Modifier le style"
+"Modifier le Blog"
 {% endif %}></div>
 </div>
-{{form_end(formStyle)}}
+{{form_end(formBlog)}}
 {% endblock %}
+
+
+
