@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avatar;
 
+    #[ORM\Column(length: 255)]
+    private ?string $pseudo = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -193,5 +196,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getFullName():string
     {
         return $this->getNom()." ".$this->getPrenom();
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 }
