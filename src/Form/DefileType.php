@@ -28,6 +28,7 @@ class DefileType extends AbstractType
             ->add('mannequin', TextareaType::class)
             ->add('Date',DateType::class)
             ->add('marque', TextType::class)
+            ->add('blogs', TextareaType::class)
             ->add('description', TextType::class)
             ->add('Theme',ChoiceType::class, [
                 "choices"=>[

@@ -15,17 +15,17 @@ Modification
 {% endif %}
 d'un Albums</h1>
 
-{{form_start(formAlbum,{'attr':{'novalidate':'novalidate'}})}}
+{{form_start(formDefile,{'attr':{'novalidate':'novalidate'}})}}
 <div class="row">
-    <div class="col">{{form_row(formAlbum.NomD)}}</div>
-    <div class="col">{{form_row(formAlbum.Date)}}</div>
+    <div class="col">{{form_row(formDefile.NomD)}}</div>
+    <div class="col">{{form_row(formDefile.Date)}}</div>
 </div>
 <div class="row">
-    <div class="col">{{form_row(formAlbum.marque)}}</div>
-    <div class="col">{{form_row(formAlbum.blogs)}}</div>
-    <div class="col">{{form_row(formAlbum.mannequin)}}</div>
-    <div class="col">{{form_row(formAlbum.Thème)}}</div>
-    <div class="col">{{form_row(formAlbum.description)}}</div>
+    <div class="col">{{form_row(formDefile.marque)}}</div>
+    <div class="col">{{form_row(formDefile.blogs)}}</div>
+    <div class="col">{{form_row(formDefile.mannequin)}}</div>
+    <div class="col">{{form_row(formDefile.theme)}}</div>
+    <div class="col">{{form_row(formDefile.description)}}</div>
 </div>
 
 <div class="row">
@@ -37,7 +37,7 @@ d'un Albums</h1>
 "Modifier l'album"
 {% endif %}></div>
 </div>
-{{form_end(formAlbum)}}
+{{form_end(formDefile)}}
 {% endblock %}
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
