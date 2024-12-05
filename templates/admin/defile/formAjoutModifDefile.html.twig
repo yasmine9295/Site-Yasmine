@@ -8,7 +8,7 @@
 
 {% block body %}
 <h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="defile_ajout") %}
+{% if (app.request.attributes.get('_route')=="admin_defile_ajout") %}
 Ajout
 {% else %}
 Modification
@@ -31,13 +31,13 @@ d'un Albums</h1>
 <div class="row">
     <div class="col"><a href=" {{path('admin_defiles')}}" class="btn btn-dark btn-block">Annuler</a></div>
     <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="defile_ajout") %}
-"Ajouter le defile"
+    {% if (app.request.attributes.get('_route')=="admin_defile_ajout") %}
+"Ajouter l'album"
 {% else %}
-"Modifier le defile"
+"Modifier l'album"
 {% endif %}></div>
 </div>
-{{form_end(formDefile)}}
+{{form_end(formAlbum)}}
 {% endblock %}
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

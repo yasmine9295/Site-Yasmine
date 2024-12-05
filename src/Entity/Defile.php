@@ -33,7 +33,7 @@ class Defile
     private Collection $mannequin;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Thème = null;
+    private ?string $Theme = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $description = null;
@@ -141,14 +141,14 @@ class Defile
         return $this;
     }
 
-    public function getThème(): ?string
+    public function getTheme(): ?string
     {
-        return $this->Thème;
+        return $this->theme;
     }
 
-    public function setThème(?string $Thème): static
+    public function setTheme(?string $theme): static
     {
-        $this->Thème = $Thème;
+        $this->theme = $theme;
 
         return $this;
     }

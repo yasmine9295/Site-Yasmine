@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,16 +19,17 @@ class DefileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class,[
+            ->add('NomD', TextType::class,[
                 'label'=>"Nom du defile",
                 'attr'=>[
                     "placeholder"=>"Saisir le nom du defile"
                 ]
             ])
-            ->add('description', TextareaType::class)
-            ->add('site',UrlType::class)
-            ->add('image', TextType::class)
-            ->add('type',ChoiceType::class, [
+            ->add('mannequin', TextareaType::class)
+            ->add('Date',DateType::class)
+            ->add('marque', TextType::class)
+            ->add('description', TextType::class)
+            ->add('Theme',ChoiceType::class, [
                 "choices"=>[
                     "solo"=>0,
                     "groupe"=>1
@@ -36,10 +38,10 @@ class DefileType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Artiste::class,
-        ]);
-    }
+    // public function configureOptions(OptionsResolver $resolver): void
+    // {
+    //     $resolver->setDefaults([
+    //         'data_class' => Defile::class,
+    //     ]);
+    // }
 }
