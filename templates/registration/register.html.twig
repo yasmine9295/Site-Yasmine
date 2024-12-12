@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     <style>
-        /* Global styles */
+           /* Global styles */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
@@ -141,30 +141,64 @@
             font-size: 1rem;
         }
 
+
     </style>
 {% endblock %}
 
 {% block body %}
-   
-    <div class="container">
-        <div class="form-container">
-            <h1 class="form-title">Inscription</h1>
+    <!-- Flash message error -->
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 
-            {% for flash_error in app.flashes('verify_email_error') %}
-                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-            {% endfor %}
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg mt-5">
+                    <div class="card-header text-center text-dark">
+                        <h3>Inscription</h3>
+                    </div>
+                    <div class="card-body text-dark">
+                        {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                            
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.pseudo, {
+                                    'attr': {'class': 'form-control', 'placeholder': 'Pseudo'}
+                                }) }}
+                            </div>
 
-            {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.nom) }}
-                {{ form_row(registrationForm.prenom) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.plainPassword, {
-                    label: 'Mot de passe'
-                }) }}
-                {{ form_row(registrationForm.agreeTerms) }}
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.email, {
+                                    'attr': {'class': 'form-control', 'placeholder': 'Email'}
+                                }) }}
+                            </div>
 
-                <button type="submit" class="btn">S'inscrire</button>
-            {{ form_end(registrationForm) }}
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.nom) }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.prenom) }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    'label': 'Mot de passe',
+                                    'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}
+                                }) }}
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-dark btn-block">S'inscrire</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                    <div class="card-footer text-center text-dark">
+                        <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="text-dark">Se connecter</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
+

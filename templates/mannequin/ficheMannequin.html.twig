@@ -6,12 +6,12 @@
 <h1 class="pt-2 text-center">Fiche de l'artiste</h1>
 <hr>
 <div class="row pt-2">
-{% set nbAlbums = leArtiste.albums|length  %}
+{% set nbAlbums = leMannequin.albums|length  %}
     <div class="card mb-3">
-        <h3 class="card-header">{{leArtiste.nom}}</h3>
+        <h3 class="card-header">{{leMannequin.nom}}</h3>
         <div class="row">        
             <div class="col-3 d-flex align-items-center mx-auto">
-                <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{leArtiste.image}}" alt="Card image">
+                <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{leMannequin.image}}" alt="Card image">
             </div>
             <div class="col"><div class="card-body">
         <h5 class="card-title">
@@ -20,11 +20,11 @@
         </div>
 
         <div class="card-body">
-            <p class="card-text">{{leArtiste.description|raw}}</p>
+            <p class="card-text">{{leMannequin.description|raw}}</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"> {% if leArtiste.type == 0 %} Artiste solo {% else %} Groupe {% endif %}</li>
-            <li class="list-group-item"> <a href ="{{ leArtiste.site}}">Site Web</a></li>
+            <li class="list-group-item"> {% if leMannequin.type == 0 %} Artiste solo {% else %} Groupe {% endif %}</li>
+            <li class="list-group-item"> <a href ="{{ leMannequin.site}}">Site Web</a></li>
         </ul>
     </div>
 </div>

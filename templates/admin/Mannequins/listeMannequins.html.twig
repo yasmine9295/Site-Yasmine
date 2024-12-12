@@ -130,39 +130,29 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Liste des mannequins</h1>
-  <div class="d-flex justify-content-end mb-9">
-        <a href="{{path('admin_mannequins')}}" class="btn btn-outline-primary btn-lg">
-            <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
-        </a>
+<h1 class="pt-2 text-center">Gestion des mannequins</h1>
+{# <a href=" {{path('admin_mannequin')}}" class="btn btn-dark">Ajouter un defile</a> #}
 
-     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
-         {% for lemannequin in lesmannequins %}
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{lemannequin.id}}</h5>
-                        <h6 class="card-subtitle mb-2">{{lemannequin.Nom}} - {{lemannequin.Prenom}}</h6>
-                        <h6 class="card-subtitle mb-2">{{lemannequin.Nationalite}}</h6>
-                        <p class="card-text">
-                            <strong>Description:</strong> {{lemannequin.biographieM}}
-                        </p>
-                        {# <div class="d-flex justify-content-between">
-                            <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pen"></i> Modifier
-                            </a>
-                            <a class="btn btn-danger btn-sm"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modalSimple"
-                               data-titre="Suppression d'un défilé"
-                               data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
-                               data-libelleBouton="Supprimer ce défilé"
-                               data-lien="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}">
-                                <i class="far fa-trash-alt"></i> Supprimer
-                            </a> #}
-                        </div>
-                    </div>
-                </div>
+<hr> 
+<table class="table table-hover">
+<thead>
+    <tr>
+      <th scope="col-1">Nom</th>
+      <th scope="col-3">Prenom</th>
+      <th scope="col-1">Nationalité</th>
+      <th scope="col-1">Biographie</th>
+    
+    </tr>
+</thead>  
+    <tbody>
+        {% for lemannequin in lesmannequins %}
+            <tr>
+            <td class="col-3">{{lemannequin.id}}</td>
+            <td class="col-1">{{lemannequin.Nom}}</td>
+            <td class="col-1">{{lemannequin.Prenom}}</td>
+            <td class="col-1">{{lemannequin.Nationalite}}</td>
+             <td class="col-1">{{lemannequin.biographieM}}</td>
+            <td class="col-1">
             {# {% for leStyle in ledefile.styles %} 
             <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
             {# {% endfor %} 

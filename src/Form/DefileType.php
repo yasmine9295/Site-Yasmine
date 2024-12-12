@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Defile; // Assurez-vous d'avoir cette importation
-use App\Entity\Mannequin; // Importation de l'entité Mannequin si nécessaire
-use App\Entity\Marque; // Importation de l'entité Marque si nécessaire
+use App\Entity\Defile;
+use App\Entity\Marque; 
+use App\Form\DefileType;
+use App\Entity\Mannequin; 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,9 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\EntityType;
 
 class DefileType extends AbstractType
 {
@@ -29,7 +30,7 @@ class DefileType extends AbstractType
             ])
             ->add('mannequin', EntityType::class, [
                 'class' => Mannequin::class, 
-                'choice_label' => 'nom', 
+                'choice_label' => 'Nom', 
                 'label' => 'Choisir un mannequin'
             ])
             ->add('Date', DateType::class, [
@@ -39,7 +40,7 @@ class DefileType extends AbstractType
             ])
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
-                'choice_label' => 'nom', 
+                'choice_label' => 'Nom', 
                 'label' => 'Choisir une marque'
             ])
             ->add('blogs', TextareaType::class, [
@@ -69,7 +70,7 @@ class DefileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Defile::class, 
+            'data_class' => DefileType::class, 
         ]);
     }
 }

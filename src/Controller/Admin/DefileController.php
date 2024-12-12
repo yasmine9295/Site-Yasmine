@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Defile;
-use App\Form\DefileType;
+use App\defile\DefileType;
 use App\Repository\DefileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\DefileController;
@@ -46,15 +46,15 @@ class DefileController extends AbstractController
         $form=$this->createForm(DefileType::class,$defile);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($defile->isSubmitted() && $defile->isValid())
         {
             $manager->persist($defile);
             $manager->flush();
-            $this->addFlash("success", "l'defile a bien été $mode");
+            $this->addFlash("success", "l'defile a bien été $defile");
             return $this->redirectToRoute('admin_defiles');
         }
-        return $this->render('admin/defile/formAjoutModifDefile.html.twig', [
-            'formDefile' => $form->createView()
+        return $this->render('admin/defile/defileAjoutModifDefile.html.twig', [
+            'defileDefile' => $defile->createView()
         ]);
     }
 
