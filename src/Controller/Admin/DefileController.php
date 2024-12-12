@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Defile;
-use App\defile\DefileType;
+use App\Form\DefileType;
 use App\Repository\DefileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\DefileController;

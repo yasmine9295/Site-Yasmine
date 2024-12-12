@@ -10,21 +10,19 @@
 
     {% block stylesheets %}
     <style>
-
-
         /* Global styles */
         body {
             font-family: 'Helvetica', sans-serif;
             background-color: #fff;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Prevent scrolling to ensure the background video stays in place */
         }
-    
+
         /* Navbar styles */
         .navbar {
-            
-            display: flex; /* Utiliser Flexbox pour aligner les éléments */
-            align-items: center; /* Centre les éléments verticalement */
+            display: flex;
+            align-items: center;
             padding: 15px 30px;
             position: fixed;
             top: 0;
@@ -51,7 +49,6 @@
             margin-right: 20px;
         }
 
-       
         .nav-link {
             color: #f1f1f1;
             font-size: 1.1rem;
@@ -65,27 +62,36 @@
             transform: translateY(-2px);
         }
 
-      
-          .main-section {
-            display: flex; /* Use flexbox to align the videos side by side */
-            justify-content: space-between; /* Space out the videos equally */
-            height: 100vh; /* Full viewport height */
+        /* Background video section */
+        .background-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensure video stays in the background */
+            overflow: hidden;
         }
 
-        /* Each video section (left and right) */
+        #background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Make sure the video covers the full screen */
+        }
+
+        .main-section {
+            position: relative;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
         .video-section {
-            flex: 1; /* Each video takes up equal space */
+            flex: 1;
             position: relative;
         }
 
-        /* Ensure that the video fills the container */
-        .video-container {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Optionally, you can add content text on top of the video */
         .content-text {
             position: absolute;
             top: 50%;
@@ -93,14 +99,7 @@
             transform: translate(-50%, -50%);
             color: white;
             text-align: center;
-            z-index: 2;
-        }
-
-        .content-text {
             z-index: 1;
-            text-align: center;
-             color: white;
-            padding: 20px;
         }
 
         .content-text h1 {
@@ -113,7 +112,6 @@
         }
 
         .btn {
-
             color: #f1f1f1;
             padding: 10px 20px;
             font-size: 1rem;
@@ -126,10 +124,20 @@
 
     </style>
     {% endblock %}
-    
+
 </head>
 
 <body>
+
+<!-- Background Video -->
+<div class="background-video-container">
+    <video autoplay muted loop id="background-video">
+        <source src="{{ asset('videos/background-video.mp4') }}" type="video/mp4">
+        <source src="{{ asset('videos/background-video.webm') }}" type="video/webm">
+        <source src="{{ asset('videos/background-video.ogv') }}" type="video/ogg">
+        Votre navigateur ne prend pas en charge les vidéos HTML5.
+    </video>
+</div>
 
 <!-- Navbar -->
 <nav class="navbar">
@@ -145,33 +153,25 @@
         </ul>
     </div>
 </nav>
- <div class="bloc">     
 
-</div>
- <!-- Main content area with video background -->
+<!-- Main content area with video background -->
 <div class="main-section">
     <!-- First video section (left) -->
     <div class="video-section">
-        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-    
-    <div class="content-text"> 
+        <div class="content-text"> 
             <h1>Notre Présentation</h1>
             <p>Plongez dans l'univers de Y&M </p>
             <p>où l'élégance rencontre la mode.</p>
             <a href="{{ path('admin_defiles') }}" class="btn">Découvrir</a>
         </div>
-</div>
+    </div>
+
     <!-- Second video section (right) -->
     <div class="video-section">
-        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-           <div class="content-text">
+        <div class="content-text">
             <h1>Bienvenue dans le monde du luxe</h1>
             <p>Découvrez nos dernières collections et défilés</p>
             <a href="{{ path('admin_blog') }}" class="btn">Explorez le Blog</a>
-    </div>
-</div>
-
-            
         </div>
     </div>
 </div>
@@ -185,11 +185,3 @@
 
 </body>
 </html>
-
-
-       
-
-        
-
-
-
