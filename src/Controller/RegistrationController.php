@@ -90,24 +90,6 @@ class RegistrationController extends AbstractController
     
 
 
-       
-            $user = new User();
-            $form = $this->createForm(RegistrationFormType::class, $user);
     
-            // Traitement du formulaire (soumission)
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Vous pouvez gérer l'enregistrement de l'utilisateur ici, par exemple :
-                // $entityManager->persist($user);
-                // $entityManager->flush();
-    
-                return $this->redirectToRoute('app_home');
-            }
-    
-            return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView(),
-            ]);
-        }
     }
-
+}
