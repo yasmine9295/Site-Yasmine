@@ -31,7 +31,9 @@ class DefileType extends AbstractType
             ->add('mannequin', EntityType::class, [
                 'class' => Mannequins::class, 
                 'choice_label' => 'Nom', 
-                'label' => 'Choisir un mannequin'
+                'label' => 'Choisir un mannequin',
+                'multiple'=>true,
+                'by_reference'=>false,
             ])
             ->add('Date', DateType::class, [
                 'widget' => 'single_text', 
