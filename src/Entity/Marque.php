@@ -49,6 +49,11 @@ class Marque
         return $this->nomM;
     }
 
+    public function __toString(): string
+    {
+        return $this->nomM; 
+    }
+
     public function setNomM(string $nomM): static
     {
         $this->nomM = $nomM;

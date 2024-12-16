@@ -33,7 +33,7 @@ class Defile
     private Collection $mannequin;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Theme = null;
+    private ?string $theme = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $description = null;

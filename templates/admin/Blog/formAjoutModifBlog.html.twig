@@ -11,12 +11,12 @@ Modification
 {% endif %}
 d'un blog</h1>
 
-{{form_start(formBlog)}}
+{{form_start(ArticleType)}}
 <div class="row">
-    <div class="col-3">{{form_row(formBlog.NomArticle)}}</div>
-    <div class="col-2">{{form_row(formBlog.Contenu)}}</div>
-    <div class="col-2">{{form_row(formBlog.image)}}</div>
-    <div class="col-2">{{form_row(formBlog.Date)}}</div>
+    <div class="col-3">{{form_row(ArticleType.NomArticle)}}</div>
+    <div class="col-2">{{form_row(ArticleType.Contenu)}}</div>
+    <div class="col-2">{{form_row(ArticleType.image)}}</div>
+    <div class="col-2">{{form_row(ArticleType.Date)}}</div>
     {# <div class="col-2">{{form_row(formBlog.)}}</div> #}
 </div>
 
@@ -29,7 +29,7 @@ d'un blog</h1>
 "Modifier le Blog"
 {% endif %}></div>
 </div>
-{{form_end(formBlog)}}
+{{form_end(ArticleType)}}
 {% endblock %}
 
 

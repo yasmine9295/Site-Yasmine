@@ -37,5 +37,3 @@ class DefileController extends AbstractController
         ]);
     }
 }
-
-
