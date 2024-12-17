@@ -16,9 +16,10 @@
             background-color: #fff;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent scrolling to ensure the background video stays in place */
+            overflow: hidden;
         }
-/* Navbar styles */
+
+        /* Navbar styles */
         nav {
             position: fixed;
             top: 0;
@@ -29,8 +30,9 @@
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .navbar-brand {
-            font-size: 1.6rem; /* Reduced font size */
+            font-size: 1.6rem;
             font-weight: bold;
             color: #222;
             text-decoration: none;
@@ -50,7 +52,7 @@
 
         .nav-link {
             color: #555;
-            font-size: 1rem; /* Reduced font size */
+            font-size: 1rem;
             text-transform: uppercase;
             font-weight: 500;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -61,6 +63,7 @@
             color: #333;
             transform: translateY(-2px);
         }
+
         /* Background video section */
         .background-video-container {
             position: fixed;
@@ -68,16 +71,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Ensure video stays in the background */
+            z-index: -1;
             overflow: hidden;
         }
 
         #background-video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Make sure the video covers the full screen */
+            object-fit: cover;
         }
 
+        /* Main content section */
         .main-section {
             position: relative;
             height: 100vh; /* Full viewport height */
@@ -87,8 +91,17 @@
         }
 
         .video-section {
-            flex: 1;
+            flex: 1; /* Occupy equal width */
             position: relative;
+            overflow: hidden; /* Ensure videos stay within their containers */
+        }
+
+        /* Style for the video iframe */
+        .video-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover; /* Ensure the video fills the section */
         }
 
         .content-text {
@@ -121,23 +134,40 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+                /* Style pour le bouton élégant */
+        .btn-elegant {
+            padding: 15px 40px; /* Plus de padding pour rendre le bouton plus grand */
+            font-size: 1.5rem; /* Taille de texte plus grande */
+            font-weight: 700; /* Texte plus gras pour l'élégance */
+            background-color: #090706; /* Fond sombre élégant */
+            color: #fff; /* Texte en blanc */
+            border: 2px solid transparent; /* Bordure invisible */
+            border-radius: 50px; /* Bordure arrondie pour un aspect moderne */
+            text-transform: uppercase; /* Majuscules pour l'aspect luxueux */
+            letter-spacing: 2px; /* Espacement des lettres pour plus de style */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Ombre douce autour du bouton */
+            transition: all 0.4s ease; /* Transition fluide pour les effets de survol */
+            display: inline-block; /* S'assurer que le bouton se comporte comme un élément en ligne */
+        }
+
+        /* Effet de survol élégant */
+        .btn-elegant:hover {
+            background-color: #34495e; /* Changement de couleur lors du survol */
+            transform: translateY(-5px); /* Légère élévation lors du survol */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Ombre plus marquée */
+            color: #fff; /* Garder le texte en blanc au survol */
+        }
+
+        /* Effet de focus pour l'accessibilité */
+        .btn-elegant:focus {
+            outline: none; /* Enlever le contour par défaut */
+            border-color: #fff; /* Bordure blanche lors du focus */
+        }
     </style>
     {% endblock %}
-
 </head>
 
 <body>
-
-<!-- Background Video -->
-<div class="background-video-container">
-    <video autoplay muted loop id="background-video">
-        <source src="{{ asset('videos/background-video.mp4') }}" type="video/mp4">
-        <source src="{{ asset('videos/background-video.webm') }}" type="video/webm">
-        <source src="{{ asset('videos/background-video.ogv') }}" type="video/ogg">
-        Votre navigateur ne prend pas en charge les vidéos HTML5.
-    </video>
-</div>
-
 <!-- Navbar -->
 <nav class="navbar">
     <a href="{{ path('accueil') }}" class="navbar-brand">
@@ -153,24 +183,26 @@
     </div>
 </nav>
 
-<!-- Main content area with video background -->
+<!-- Main section for videos -->
 <div class="main-section">
     <!-- First video section (left) -->
     <div class="video-section">
+        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <div class="content-text"> 
             <h1>Notre Présentation</h1>
             <p>Plongez dans l'univers de Y&M </p>
             <p>où l'élégance rencontre la mode.</p>
-            <a href="{{ path('admin_defiles') }}" class="btn">Découvrir</a>
+            <a href="{{ path('admin_defiles') }}" class="btn btn-elegant">Découvrir</a>
         </div>
     </div>
 
     <!-- Second video section (right) -->
     <div class="video-section">
+        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <div class="content-text">
             <h1>Bienvenue dans le monde du luxe</h1>
             <p>Découvrez nos dernières collections et défilés</p>
-            <a href="{{ path('admin_blog') }}" class="btn">Explorez le Blog</a>
+            <a href="{{ path('admin_blog') }}" class="btn btn-elegant">Explorez le Blog</a>
         </div>
     </div>
 </div>
