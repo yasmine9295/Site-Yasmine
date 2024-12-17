@@ -18,21 +18,19 @@
             padding: 0;
             overflow: hidden; /* Prevent scrolling to ensure the background video stays in place */
         }
-
-        /* Navbar styles */
-        .navbar {
-            display: flex;
-            align-items: center;
-            padding: 15px 30px;
+/* Navbar styles */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100000000;
+            background-color: #fff;
+            padding: 10px 30px; /* Reduced padding for a smaller navbar */
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         .navbar-brand {
-            font-size: 2rem;
+            font-size: 1.6rem; /* Reduced font size */
             font-weight: bold;
             color: #222;
             text-decoration: none;
@@ -41,6 +39,7 @@
         }
 
         .navbar-nav {
+            list-style-type: none;
             display: flex;
             margin-left: auto;
         }
@@ -50,18 +49,18 @@
         }
 
         .nav-link {
-            color: #f1f1f1;
-            font-size: 1.1rem;
+            color: #555;
+            font-size: 1rem; /* Reduced font size */
             text-transform: uppercase;
             font-weight: 500;
             transition: color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
         }
 
         .nav-link:hover {
-            color: #f1f1f1;
+            color: #333;
             transform: translateY(-2px);
         }
-
         /* Background video section */
         .background-video-container {
             position: fixed;
