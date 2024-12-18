@@ -133,12 +133,13 @@
 {% block body %}
 <div class="container py-5">
     <h1 class="text-center text-primary mb-5">Liste des Mannequins</h1>
-
+{% if "ROLE_ADMIN" in app.user.roles %}
     <div class="d-flex justify-content-between align-items-center mb-5">
         <a href="{{ path('admin_defiles') }}" class="btn btn-outline-primary btn-lg">
             <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
         </a>
     </div>
+       {% endif %}
      <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
          {% for lemannequin in lesmannequins %}
             <div class="col">
@@ -149,11 +150,13 @@
                             <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
                             <strong>Biographie:</strong> {{ lemannequin.biographieM }}
                         </p>
+                         {% if "ROLE_ADMIN" in app.user.roles %}
                         <div class="d-flex justify-content-between">
                             <a href="{{ path('admin_defile_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-pen"></i> Modifier
                             </a>
                         </div>
+                         {% endif %}
                     </div>
                 </div>
             </div>

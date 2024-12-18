@@ -132,12 +132,12 @@
 {% block body %}
 <div class="container mt-5">
     <h1 class="text-center mb-4 text-primary font-weight-bold">Liste des Marques</h1>
-
+  {% if "ROLE_ADMIN" in app.user.roles %}
     <div class="d-flex justify-content-end mb-9">
         <a href="{{ path('admin_marque') }}" class="btn btn-outline-primary btn-lg">
             <i class="fas fa-plus-circle me-2"></i> Ajouter une marque
         </a>
-
+  {% endif %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for laMarque in lesmarques %}
             <div class="col">
@@ -148,6 +148,7 @@
                         <p class="card-text"><strong>Créateur :</strong> {{ laMarque.createurM }}</p>
                         <p class="card-text"><strong>Histoire :</strong> {{ laMarque.histoireM }}</p>
                         <p class="card-text"><strong>Représentants :</strong> {{ laMarque.representantM }}</p>
+                         {% if "ROLE_ADMIN" in app.user.roles %}
                     </div>
                     <div class="card-footer text-center">
                         <a href="{{ path('admin_defile_modif', {'id': laMarque.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Modifier</a>
@@ -160,7 +161,9 @@
                            {# data-lien="{{ path('admin_marque_suppression', {'id': laMarque.id}) }}"> #}
                            <i class="far fa-trash-alt"></i> Supprimer
                         </a>
-                    </div>
+                     {% endif %}
+                     </div>
+                    
                 </div>
             </div>
         {% endfor %}
