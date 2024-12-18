@@ -4,10 +4,10 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
+   <style>
         /* Style général des cartes */
         .card {
-            background-color: #ffffff; /* Fond blanc crème */
+            background-color: #f1f1f1f; /* Fond blanc crème */
             border: none;
             border-radius: 10px; /* Coins arrondis pour une apparence chic */
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Ombre douce mais marquée */
@@ -21,6 +21,26 @@
             transform: translateY(-10px); /* Légère élévation */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Ombre élégante */
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); /* Dégradé lumineux */
+        }
+
+       /* Effet pailleté subtil sur survol */
+        .card:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Texture pailletée discrète */
+            opacity: 0.1;
+            pointer-events: none;
+            animation: sparkle 1.5s ease-in-out infinite; /* Animation légère de scintillement */
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 0.1; }
         }
 
         /* Style du titre de la carte */
@@ -96,7 +116,7 @@
         /* Amélioration du titre principal */
         h1 {
             font-family: 'Georgia', serif;
-            color: #2c3e50;
+            color: #090706;
             font-size: 3rem;
             text-transform: uppercase;
             letter-spacing: 2px;

@@ -20,6 +20,7 @@
             padding: 0;
             overflow: hidden; /* Prevent scrolling to ensure the background video stays in place */
         }
+<<<<<<< HEAD
     
         /* Navbar styles */
         .navbar {
@@ -69,6 +70,8 @@
             color: #333;
             transform: translateY(-2px);
         }
+=======
+>>>>>>> 1124cf96439a588eb1d5c7638f7f5abc05e92a67
 
         /* Background video section */
         .background-video-container {
@@ -188,34 +191,7 @@
 </head>
 
 <body>
-
-<!-- Background Video -->
-<div class="background-video-container">
-    <video autoplay muted loop id="background-video">
-        <source src="{{ asset('videos/background-video.mp4') }}" type="video/mp4">
-        <source src="{{ asset('videos/background-video.webm') }}" type="video/webm">
-        <source src="{{ asset('videos/background-video.ogv') }}" type="video/ogg">
-        Votre navigateur ne prend pas en charge les vidéos HTML5.
-    </video>
-</div>
-
-<!-- Navbar -->
-<nav class="navbar">
-    <a href="{{ path('accueil') }}" class="navbar-brand">
-        <img src="{{ asset('images/logo.png') }}" alt="Y&M Logo" class="navbar-logo">
-    </a>
-    <div class="navbar-menu">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_defiles') }}">Défilés</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_marque') }}">Marques</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_mannequins') }}">Mannequins</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_blog') }}">Partie Blog</a></li>
-        </ul>
-    </div>
-</nav>
- <div class="bloc">     
-
-<!-- Main content area with video background -->
+<!-- Main section for videos -->
 <div class="main-section">
     <!-- First video section (left) -->
     <div class="video-section">
@@ -223,7 +199,7 @@
             <h1>Notre Présentation</h1>
             <p>Plongez dans l'univers de Y&M </p>
             <p>où l'élégance rencontre la mode.</p>
-            <a href="{{ path('admin_defiles') }}" class="btn btn-elegant">Découvrir</a>
+            <a href="{{ path('admin_defiles') }}" class="btn">Découvrir</a>
         </div>
 </div>
     <!-- Second video section (right) -->
