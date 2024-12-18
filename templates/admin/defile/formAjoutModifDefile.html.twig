@@ -1,70 +1,288 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout Modif Défilé{% endblock %}
-{% block stylesheets %}  
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% block title %}Ajout / Modif Défilé{% endblock %}
 
-  {% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Design général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+         /* Navigation Bar */
+        .navbar {
+            background-color: #fff; /* White background */
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #222;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            color: #555;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: #333;
+            transform: translateY(-2px); /* Elegant hover effect */
+        }
+
+        .nav-item.dropdown .dropdown-menu {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        /* Formulaire */
+        form {
+            margin-top: 30px;
+        }
+
+        .row {
+            margin-bottom: 20px;
+        }
+
+        /* Form controls */
+        input, select, textarea {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Champs de texte */
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        select {
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        /* Boutons */
+        .btn {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Listes */
+        .list-group {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .list-group-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Sélecteur dynamique */
+        select {
+            width: 100%;
+        }
+
+        /* Optimisation responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .col-md-6 {
+                width: 100%;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_defile_ajout") %}
-Ajout
-{% else %}
-Modification
-{% endif %}
-d'un Albums</h1>
+<div class="container py-4">
+    <h1 class="text-center mb-4">
+        {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
+            Ajout
+        {% else %}
+            Modification
+        {% endif %}
+        d'un Défilé
+    </h1>
 
-{{form_start(formDefile,{'attr':{'novalidate':'novalidate'}})}}
-<div class="row">
-    <div class="col">{{form_row(formDefile.NomD)}}</div>
-    <div class="col">{{form_row(formDefile.Date)}}</div>
-</div>
-<div class="row">
-    <div class="col">{{form_row(formDefile.marque)}}</div>
-</div>
-<div class="row">
-    {% if formDefile.blogs is not empty %}
-        <div class="col">
-            <h4>Blogs associés : </h4>
-            <ul>
-                {% for blog in formDefile.blogs %}
-                    <li>{{ blog.name }}</li> 
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    
-    {% if formDefile.mannequin is not empty %}
-        <div class="col">
-            <h4>Mannequins associés :</h4>
-            <ul>
-                {% for mannequin in formDefile.mannequin %}
-                    <li>{{ mannequin.name }}</li> 
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-</div>
-    <div class="col">{{form_row(formDefile.theme)}}</div>
-    <div class="col">{{form_row(formDefile.description)}}</div>
-</div>
+    {{ form_start(formDefile, {'attr': {'novalidate': 'novalidate'}}) }}
 
-<div class="row">
-    <div class="col"><a href=" {{path('admin_defiles')}}" class="btn btn-dark btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_defile_ajout") %}
-"Ajouter l'album"
-{% else %}
-"Modifier l'album"
-{% endif %}></div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            {{ form_row(formDefile.NomD) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(formDefile.Date) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            {{ form_row(formDefile.marque) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        {% if formDefile.blogs is not empty %}
+            <div class="col-md-6">
+                <h4>Blogs associés :</h4>
+                <ul class="list-group">
+                    {% for blog in formDefile.blogs %}
+                        <li class="list-group-item">{{ blog.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if formDefile.mannequin is not empty %}
+            <div class="col-md-6">
+                <h4>Mannequins associés :</h4>
+                <ul class="list-group">
+                    {% for mannequin in formDefile.mannequin %}
+                        <li class="list-group-item">{{ mannequin.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            {{ form_row(formDefile.theme) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(formDefile.description) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ path('admin_defiles') }}" class="btn btn-secondary btn-block">Annuler</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">
+                {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
+                    Ajouter le défilé
+                {% else %}
+                    Modifier le défilé
+                {% endif %}
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(formDefile) }}
 </div>
-{{form_end(formDefile)}}
 {% endblock %}
+
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('selectStyles').select2();
-});</script>
+    $(document).ready(function() {
+        $('select').select2();  // Initialisation de Select2 pour les éléments select
+    });
+</script>
 {% endblock %}
