@@ -7,6 +7,7 @@ use App\Entity\Mannequins;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 
 class MannequinType extends AbstractType
 {
@@ -16,14 +17,19 @@ class MannequinType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('Nationalite')
-            ->add('biographieM')
+            ->add('biographieM', TextareaType::class, [
+                'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10]
+                ]) 
             ->add('defiles', EntityType::class, [
                 'class' => Defile::class,      
                 'choice_label' => 'nomD',     
                 'multiple' => true,          
                 'expanded' => false,        
-      ])   ;
+      ])   
+      
+      ;
     }
+
    
 
     public function configureOptions(OptionsResolver $resolver): void

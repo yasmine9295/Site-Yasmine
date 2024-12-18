@@ -61,7 +61,7 @@ class MannequinsController extends AbstractController
         {
             $manager->persist($mannequin);
             $manager->flush();
-            $this->addFlash("success", "Le mannequin " . $mannequin->getId() . " a bien été $mode.");
+            $this->addFlash("dark", "Le mannequin " . $mannequin->getNom() . " " . $mannequin->getPrenom() . " a bien été $mode.");
             return $this->redirectToRoute('admin_mannequins');
         }
         return $this->render('admin/Mannequins/formAjoutModifMannequin.html.twig', [

@@ -1,65 +1,106 @@
-
-
-
+/* Corps de la page */
 body {
-    background-color: #f8f4f0;
-    font-family: 'Playfair Display', serif; 
-    color: #333;
+    background: url('URL_DE_TON_IMAGE_DE_FOND') no-repeat center center fixed; /* Image de fond */
+    background-size: cover; /* Couvre toute la page */
+    font-family: 'Playfair Display', serif; /* Police luxe et élégante */
+    color: #2c2c2c; /* Noir subtil */
     margin: 0;
     padding: 0;
 }
 
 
+/* Navbar collée en haut */
 .navbar {
-    background-color: #fff; /* White background */
-    padding: 15px 30px;
-    position: fixed;
+    position: fixed; /* Fixe la navbar en haut */
     top: 0;
     left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6)); /* Transparence légère */
+    color: #000; /* Texte noir */
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Assure que la navbar est au-dessus du contenu */
+    border-bottom: 1px solid #e0d6cc; /* Ligne subtile */
+    transition: background-color 0.3s; /* Transition douce pour fond au survol */
 }
 
 .navbar h1 {
     font-size: 1.8rem;
     font-weight: bold;
     margin: 0;
-    color: #d4af37;
+    color: #d4af37; /* Or */
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 50%; /* Ajuster la taille totale */
+}
+
+.navbar li {
+    margin: 0 15px;
 }
 
 .navbar a {
     text-decoration: none;
-    color: #d4af37;
+    color: #2c2c2c; /* Noir subtil */
     font-size: 1rem;
-    margin: 0 15px;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
 }
 
 .navbar a:hover {
-    color: #fff; 
+    color: #d4af37; /* Or au survol */
+    transform: scale(1.1); /* Agrandissement léger */
 }
 
+/* Ajout d'un effet de fond lorsqu'on fait défiler la page */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.7); /* Fond sombre quand on défile */
+    transition: background-color 0.3s;
+}
 
+/* Conteneur principal */
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #ffffff;
+    max-width: 900px;
+    margin: 120px auto 40px; /* Espace sous la navbar */
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc transparent */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #e0d6cc; 
+    padding: 40px;
+    border-radius: 15px;
+    border: none;
 }
 
 
 
+/* Titre principal */
+h1 {
+    font-size: 2.4rem;
+    color: #2c2c2c;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+/* Formulaire */
 form .form-group {
     margin-bottom: 25px;
 }
 
 form label {
     font-weight: bold;
-    color: #333; 
+    color: #2c2c2c;
     display: block;
     margin-bottom: 8px;
     font-size: 1rem;
@@ -67,26 +108,29 @@ form label {
 
 form input, form select, form textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 18px;
     font-size: 1rem;
     border: 1px solid #e0d6cc;
-    border-radius: 8px;
-    background-color: #f8f4f0; 
+    border-radius: 12px;
+    background-color: #ffffff;
     box-sizing: border-box;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #d4af37; /* Or au focus */
+    box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+}
 
 /* Boutons */
 form .btn {
     display: inline-block;
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     font-size: 1rem;
     text-align: center;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     font-family: 'Playfair Display', serif;
@@ -94,19 +138,19 @@ form .btn {
 }
 
 form .btn-block {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 form .btn-dark {
-    background-color: #1c1c1c; /* Noir élégant */
-    color: #d4af37; /* Or luxueux */
+    background-color: #2c2c2c; /* Noir subtil */
+    color: #ffffff; /* Texte blanc */
     font-weight: bold;
 }
 
 form .btn-dark:hover {
     background-color: #d4af37; /* Or intense */
     color: #fff; /* Blanc */
-    transform: scale(1.02);
+    transform: scale(1.05); /* Effet survol */
 }
 
 /* Liste des éléments associés */
@@ -119,18 +163,13 @@ ul {
 ul li {
     margin: 10px 0;
     padding: 12px;
-    background-color: #f8f4f0;
+    background-color: #ffffff;
     border: 1px solid #e0d6cc;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 1rem;
-    color: #1c1c1c;
+    color: #2c2c2c;
 }
 
-h4 {
-    color: #1c1c1c;
-    margin-bottom: 15px;
-    font-family: 'Playfair Display', serif;
-}
 
 
 
