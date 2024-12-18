@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Mannequins{% endblock %}
+{% block title %}Liste des Marques{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
+   <style>
         /* Style général des cartes */
         .card {
             background-color: #f1f1f1f; /* Fond blanc crème */
@@ -129,52 +129,48 @@
     </style>
 {% endblock %}
 
-
 {% block body %}
-<div class="container py-5">
-    <h1 class="text-center text-primary mb-5">Liste des Mannequins</h1>
-{% if "ROLE_ADMIN" in app.user.roles %}
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <a href="{{ path('admin_defiles') }}" class="btn btn-outline-primary btn-lg">
-            <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary font-weight-bold">Liste des Marques</h1>
+  {% if "ROLE_ADMIN" in app.user.roles %}
+    <div class="d-flex justify-content-end mb-9">
+        <a href="{{ path('admin_marque') }}" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-plus-circle me-2"></i> Ajouter une marque
         </a>
-    </div>
-       {% endif %}
-     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
-         {% for lemannequin in lesmannequins %}
+  {% endif %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for laMarque in lesmarques %}
             <div class="col">
-                <div class="card shadow-lg border-0 rounded-4">
+                <div class="card shadow-lg">
+                    <img src="{{ asset('images/' ~ laMarque.image) }}" alt="{{ laMarque.nomM }}" class="card-img-top img-fluid rounded" style="max-height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title">{{lemannequin.Nom}} - {{lemannequin.Prenom}} </h5>
-                        <p class="card-text">
-                            <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
-                            <strong>Biographie:</strong> {{ lemannequin.biographieM }}
-                        </p>
-                          {% if "ROLE_ADMIN" in app.user.roles %}
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pen"></i> Modifier
-                            </a>
-                            <a class="btn btn-danger btn-sm"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modalSimple"
-                               data-titre="Suppression d'un défilé"
-                               data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ lemannequin.Nom }} ?"
-                               data-libelleBouton="Supprimer ce défilé"
-                               data-lien="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
-                                <i class="far fa-trash-alt"></i> Supprimer
-                            </a>
-                        </div>
-                        {% endif %}
+                        <h5 class="card-title text-center">{{ laMarque.nomM }}</h5>
+                        <p class="card-text"><strong>Créateur :</strong> {{ laMarque.createurM }}</p>
+                        <p class="card-text"><strong>Histoire :</strong> {{ laMarque.histoireM }}</p>
+                        <p class="card-text"><strong>Représentants :</strong> {{ laMarque.representantM }}</p>
+                         {% if "ROLE_ADMIN" in app.user.roles %}
                     </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ path('admin_defile_modif', {'id': laMarque.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Modifier</a>
+                        <a class="btn btn-danger btn-sm"
+                           data-bs-toggle="modal" 
+                           data-bs-target="#modalSimple"
+                           data-titre="Suppression de la Marque"
+                           data-message="Etes-vous sûr de vouloir supprimer la marque : {{ laMarque.nomM }} ?"
+                           data-libelleBouton="Supprimer la Marque"
+                           {# data-lien="{{ path('admin_marque_suppression', {'id': laMarque.id}) }}"> #}
+                           <i class="far fa-trash-alt"></i> Supprimer
+                        </a>
+                     {% endif %}
+                     </div>
+                    
                 </div>
             </div>
-            {% endfor %}
-    </tbody>
+        {% endfor %}
+    </div>
 
-    <!-- Pagination -->
-    <div class="navigation mx-auto">
-        {{ knp_pagination_render(lesmannequins) }}
+    <div class="navigation mx-auto mt-4">
+        {{ knp_pagination_render(lesmarques) }}
     </div>
 </div>
 {% endblock %}
@@ -182,10 +178,3 @@
 {% block javascript %}
     {% include "include/_modale.html.twig" %}
 {% endblock %}
-
-
- {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-{% endblock %}
- {% extends 'base.html.twig' %} 

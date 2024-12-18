@@ -1,0 +1,76 @@
+  {% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %} 
+ {% extends 'base.html.twig' %} 
+
+{% block title %}Ajout/Modification Mannequins{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">
+    {% if (app.request.attributes.get('_route') == "admin_Marques_ajout") %}
+        Ajout
+    {% else %}
+        Modification
+    {% endif %}
+    d'un Mannequin
+</h1>
+
+{{ form_start(formMarques, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="row">
+    <div class="col">{{ form_row(formMarques.Nom) }}</div>
+    <div class="col">{{ form_row(formMarques.Prenom) }}</div>
+</div>
+
+<div class="row">
+    <div class="col">{{ form_row(formMarques.Nationalite) }}</div>
+</div>
+
+<div class="row">
+    {% if formMarques.defiles is not empty %}
+        <div class="col">
+            <h4>defile associés : </h4>
+            <ul>
+                {% for defiles in formMarques.defiles %}
+                    <li>{{ defiles.name }}</li> 
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {# {% if formMannequin.mannequins is not empty %}
+        <div class="col">
+            <h4>Mannequins associés :</h4>
+            <ul>
+                {% for mannequin in formMannequin.mannequins %}
+                    <li>{{ mannequin.nom }}</li> 
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} #}
+</div>
+
+<div class="row">
+    <div class="col">{{ form_row(formMarques.biographieM) }}</div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a href="{{ path('admin_Marques') }}" class="btn btn-dark btn-block">Annuler</a>
+    </div>
+    <div class="col">
+        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_Marques_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
+    </div>
+</div>
+
+{{ form_end(formMarques) }}
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('select').select2();
+});
+</script>
+{% endblock %}

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Form;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Defile;
 use App\Entity\Mannequins;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,9 +17,14 @@ class MannequinType extends AbstractType
             ->add('Prenom')
             ->add('Nationalite')
             ->add('biographieM')
-            ->add('defiles')
-        ;
+            ->add('defiles', EntityType::class, [
+                'class' => Defile::class,      
+                'choice_label' => 'nomD',     
+                'multiple' => true,          
+                'expanded' => false,        
+      ])   ;
     }
+   
 
     public function configureOptions(OptionsResolver $resolver): void
     {

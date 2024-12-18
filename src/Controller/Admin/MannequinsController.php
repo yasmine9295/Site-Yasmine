@@ -61,29 +61,28 @@ class MannequinsController extends AbstractController
         {
             $manager->persist($mannequin);
             $manager->flush();
-            $this->addFlash("success", "l'mannequin a bien été $mannequin");
-            return $this->redirectToRoute('admin_mannequin');
+            $this->addFlash("success", "Le mannequin " . $mannequin->getId() . " a bien été $mode.");
+            return $this->redirectToRoute('admin_mannequins');
         }
-        return $this->render('admin/mannequin/formAjoutModifMannequin.html.twig', [
+        return $this->render('admin/Mannequins/formAjoutModifMannequin.html.twig', [
             'formMannequin' => $form->createView()
         ]);
     }
 
     
     #[Route('/admin/mannequin/suppression/{id}', name: 'admin_mannequin_suppression' , methods:["GET"])]
-
-    public function suppressionMannequin(Mannequin $defile, EntityManagerInterface $manager)
+    public function suppressionMannequin(Mannequins $mannequin, EntityManagerInterface $manager)
     {
-        $nbAlbums=$mannequin->getAlbums()->count();
-        if($nbAlbums > 0)
-        {
-            $this->addFlash("danger","Vous ne pouvez pas supprimer cet mannequin car $nbAlbums album(s) y sont associés");
-        }else{
+        $nbDefiles = $mannequin->getDefiles()->count(); 
+        if ($nbDefiles > 0) {
+            $this->addFlash("danger", "Vous ne pouvez pas supprimer ce mannequin car $nbDefiles défilé(s) y sont associés");
+        } else {
             $manager->remove($mannequin);
             $manager->flush();
-            $this->addFlash("success","le mannequin a bien été supprimé");
+            $this->addFlash("success", "Le mannequin a bien été supprimé");
         }
-        return $this->redirectToRoute('admin_mannequin');
+        return $this->redirectToRoute('admin_mannequins');
     }
+    
 
 }

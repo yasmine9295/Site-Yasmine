@@ -1,76 +1,55 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Ajout/Modification Mannequins{% endblock %}
-
 {% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
+ {% extends 'base.html.twig' %} 
+
+{% block title %}Modification du Mannequin{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">
-    {% if (app.request.attributes.get('_route') == "admin_mannequins_ajout") %}
-        Ajout
-    {% else %}
-        Modification
-    {% endif %}
-    d'un Mannequin
-</h1>
 
-{{ form_start(formMannequins, {'attr': {'novalidate': 'novalidate'}}) }}
-<div class="row">
-    <div class="col">{{ form_row(formMannequins.Nom) }}</div>
-    <div class="col">{{ form_row(formMannequins.Prenom) }}</div>
-</div>
+<div class="container">
+    <h1>Modification d'un Mannequin</h1>
+    {{ form_start(formMannequin, {'attr': {'novalidate': 'novalidate'}}) }}
 
-<div class="row">
-    <div class="col">{{ form_row(formMannequins.Nationalite) }}</div>
-</div>
+    <div class="form-group">
+        {{ form_label(formMannequin.Nom, 'Nom') }}
+        {{ form_widget(formMannequin.Nom, {'attr': {'placeholder': 'Nom du mannequin'}}) }}
+    </div>
 
-<div class="row">
-    {% if formMannequins.blogs is not empty %}
-        <div class="col">
-            <h4>Blogs associés : </h4>
-            <ul>
-                {% for blog in formMannequins.blogs %}
-                    <li>{{ blog.name }}</li> 
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    <div class="form-group">
+        {{ form_label(formMannequin.Prenom, 'Prénom') }}
+        {{ form_widget(formMannequin.Prenom, {'attr': {'placeholder': 'Prénom du mannequin'}}) }}
+    </div>
 
-    {% if formMannequins.mannequins is not empty %}
-        <div class="col">
-            <h4>Mannequins associés :</h4>
-            <ul>
-                {% for mannequin in formMannequins.mannequins %}
-                    <li>{{ mannequin.nom }}</li> 
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-</div>
+    <div class="form-group">
+        {{ form_label(formMannequin.Nationalite, 'Nationalité') }}
+        {{ form_widget(formMannequin.Nationalite, {'attr': {'placeholder': 'Nationalité du mannequin'}}) }}
+    </div>
 
-<div class="row">
-    <div class="col">{{ form_row(formMannequins.biographieM) }}</div>
-</div>
+    <div class="form-group">
+        {{ form_label(formMannequin.biographieM, 'Biographie') }}
+        {{ form_widget(formMannequin.biographieM, {'attr': {'placeholder': 'Courte biographie...'}}) }}
+    </div>
 
-<div class="row">
-    <div class="col">
+    <div class="form-group">
+        <h4>Défilés associés :</h4>
+        <ul>
+            {% for defile in formMannequin.defiles %}
+                <li>{{ defile.nom }}</li>
+            {% else %}
+                <li>Aucun défilé associé.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark btn-block">
+            Enregistrer les modifications
+        </button>
         <a href="{{ path('admin_mannequins') }}" class="btn btn-dark btn-block">Annuler</a>
     </div>
-    <div class="col">
-        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_mannequins_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
-    </div>
+
+    {{ form_end(formMannequin) }}
 </div>
-
-{{ form_end(formMannequins) }}
-{% endblock %}
-
-{% block javascript %}
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('select').select2();
-});
-</script>
 {% endblock %}

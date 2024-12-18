@@ -1,0 +1,136 @@
+
+
+
+body {
+    background-color: #f8f4f0;
+    font-family: 'Playfair Display', serif; 
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar {
+    background-color: #fff; /* White background */
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+    color: #d4af37;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #d4af37;
+    font-size: 1rem;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #fff; 
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e0d6cc; 
+}
+
+
+
+form .form-group {
+    margin-bottom: 25px;
+}
+
+form label {
+    font-weight: bold;
+    color: #333; 
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #e0d6cc;
+    border-radius: 8px;
+    background-color: #f8f4f0; 
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+
+/* Boutons */
+form .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+}
+
+form .btn-block {
+    margin-top: 10px;
+}
+
+form .btn-dark {
+    background-color: #1c1c1c; /* Noir élégant */
+    color: #d4af37; /* Or luxueux */
+    font-weight: bold;
+}
+
+form .btn-dark:hover {
+    background-color: #d4af37; /* Or intense */
+    color: #fff; /* Blanc */
+    transform: scale(1.02);
+}
+
+/* Liste des éléments associés */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    padding: 12px;
+    background-color: #f8f4f0;
+    border: 1px solid #e0d6cc;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #1c1c1c;
+}
+
+h4 {
+    color: #1c1c1c;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+}
+
+
+
