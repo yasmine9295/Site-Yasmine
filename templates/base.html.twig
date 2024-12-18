@@ -46,57 +46,108 @@
             margin-top: 10px;
         }
 
+            /* Importation de la police élégante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@500&display=swap');
+
         /* Navigation Bar */
         .navbar {
-            background-color: #fff; /* White background */
+            background-color: #ffffff; /* Fond blanc pour un look épuré */
             padding: 15px 30px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre douce et élégante */
+            border-bottom: 1px solid #e0e0e0; /* Ajouter une bordure subtile */
+            font-family: 'Montserrat', sans-serif; /* Police moderne et élégante */
         }
 
         .navbar-brand {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #222;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50; /* Couleur sombre pour un aspect sophistiqué */
             text-decoration: none;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #34495e; /* Subtle hover effect for brand */
         }
 
         .navbar-nav {
             list-style-type: none;
             display: flex;
             margin-left: auto;
+            align-items: center;
         }
 
         .nav-item {
-            margin-right: 20px;
+            margin-right: 30px; /* Espacement plus large entre les éléments */
         }
 
         .nav-link {
-            color: #555;
+            color: #555555; /* Gris élégant pour le texte */
             font-size: 1.1rem;
             text-transform: uppercase;
             font-weight: 500;
             transition: color 0.3s ease, transform 0.3s ease;
             text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .nav-link:hover {
-            color: #333;
-            transform: translateY(-2px); /* Elegant hover effect */
+            color: #2c3e50; /* Changement de couleur plus foncé pour un survol élégant */
+            transform: translateY(-3px); /* Légère élévation pour un effet de survol plus élégant */
         }
 
         .nav-item.dropdown .dropdown-menu {
-            background-color: #fff;
+            background-color: #ffffff;
             border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Ombre plus douce pour un menu élégant */
+            border-radius: 5px;
+            padding: 10px 0;
         }
 
+        .nav-item.dropdown .dropdown-menu .dropdown-item {
+            font-family: 'Montserrat', sans-serif;
+            color: #555555;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+            background-color: #f4f4f4; /* Effet de survol pour les éléments du menu */
+            color: #2c3e50; /* Couleur élégante au survol */
+        }
+
+        /* Mobile Responsiveness: NavBar Adaptation */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar-brand {
+                font-size: 1.8rem; /* Réduire la taille de la marque sur mobile */
+            }
+
+            .navbar-nav {
+                display: block;
+                text-align: center;
+            }
+
+            .nav-item {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .nav-item:last-child {
+                margin-bottom: 0;
+            }
+        }
+        
         .dropdown-item {
             color: #f1f1f1;
             font-weight: 500;
@@ -151,7 +202,6 @@
     </style>
     {% endblock %}
 </head>
-
 <body>
 <!-- Navigation bar -->
 <nav class="navbar">

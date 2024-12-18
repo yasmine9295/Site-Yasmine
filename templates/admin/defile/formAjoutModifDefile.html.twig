@@ -1,8 +1,23 @@
- {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/defile-modification.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/defile-modification.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Ajouter du style pour fixer le bouton Annuler en bas */
+        .cancel-button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            width: 80%;  /* Vous pouvez ajuster la largeur selon vos préférences */
+        }
+
+        .btn-secondary {
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
 {% endblock %}
-    
 
 {% block body %}
 <div class="container py-4">
@@ -67,9 +82,6 @@
 
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ path('admin_defiles') }}" class="btn btn-secondary btn-block">Annuler</a>
-        </div>
-        <div class="col-md-6">
             <button type="submit" class="btn btn-primary btn-block">
                 {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
                     Ajouter le défilé
@@ -82,6 +94,11 @@
 
     {{ form_end(formDefile) }}
 </div>
+
+<div class="cancel-button-container">
+    <a href="{{ path('admin_defiles') }}" class="btn btn-secondary btn-block">Annuler</a>
+</div>
+
 {% endblock %}
 
 {% block javascript %}

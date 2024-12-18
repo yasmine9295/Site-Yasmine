@@ -1,81 +1,59 @@
-  /* Design général */
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fa;
-    color: #333;
+/* Importation de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400&display=swap');
+
+/* Design général */
+body {
+    font-family: 'Roboto', sans-serif; /* Police élégante pour le corps */
+    background-color: #f4f7fa; /* Fond général */
+    color: #333; /* Couleur du texte par défaut */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
 }
 
+/* Conteneur principal */
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
+    max-width: 600px; /* Taille plus compacte */
+    margin: 50px auto; /* Centré verticalement */
+    padding: 30px;
+    background-color: #fff; /* Fond blanc */
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre élégante */
+    transition: transform 0.3s ease;
 }
 
- /* Navigation Bar */
-.navbar {
-    background-color: #fff; /* White background */
-    padding: 15px 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #222;
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.navbar-nav {
-    list-style-type: none;
-    display: flex;
-    margin-left: auto;
-}
-
-.nav-item {
-    margin-right: 20px;
-}
-
-.nav-link {
-    color: #555;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.3s ease, transform 0.3s ease;
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    color: #333;
-    transform: translateY(-2px); /* Elegant hover effect */
-}
-
-.nav-item.dropdown .dropdown-menu {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+/* Titre principal */
 h1 {
+    font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
     font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
+    color: #000; /* Titre en noir */
+    text-align: center;
+    margin-bottom: 20px;
     font-weight: 600;
 }
 
+/* Sous-titre */
 h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #444;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Effet d'apparition (Fade-in) lors du scroll */
+.container, .form-group, .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Formulaire */
@@ -83,34 +61,33 @@ form {
     margin-top: 30px;
 }
 
-.row {
-    margin-bottom: 20px;
-}
-
-/* Form controls */
 input, select, textarea {
-    border: 1px solid #ced4da;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
     width: 100%;
-    box-sizing: border-box;
-    transition: border 0.3s ease;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: #007bff;
+    border-color: #000; /* Bordure noire lors du focus */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     outline: none;
 }
 
-/* Champs de texte */
-textarea {
-    resize: vertical;
-    height: 150px;
+/* Sélecteurs */
+select {
+    background-color: #fff;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
 }
 
-select {
-    font-size: 1rem;
-    padding: 10px;
+select:focus {
+    border-color: #000; /* Bordure noire sur focus */
 }
 
 /* Boutons */
@@ -118,35 +95,52 @@ select {
     padding: 12px 20px;
     font-size: 1rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
     width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border: none;
+    background-color: #000;
     color: white;
+    border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #333;
+    transform: translateY(-2px);
 }
 
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: #000; /* Fond noir pour le bouton Annuler */
+    color: white; /* Texte en blanc */
     border: none;
-    color: white;
+    font-family: 'Playfair Display', serif; /* Police élégante */
+    font-weight: 600; /* Police en gras pour un effet luxueux */
+    letter-spacing: 1px; /* Espacement des lettres pour l'élégance */
+    padding: 15px 40px; /* Un peu plus de padding pour l'élégance */
+    text-transform: uppercase; /* Texte en majuscules */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #333; /* Hover avec un gris plus foncé */
+    transform: translateY(-2px);
 }
 
-.btn-block {
-    width: 100%;
+/* Positionner le bouton Annuler en bas de la page */
+.cancel-button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: auto; /* Pour ne pas étirer le bouton sur toute la largeur */
 }
 
-/* Listes */
 .list-group {
     padding: 0;
     list-style-type: none;
@@ -155,8 +149,8 @@ select {
 .list-group-item {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    padding: 8px 10px;
-    margin-bottom: 8px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
@@ -165,23 +159,14 @@ select {
     background-color: #f1f1f1;
 }
 
-/* Sélecteur dynamique */
-select {
-    width: 100%;
-}
-
 /* Optimisation responsive */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        padding: 20px;
     }
 
     h1 {
-        font-size: 2rem;
-    }
-
-    .col-md-6 {
-        width: 100%;
+        font-size: 1.8rem;
     }
 
     .btn {
