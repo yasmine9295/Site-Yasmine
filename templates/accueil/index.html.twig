@@ -19,51 +19,6 @@
             overflow: hidden;
         }
 
-        /* Navbar styles */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            padding: 10px 30px; /* Reduced padding for a smaller navbar */
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #222;
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .navbar-nav {
-            list-style-type: none;
-            display: flex;
-            margin-left: auto;
-        }
-
-        .nav-item {
-            margin-right: 20px;
-        }
-
-        .nav-link {
-            color: #555;
-            font-size: 1rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .nav-link:hover {
-            color: #333;
-            transform: translateY(-2px);
-        }
-
         /* Background video section */
         .background-video-container {
             position: fixed;
@@ -168,21 +123,6 @@
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar">
-    <a href="{{ path('accueil') }}" class="navbar-brand">
-        <img src="{{ asset('images/logo.png') }}" alt="Y&M Logo" class="navbar-logo">
-    </a>
-    <div class="navbar-menu">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_defiles') }}">Défilés</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_marque') }}">Marques</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_mannequins') }}">Mannequins</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_blog') }}">Partie Blog</a></li>
-        </ul>
-    </div>
-</nav>
-
 <!-- Main section for videos -->
 <div class="main-section">
     <!-- First video section (left) -->
@@ -192,7 +132,7 @@
             <h1>Notre Présentation</h1>
             <p>Plongez dans l'univers de Y&M </p>
             <p>où l'élégance rencontre la mode.</p>
-            <a href="{{ path('admin_defiles') }}" class="btn btn-elegant">Découvrir</a>
+            <a href="{{ path('admin_defiles') }}" class="btn">Découvrir</a>
         </div>
     </div>
 
@@ -202,7 +142,7 @@
         <div class="content-text">
             <h1>Bienvenue dans le monde du luxe</h1>
             <p>Découvrez nos dernières collections et défilés</p>
-            <a href="{{ path('admin_blog') }}" class="btn btn-elegant">Explorez le Blog</a>
+            <a href="{{ path('admin_blog') }}" class="btn">Explorez le Blog</a>
         </div>
     </div>
 </div>
