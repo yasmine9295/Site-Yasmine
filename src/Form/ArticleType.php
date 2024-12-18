@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Blog;
+use App\Form\ArticleType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
