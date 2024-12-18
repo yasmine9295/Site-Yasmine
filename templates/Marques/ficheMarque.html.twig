@@ -6,21 +6,21 @@
 <h1 class="pt-2 text-center">Fiche de l'marque</h1>
 <hr>
     <div class="card mb-3">
-        <h3 class="card-header">{{lemarque.nom}}</h3>
+        <h3 class="card-header">{{lemarque.nomM}}</h3>
         <div class="row">        
             <div class="col-3 d-flex align-items-center mx-auto">
                 <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{lemarque.image}}" alt="Card image">
             </div>
             <div class="col"><div class="card-body">
                 <h5 class="card-title">
-                    <a href="  {{path('ficheArtiste', {'id': lemarque.artiste.id})}}" class="badge bg-dark">  {{lemarque.artiste.nom}}</a>
+                    <a href="  {{path('ficheArtiste', {'id': lemarque.artiste.id})}}" class="badge bg-dark">  {{lemarque.artiste.nomM}}</a>
                 </h5>
                 <p class="card-text">{{lemarque.date}}</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> 
                     {% for leStyle in lemarque.styles %}
-                <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
+                <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nomM}}</span>
                 {% endfor %}
                 </li>
                 <li class="list-group-item">
