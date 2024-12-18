@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Mannequins;
 use App\Entity\ImageMannequin;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MannequinsRepository;

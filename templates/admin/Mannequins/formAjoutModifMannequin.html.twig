@@ -1,34 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout Artiste{% endblock %}
+{% block title %}Ajout/Modification Mannequins{% endblock %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
 <h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_artiste_ajout") %}
-Ajout
-{% else %}
-Modification
-{% endif %}
-d'un Artistes</h1>
+    {% if (app.request.attributes.get('_route') == "admin_mannequins_ajout") %}
+        Ajout
+    {% else %}
+        Modification
+    {% endif %}
+    d'un Mannequin
+</h1>
 
-{{form_start(formArtiste,{'attr':{'novalidate':'novalidate'}})}}
-
-{{form_row(formArtiste.NomD)}}
-{{form_row(formArtiste.description)}}
+{{ form_start(formMannequins, {'attr': {'novalidate': 'novalidate'}}) }}
 <div class="row">
-    <div class="col">{{form_row(formArtiste.site)}}</div>
-    <div class="col">{{form_row(formArtiste.type)}}</div>
+    <div class="col">{{ form_row(formMannequins.Nom) }}</div>
+    <div class="col">{{ form_row(formMannequins.Prenom) }}</div>
 </div>
-{{form_row(formArtiste.image)}}
 
 <div class="row">
-    <div class="col"><a href=" {{path('admin_artistes')}}" class="btn btn-dark btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_artiste_ajout") %}
-"Ajouter l'artiste"
-{% else %}
-"Modifier l'artiste"
-{% endif %}></div>
+    <div class="col">{{ form_row(formMannequins.Nationalite) }}</div>
 </div>
-{{form_end(formArtiste)}}
+
+<div class="row">
+    {% if formMannequins.blogs is not empty %}
+        <div class="col">
+            <h4>Blogs associés : </h4>
+            <ul>
+                {% for blog in formMannequins.blogs %}
+                    <li>{{ blog.name }}</li> 
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if formMannequins.mannequins is not empty %}
+        <div class="col">
+            <h4>Mannequins associés :</h4>
+            <ul>
+                {% for mannequin in formMannequins.mannequins %}
+                    <li>{{ mannequin.nom }}</li> 
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col">{{ form_row(formMannequins.biographieM) }}</div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a href="{{ path('admin_mannequins') }}" class="btn btn-dark btn-block">Annuler</a>
+    </div>
+    <div class="col">
+        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_mannequins_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
+    </div>
+</div>
+
+{{ form_end(formMannequins) }}
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('select').select2();
+});
+</script>
 {% endblock %}

@@ -150,13 +150,22 @@
                             <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
                             <strong>Biographie:</strong> {{ lemannequin.biographieM }}
                         </p>
-                         {% if "ROLE_ADMIN" in app.user.roles %}
+                          {% if "ROLE_ADMIN" in app.user.roles %}
                         <div class="d-flex justify-content-between">
-                            <a href="{{ path('admin_defile_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-pen"></i> Modifier
                             </a>
+                            <a class="btn btn-danger btn-sm"
+                               data-bs-toggle="modal"
+                               data-bs-target="#modalSimple"
+                               data-titre="Suppression d'un défilé"
+                               data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ lemannequin.Nom }} ?"
+                               data-libelleBouton="Supprimer ce défilé"
+                               data-lien="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                                <i class="far fa-trash-alt"></i> Supprimer
+                            </a>
                         </div>
-                         {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
