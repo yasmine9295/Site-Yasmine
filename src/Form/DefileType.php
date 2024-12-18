@@ -42,7 +42,7 @@ class DefileType extends AbstractType
             ])
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
-                'choice_label' => 'Nom', 
+                'choice_label' => 'NomM', 
                 'label' => 'Choisir une marque'
             ])
             ->add('blogs', TextareaType::class, [

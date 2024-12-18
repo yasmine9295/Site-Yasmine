@@ -19,6 +19,20 @@
             overflow: hidden;
         }
 
+                /* Centrer le titre en haut de la page */
+        .title {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Centrage horizontal */
+            font-size: 2.5rem;  /* Taille du titre, vous pouvez ajuster cela */
+            font-weight: bold;  /* Gras pour rendre le titre plus visible */
+            color: #fff; /* Couleur blanche pour le texte */
+            z-index: 2; /* Assurez-vous qu'il est au-dessus des autres éléments */
+            text-align: center;  /* Centrer le texte à l'intérieur de l'élément */
+            width: 100%; /* Prendre toute la largeur */
+        }
+
         /* Background video section */
         .background-video-container {
             position: fixed;
