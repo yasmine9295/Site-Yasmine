@@ -196,7 +196,7 @@
                                    data-titre="Suppression d'un défilé"
                                    data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
                                    data-libelleBouton="Supprimer ce défilé"
-                                   data-lien="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}">
+                                   <a href="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
                                     <i class="far fa-trash-alt"></i> Supprimer
                                 </a>
                             </div>
