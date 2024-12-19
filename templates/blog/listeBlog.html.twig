@@ -5,91 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YM - Blog{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤍</text></svg>">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Blog.css') }}">
     <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
     
     <!-- Google Fonts (Elegant fonts) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    {% block stylesheets %}
-    <style>
-        /* Global styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4; /* Fond clair */
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Title of the page */
-        .title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 600;
-            color: #333;
-            padding: 20px;
-        }
-
-        /* Blog posts container */
-        .blog-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-
-        /* Blog post card */
-        .blog-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 30%;
-            margin: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .blog-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .blog-card-content {
-            padding: 20px;
-        }
-
-        .blog-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #333;
-        }
-
-        .blog-card p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .blog-card a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #090706;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: background-color 0.3s;
-        }
-
-        .blog-card a:hover {
-            background-color: #34495e;
-        }
-    </style>
-    {% endblock %}
 </head>
 
 <body>

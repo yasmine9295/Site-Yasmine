@@ -3,70 +3,64 @@ body {
     background: url('URL_DE_TON_IMAGE_DE_FOND') no-repeat center center fixed; /* Image de fond */
     background-size: cover; /* Couvre toute la page */
     font-family: 'Playfair Display', serif; /* Police luxe et élégante */
-    color: #2c2c2c; /* Noir subtil */
+    color: #2c2c2c; /* Gris subtile */
     margin: 0;
     padding: 0;
 }
 
-
-/* Navbar collée en haut */
-.navbar {
-    position: fixed; /* Fixe la navbar en haut */
+  /* Navigation Bar */
+  .navbar {
+    background-color: #ffffff; /* Fond blanc pour un look épuré */
+    padding: 15px 30px;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6)); /* Transparence légère */
-    color: #000; /* Texte noir */
-    padding: 15px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10; /* Assure que la navbar est au-dessus du contenu */
-    border-bottom: 1px solid #e0d6cc; /* Ligne subtile */
-    transition: background-color 0.3s; /* Transition douce pour fond au survol */
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre douce et élégante */
+    border-bottom: 1px solid #e0e0e0; /* Ajouter une bordure subtile */
+    font-family: 'Montserrat', sans-serif; /* Police moderne et élégante */
 }
 
-.navbar h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0;
-    color: #d4af37; /* Or */
-    font-family: 'Playfair Display', serif;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    width: 50%; /* Ajuster la taille totale */
-}
-
-.navbar li {
-    margin: 0 15px;
-}
-
-.navbar a {
+.navbar-brand {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50; /* Couleur sombre pour un aspect sophistiqué */
     text-decoration: none;
-    color: #2c2c2c; /* Noir subtil */
-    font-size: 1rem;
-    transition: color 0.3s, transform 0.2s;
-    font-weight: bold;
-    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
+    transition: color 0.3s ease;
 }
 
-.navbar a:hover {
-    color: #d4af37; /* Or au survol */
-    transform: scale(1.1); /* Agrandissement léger */
+.navbar-brand:hover {
+    color: #34495e; /* Subtle hover effect for brand */
 }
 
-/* Ajout d'un effet de fond lorsqu'on fait défiler la page */
-.navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.7); /* Fond sombre quand on défile */
-    transition: background-color 0.3s;
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 30px; /* Espacement plus large entre les éléments */
+}
+
+.nav-link {
+    color: #555555; /* Gris élégant pour le texte */
+    font-size: 1.1rem;
+text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-link:hover {
+    color: #2c3e50; /* Changement de couleur plus foncé pour un survol élégant */
+    transform: translateY(-3px); /* Légère élévation pour un effet de survol plus élégant */
 }
 
 /* Conteneur principal */
@@ -79,8 +73,6 @@ body {
     border-radius: 15px;
     border: none;
 }
-
-
 
 /* Titre principal */
 h1 {
@@ -132,7 +124,7 @@ form .btn {
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
     font-family: 'Playfair Display', serif;
     text-transform: uppercase;
 }
@@ -151,6 +143,7 @@ form .btn-dark:hover {
     background-color: #d4af37; /* Or intense */
     color: #fff; /* Blanc */
     transform: scale(1.05); /* Effet survol */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Ombre douce */
 }
 
 /* Liste des éléments associés */
@@ -168,8 +161,11 @@ ul li {
     border-radius: 10px;
     font-size: 1rem;
     color: #2c2c2c;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-
-
+ul li:hover {
+    background-color: #f9f9f9;
+    transform: translateX(5px); /* Légère animation au survol */
+}
 

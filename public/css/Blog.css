@@ -1,0 +1,174 @@
+        /* Importation de Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400&display=swap');
+
+        /* Design général */
+body {
+            font-family: 'Roboto', sans-serif; /* Police élégante pour le corps */
+            background-color: #f4f7fa; /* Fond général */
+            color: #333; /* Couleur du texte par défaut */
+    margin: 0;
+    padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #ffffff; /* Fond blanc pour un look épuré */
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre douce et élégante */
+            border-bottom: 1px solid #e0e0e0; /* Ajouter une bordure subtile */
+            font-family: 'Montserrat', sans-serif; /* Police moderne et élégante */
+        }
+
+        .navbar-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50; /* Couleur sombre pour un aspect sophistiqué */
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #34495e; /* Subtle hover effect for brand */
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            margin-left: auto;
+            align-items: center;
+}
+
+        .nav-item {
+            margin-right: 30px; /* Espacement plus large entre les éléments */
+        }
+
+        .nav-link {
+            color: #555555; /* Gris élégant pour le texte */
+            font-size: 1.1rem;
+    text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-link:hover {
+            color: #2c3e50; /* Changement de couleur plus foncé pour un survol élégant */
+            transform: translateY(-3px); /* Légère élévation pour un effet de survol plus élégant */
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 900px; /* Taille plus large */
+            margin: 80px auto; /* Centré verticalement */
+            padding: 30px;
+            background-color: #fff; /* Fond blanc */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre élégante */
+    transition: transform 0.3s ease;
+}
+
+        /* Titre principal */
+        h1 {
+            font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
+            font-size: 2.5rem;
+            color: #000; /* Titre en noir */
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Article */
+        .article {
+            margin-bottom: 30px;
+}
+
+        .article img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+}
+
+        .article .content {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+}
+
+        .article .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+}
+
+.like-btn, .pin-btn {
+    background: none;
+    border: none;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.like-btn:hover, .pin-btn:hover {
+    color: #e74c3c;
+}
+
+.liked {
+    color: #e74c3c;
+}
+
+.pinned {
+    color: #f39c12;
+}
+
+.comments-section {
+    margin-top: 30px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comments-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    margin-bottom: 15px;
+}
+
+.comment strong {
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+textarea:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.pagination-container {
+    margin-top: 50px;
+    text-align: center;
+}

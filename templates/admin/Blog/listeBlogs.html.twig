@@ -1,60 +1,62 @@
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/Blog.css') }}">
+{% endblock %}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Gestion blog{% endblock %}
 
 {% block body %}
 <h1 class="pt-2 text-center">Gestion des blogs</h1>
-<a href=" {{path('blog_ajout')}}" class="btn btn-dark">Ajouter un article</a>
+<a href=" {{ path('blog_ajout') }}" class="btn btn-dark">Ajouter un article</a>
 
-<hr> 
-<table class="table table-hover">
-<thead>
-    <tr>
-      <th scope="col-1">Defile</th>
-      <th scope="col-3">Nom de l'article</th>
-      <th scope="col-1">contenu</th>
-      <th scope="col-1">date</th>
-
-    
-    </tr>
-</thead>  
-    <tbody>
+<hr>
         {% for leblog in lesblogs %}
             <tr>
-            <td class="col-3">{{leblog.id}}</td>
-            <td class="col-1">{{leblog.defile.id}}</td>
-            <td class="col-1">{{leblog.nomArticle}}</td>
-            <td class="col-1">{{leblog.contenu}}</td>
-            <td class="col-1">{{leblog.Date|date("Y/m/d")}}</td>
-            <td class="col-1">{{leblog.image}}</td>
-            <td class="col-1">
-            {# {% for leStyle in ledefile.styles %} 
-            <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
-            {# {% endfor %} 
-            </td>
-            <td class="col-2">
-            <span class="align-self-center badge bg-dark"> {{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</span>
-            {# </td> #}
-            {# <td class="col-2">
-                <a href=" {{path('admin_mannequins_modif', {'id': lemannequin.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
-                <a class="btn btn-dark"
-                data-bs-toggle="modal" 
-                data-bs-target="#modalSimple"
-                data-titre="Suppression d'un mannequin"
-                data-message="Etes vous sur de vouloir supprimer l'mannequin : {{lemannequin.Nom}}"
-                data-libelleBouton="Supprimer l'mannequin"
-                data-lien="{{path('admin_mannequins_suppression', {'id': lemannequin.id}) }}">
-                <i class="far fa-trash-alt"></i></a>
-            </td> #}
+                <td class="col-3">{{ leblog.id }}</td>
+                <td class="col-3">{{ leblog.nomArticle }}</td>
+                <td class="col-3">{{ leblog.contenu }}</td>
+                <td class="col-1">{{ leblog.Date|date("Y/m/d") }}</td>
+                <td class="col-1">{{ leblog.image }}</td>
+                <td class="col-1">
+                    <span class="badge bg-dark"> 
+                        {% if leblog.styles is not empty %}
+                            {% for leStyle in leblog.styles %}
+                                <span class="badge" style="background-color: {{ leStyle.couleur }};"> {{ leStyle.nom }}</span>
+                            {% endfor %}
+                        {% else %}
+                            Aucun style
+                        {% endif %}
+                    </span>
+                </td>
+                <td class="col-2">
+                    <span class="badge bg-dark">{{ leblog.morceaux|length }} 
+                    {% if leblog.morceaux|length > 1 %} morceaux {% else %} morceau {% endif %}
+                    </span>
+                </td>
+                <td class="col-2">
+                    <a href="{{ path('blog_modif', {'id': leblog.id}) }}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
+                    <a class="btn btn-dark"
+                       data-bs-toggle="modal" 
+                       data-bs-target="#modalSimple"
+                       data-titre="Suppression de l'article"
+                       data-message="Êtes-vous sûr de vouloir supprimer l'article : {{ leblog.nomArticle }}"
+                       data-libelleBouton="Supprimer l'article"
+                       data-lien="{{ path('blog_suppression', {'id': leblog.id}) }}">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
+
 <div class="navigation mx-auto">
-		{{ knp_pagination_render(lesblogs) }}
-	</div>
+    {{ knp_pagination_render(lesblogs) }}
 </div>
+
 {% endblock %}
+
 {% block javascript %}
     {% include "include/_modale.html.twig" %}
 {% endblock %}
