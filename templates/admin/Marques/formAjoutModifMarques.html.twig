@@ -8,7 +8,7 @@
 
 {% block body %}
 <h1 class="pt-2 text-center">
-    {% if (app.request.attributes.get('_route') == "admin_Marques_ajout") %}
+    {% if (app.request.attributes.get('_route') == "admin_marque_ajout") %}
         Ajout
     {% else %}
         Modification
@@ -56,10 +56,10 @@
 
 <div class="row">
     <div class="col">
-        <a href="{{ path('admin_Marques') }}" class="btn btn-dark btn-block">Annuler</a>
+        <a href="{{ path('admin_marque') }}" class="btn btn-dark btn-block">Annuler</a>
     </div>
     <div class="col">
-        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_Marques_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
+        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_marque_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
     </div>
 </div>
 
