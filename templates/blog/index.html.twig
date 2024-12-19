@@ -1,20 +1,141 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}YM - Blog{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤍</text></svg>">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts (Elegant fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    {% block stylesheets %}
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4; /* Fond clair */
+            margin: 0;
+            padding: 0;
+        }
 
-{% block title %}Hello BlogController!{% endblock %}
+        /* Title of the page */
+        .title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: #333;
+            padding: 20px;
+        }
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+        /* Blog posts container */
+        .blog-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        /* Blog post card */
+        .blog-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/yasmine/ProjetSite/src/Controller/BlogController.php'|file_link(0) }}">src/Controller/BlogController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/yasmine/ProjetSite/templates/blog/index.html.twig'|file_link(0) }}">templates/blog/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 20px;
+        }
+
+        .blog-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .blog-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .blog-card a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #090706;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .blog-card a:hover {
+            background-color: #34495e;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Main blog title -->
+    <div class="title">
+        <h1>Bienvenue sur notre Blog Mode</h1>
+        <p>Découvrez nos dernières tendances et collections</p>
+    </div>
+
+    <!-- Blog posts -->
+    <div class="blog-container">
+        <!-- First blog post -->
+        <div class="blog-card">
+            <img src="https://via.placeholder.com/600x400?text=Article+1" alt="Article 1">
+            <div class="blog-card-content">
+                <h3>Titre de l'Article 1</h3>
+                <p>Découvrez les dernières tendances de la saison avec notre article de mode exclusif. On parle de tissus, de couleurs, et de styles.</p>
+                <a href="{{ path('fiche_blog', {'id': 1}) }}">Lire plus</a>
+            </div>
+        </div>
+
+        <!-- Second blog post -->
+        <div class="blog-card">
+            <img src="https://via.placeholder.com/600x400?text=Article+2" alt="Article 2">
+            <div class="blog-card-content">
+                <h3>Titre de l'Article 2</h3>
+                <p>Notre expert mode vous guide à travers les must-haves de cette saison. À ne pas manquer pour rester au top de la tendance.</p>
+                <a href="{{ path('fiche_blog', {'id': 2}) }}">Lire plus</a>
+            </div>
+        </div>
+
+        <!-- Third blog post -->
+        <div class="blog-card">
+            <img src="https://via.placeholder.com/600x400?text=Article+3" alt="Article 3">
+            <div class="blog-card-content">
+                <h3>Titre de l'Article 3</h3>
+                <p>Explorez notre article dédié aux dernières collections de créateurs et trouvez votre look parfait pour les événements à venir.</p>
+                <a href="{{ path('fiche_blog', {'id': 3}) }}">Lire plus</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block javascript %}{% endblock %}
+</body>
+</html>
