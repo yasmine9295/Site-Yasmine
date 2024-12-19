@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fiche Artistes{% endblock %}
+{% block title %}Fiche Mannequins{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Fiche de l'artiste</h1>
+<h1 class="pt-2 text-center">Fiche du Mannequin</h1>
 <hr>
 <div class="row pt-2">
-{% set nbAlbums = leMannequin.albums|length  %}
     <div class="card mb-3">
         <h3 class="card-header">{{leMannequin.nom}}</h3>
         <div class="row">        
@@ -14,9 +13,6 @@
                 <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{leMannequin.image}}" alt="Card image">
             </div>
             <div class="col"><div class="card-body">
-        <h5 class="card-title">
-            <a href="" class="badge bg-dark">{{nbAlbums}} {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a>
-        </h5>
         </div>
 
         <div class="card-body">
@@ -39,7 +35,7 @@
       <th scope="col-1">Morceaux</th>
     </tr>
      </tbody>
-     {% for leAlbum in leArtiste.albums %}
+     {# {% for leAlbum in leArtiste.albums %}
     <tr>
         <td><img class="miniature" src="{{leAlbum.image}}" alt=""></td>
         <td scope="row"> <a href=" {{path('ficheAlbum',{'id': leAlbum.id})}}">{{leAlbum.nom}}</a></td>
@@ -55,7 +51,7 @@
 </table>
    
   </tbody>
-</table>
+</table> #}
 
 
 {% endblock %}

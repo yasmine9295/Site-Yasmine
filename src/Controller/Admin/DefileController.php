@@ -58,19 +58,15 @@ class DefileController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/defile/suppression/{id}', name: 'admin_defile_suppression' , methods:["GET"])]
-
+    #[Route('/admin/defile/suppression/{id}', name: 'admin_defile_suppression', methods: ["GET"])]
     public function suppressionDefile(Defile $defile, EntityManagerInterface $manager)
     {
-        $nbAlbums=$defile->getAlbums()->count();
-        if($nbAlbums > 0)
-        {
-            $this->addFlash("danger","Vous ne pouvez pas supprimer cet defile car $nbAlbums album(s) y sont associés");
-        }else{
             $manager->remove($defile);
             $manager->flush();
             $this->addFlash("success","le defile a bien été supprimé");
-        }
+        
         return $this->redirectToRoute('admin_defiles');
     }
 }
+    
+

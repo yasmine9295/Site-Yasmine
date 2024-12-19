@@ -80,18 +80,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-primary btn-block">
-                {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
-                    Ajouter le défilé
-                {% else %}
-                    Modifier le défilé
-                {% endif %}
-            </button>
-        </div>
-    </div>
-
     {{ form_end(formDefile) }}
 </div>
 

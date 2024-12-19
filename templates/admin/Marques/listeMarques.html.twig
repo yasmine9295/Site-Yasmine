@@ -169,7 +169,7 @@
     <h1 class="text-center mb-4 text-primary font-weight-bold">Liste des Marques</h1>
   {% if "ROLE_ADMIN" in app.user.roles %}
     <div class="d-flex justify-content-end mb-9">
-        <a href="{{ path('admin_marque') }}" class="btn btn-outline-primary btn-lg">
+        <a href="{{ path('admin_marque_ajout') }}" class="btn btn-outline-primary btn-lg">
             <i class="fas fa-plus-circle me-2"></i> Ajouter une marque
         </a>
   {% endif %}
@@ -186,14 +186,14 @@
                          {% if "ROLE_ADMIN" in app.user.roles %}
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{{ path('admin_defile_modif', {'id': laMarque.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Modifier</a>
+                        <a href="{{ path('admin_marque_modif', {'id': laMarque.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Modifier</a>
                         <a class="btn btn-danger btn-sm"
                            data-bs-toggle="modal" 
                            data-bs-target="#modalSimple"
                            data-titre="Suppression de la Marque"
                            data-message="Etes-vous sûr de vouloir supprimer la marque : {{ laMarque.nomM }} ?"
                            data-libelleBouton="Supprimer la Marque"
-                           {# data-lien="{{ path('admin_marque_suppression', {'id': laMarque.id}) }}"> #}
+                           data-lien="{{ path('admin_marque_suppression', {'id': laMarque.id}) }}">
                            <i class="far fa-trash-alt"></i> Supprimer
                         </a>
                      {% endif %}
