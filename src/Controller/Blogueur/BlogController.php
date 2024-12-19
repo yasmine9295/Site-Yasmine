@@ -12,14 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter; 
 
 class BlogController extends AbstractController
 {
     #[Route('/blog', name: 'admin_blog' , methods:"GET")]
-
     public function listeBlogs(BlogRepository $repo, PaginatorInterface $paginator, Request $request)
     {
-        $blogs=$paginator->paginate(
+        $blogs = $paginator->paginate(
             $repo->listeBlogsCompletePaginee(),
             $request->query->getInt('page', 1),
             9
@@ -28,7 +28,7 @@ class BlogController extends AbstractController
             'lesblogs' => $blogs
         ]);
     }
-        
+
     #[Route('/blog/{id}', name: 'ficheBlog' , methods:"GET")]
 
     public function ficheblog(Blog $blog)
@@ -38,11 +38,9 @@ class BlogController extends AbstractController
         ]);
     }
 
-
     #[Route('/blog/ajout', name: 'blog_ajout' , methods:["GET","POST"])]
     #[Route('/blog/modif/{id}', name: 'blog_modif' , methods:["GET","POST"])]
-
-    public function ajoutModifBlog(Blog $blog=null, Request $request, EntityManagerInterface $manager)
+    public function ajoutModifBlog(Blog $blog = null, Request $request, EntityManagerInterface $manager)
     {
         if($blog==null){
             $blog=new Blog();

@@ -73,16 +73,10 @@ class MannequinsController extends AbstractController
     #[Route('/admin/mannequin/suppression/{id}', name: 'admin_mannequin_suppression' , methods:["GET"])]
     public function suppressionMannequin(Mannequins $mannequin, EntityManagerInterface $manager)
     {
-        $nbDefiles = $mannequin->getDefiles()->count(); 
-        if ($nbDefiles > 0) {
-            $this->addFlash("danger", "Vous ne pouvez pas supprimer ce mannequin car $nbDefiles défilé(s) y sont associés");
-        } else {
             $manager->remove($mannequin);
             $manager->flush();
-            $this->addFlash("success", "Le mannequin a bien été supprimé");
-        }
+            $this->addFlash("success","Le mannequin a bien été supprimé");
+        
         return $this->redirectToRoute('admin_mannequins');
     }
-    
-
 }
