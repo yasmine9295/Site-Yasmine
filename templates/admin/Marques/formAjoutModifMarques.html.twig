@@ -8,7 +8,7 @@
 
 {% block body %}
 <h1 class="pt-2 text-center">
-    {% if (app.request.attributes.get('_route') == "admin_marque_ajout") %}
+    {% if (app.request.attributes.get('_route') == "admin_marques_ajout") %}
         Ajout
     {% else %}
         Modification
@@ -37,17 +37,10 @@
             </ul>
         </div>
     {% endif %}
-
-    {# {% if formMannequin.mannequins is not empty %}
-        <div class="col">
-            <h4>Mannequins associés :</h4>
-            <ul>
-                {% for mannequin in formMannequin.mannequins %}
-                    <li>{{ mannequin.nom }}</li> 
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %} #}
+<div class="form-group">
+        {{ form_label(formMarques.image, 'Image') }}
+        {{ form_widget(formMarques.image, {'attr': {'placeholder': 'image du mannequin'}}) }}
+    </div>
 </div>
 
 <div class="row">

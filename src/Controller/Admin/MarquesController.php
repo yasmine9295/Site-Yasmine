@@ -27,8 +27,8 @@ class MarquesController extends AbstractController
             'lesMarques' => $marques
         ]);
     }
-    #[Route('/admin/marque/ajout', name: 'admin_marque_ajout' , methods:["GET","POST"])]
-    #[Route('/admin/marque/modif/{id}', name: 'admin_marque_modif' , methods:["GET","POST"])]
+    #[Route('/admin/marques/ajout', name: 'admin_marques_ajout' , methods:["GET","POST"])]
+    #[Route('/admin/marque/modif/{id}', name: 'admin_marques_modif' , methods:["GET","POST"])]
 
     public function ajoutModifMarque(Marque $marque=null, Request $request, EntityManagerInterface $manager)
     {
@@ -49,12 +49,12 @@ class MarquesController extends AbstractController
             $this->addFlash("success", "la marque a bien été $marque");
             return $this->redirectToRoute('admin_marques');
         }
-        return $this->render('admin/marque/formAjoutModifmarque.html.twig', [
+        return $this->render('admin/marques/formAjoutModifmarque.html.twig', [
             'formMarque' => $form->createView()
         ]);
     }
 
-    #[Route('/admin/marque/suppression/{id}', name: 'admin_marque_suppression', methods: ["GET"])]
+    #[Route('/admin/marques/suppression/{id}', name: 'admin_marques_suppression', methods: ["GET"])]
     public function suppressionmarque(Marque $marque, EntityManagerInterface $manager)
     {
             $manager->remove($marque);

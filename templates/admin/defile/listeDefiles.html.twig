@@ -184,10 +184,11 @@
                         <p class="card-text">
                             <strong>Theme:</strong> {{ ledefile.theme }}<br>
                             <strong>Description:</strong> {{ ledefile.Description }}
+                        
                         </p>
+                        
                         {% if "ROLE_ADMIN" in app.user.roles %}
                             <div class="btn-container">
-                                <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
                                     <i class="fas fa-pen"></i> Modifier
                                 </a>
                                 <a class="btn btn-danger btn-sm"

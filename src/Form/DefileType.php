@@ -63,9 +63,11 @@ class DefileType extends AbstractType
                 ],
                 'label' => 'Choisir un thème'
             ])
+            
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre'
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
