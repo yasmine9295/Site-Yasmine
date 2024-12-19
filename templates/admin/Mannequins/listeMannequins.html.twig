@@ -149,6 +149,12 @@
                         <p class="card-text">
                             <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
                             <strong>Biographie:</strong> {{ lemannequin.biographieM }}
+                            <strong>Défilés :</strong>
+                                    {% for defile in lemannequin.defiles %}
+                                        <li>{{ defile.nomD }}</li> 
+                                    {% endfor %}
+                                   
+                            <img src="{{ lemannequin.imageMannequins }}" alt="Image" style="width: 200px; height: auto;">
                         </p>
                           {% if "ROLE_ADMIN" in app.user.roles %}
                         <div class="d-flex justify-content-between">

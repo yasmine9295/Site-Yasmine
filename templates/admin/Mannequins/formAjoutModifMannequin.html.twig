@@ -36,18 +36,19 @@
             'style': 'height: 200px;'
         }
     }) }}
-</div>
 
     <div class="form-group">
-        <h4>Défilés associés :</h4>
-        <ul>
-            {% for defile in formMannequin.defiles %}
-                <li>{{ defile.nom }}</li>
-            {% else %}
-                <li>Aucuns défilés associés.</li>
-            {% endfor %}
-        </ul>
+        {{ form_label(formMannequin.defiles, 'defiles') }}
+        {{ form_widget(formMannequin.defiles, {'attr': {'placeholder': 'defiles du mannequin'}}) }}
     </div>
+</div>
+
+<div class="form-group">
+        {{ form_label(formMannequin.imageMannequins, 'Image') }}
+        {{ form_widget(formMannequin.imageMannequins, {'attr': {'placeholder': 'image du mannequin'}}) }}
+    </div>
+
+   
 
     <div class="form-group">
         <button type="submit" class="btn btn-dark btn-block">

@@ -32,8 +32,10 @@ class Mannequins
     #[ORM\Column(length: 1000)]
     private ?string $biographieM = null;
 
-    #[ORM\OneToMany(mappedBy: 'mannequinId', targetEntity: ImageMannequin::class)]
-    private Collection $imageMannequins;
+    #[ORM\Column(length: 1000)]
+    private ?string $imageMannequins = null;
+
+
 
     public function __construct()
     {
@@ -121,33 +123,18 @@ class Mannequins
         return $this;
     }
 
-    /**
-     * @return Collection<int, ImageMannequin>
-     */
-    public function getImageMannequins(): Collection
+    public function getImageMannequins(): ?string
     {
         return $this->imageMannequins;
     }
 
-    public function addImageMannequin(ImageMannequin $imageMannequin): static
+    public function setImageMannequins(string $imageMannequins): static
     {
-        if (!$this->imageMannequins->contains($imageMannequin)) {
-            $this->imageMannequins->add($imageMannequin);
-            $imageMannequin->setMannequinId($this);
-        }
+        $this->imageMannequins = $imageMannequins;
 
         return $this;
     }
 
-    public function removeImageMannequin(ImageMannequin $imageMannequin): static
-    {
-        if ($this->imageMannequins->removeElement($imageMannequin)) {
-            // set the owning side to null (unless already changed)
-            if ($imageMannequin->getMannequinId() === $this) {
-                $imageMannequin->setMannequinId(null);
-            }
-        }
-
-        return $this;
+   
     }
-}
+

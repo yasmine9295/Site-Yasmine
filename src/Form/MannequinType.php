@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Form;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Defile;
 use App\Entity\Mannequins;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 
 class MannequinType extends AbstractType
@@ -25,8 +26,12 @@ class MannequinType extends AbstractType
                 'choice_label' => 'nomD',     
                 'multiple' => true,          
                 'expanded' => false,        
-      ])   
-      
+      ])    
+      ->add('imageMannequins', UrlType::class, [
+        'label' => 'Lien vers l\'image du Mannequin',
+        'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
+        'required' => false  
+    ]);
       ;
     }
 
