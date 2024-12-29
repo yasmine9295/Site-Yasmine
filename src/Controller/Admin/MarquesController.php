@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Marque;
 use App\Repository\MarqueRepository;
-use App\Controller\MarquesController;
+use App\Form\MarquesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +39,7 @@ class MarquesController extends AbstractController
             $mode="modifié";
         }
 
-        $form=$this->createForm(MarqueType::class,$marque);
+        $form=$this->createForm(MarquesType::class,$marque);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
@@ -49,7 +49,7 @@ class MarquesController extends AbstractController
             $this->addFlash("success", "la marque a bien été $marque");
             return $this->redirectToRoute('admin_marques');
         }
-        return $this->render('admin/marques/formAjoutModifmarque.html.twig', [
+        return $this->render('admin/marques/formAjoutModifmarques.html.twig', [
             'formMarque' => $form->createView()
         ]);
     }

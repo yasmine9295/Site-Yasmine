@@ -1,61 +1,51 @@
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/Blog.css') }}">
-{% endblock %}
 
-{% extends 'base.html.twig' %}
 
-{% block title %}Gestion blog{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Gestion des blogs</h1>
-<a href=" {{ path('blog_ajout') }}" class="btn btn-dark">Ajouter un article</a>
+<div class="container py-5">
+    <h1 class="text-center text-primary mb-5">Liste des Blogs</h1>
 
-<hr>
-        {% for leblog in lesblogs %}
-            <tr>
-                <td class="col-3">{{ leblog.id }}</td>
-                <td class="col-3">{{ leblog.nomArticle }}</td>
-                <td class="col-3">{{ leblog.contenu }}</td>
-                <td class="col-1">{{ leblog.Date|date("Y/m/d") }}</td>
-                <td class="col-1">{{ leblog.image }}</td>
-                <td class="col-1">
-                    <span class="badge bg-dark"> 
-                        {% if leblog.styles is not empty %}
-                            {% for leStyle in leblog.styles %}
-                                <span class="badge" style="background-color: {{ leStyle.couleur }};"> {{ leStyle.nom }}</span>
-                            {% endfor %}
-                        {% else %}
-                            Aucun style
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
+          {% for blog in lesBlogs %} 
+            <div class="col">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ blog.NomArticle }}</h5>
+                        <h5 class="card-title">{{ blog.Contenu }}</h5>
+                        <h6 class="card-subtitle mb-2">{{ blog.Date|date("Y/m/d") }}</h6>
+                        <p class="card-text">
+                            <strong>Theme:</strong> {{ blog.theme }}<br>
+                            <strong>Description:</strong> {{ blog.Description }}
+                        </p>
+                        
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="btn-container">
+                                <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un blog"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le blog : {{ blog.NomArticle }} ?"
+                                   data-libelleBouton="Supprimer ce blog"
+                                   href="{{ path('admin_blog_suppression', {'id': blog.id}) }}">
+                                    <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
                         {% endif %}
-                    </span>
-                </td>
-                <td class="col-2">
-                    <span class="badge bg-dark">{{ leblog.morceaux|length }} 
-                    {% if leblog.morceaux|length > 1 %} morceaux {% else %} morceau {% endif %}
-                    </span>
-                </td>
-                <td class="col-2">
-                    <a href="{{ path('blog_modif', {'id': leblog.id}) }}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-dark"
-                       data-bs-toggle="modal" 
-                       data-bs-target="#modalSimple"
-                       data-titre="Suppression de l'article"
-                       data-message="Êtes-vous sûr de vouloir supprimer l'article : {{ leblog.nomArticle }}"
-                       data-libelleBouton="Supprimer l'article"
-                       data-lien="{{ path('blog_suppression', {'id': leblog.id}) }}">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %} 
+    </div>
 
-<div class="navigation mx-auto">
-    {{ knp_pagination_render(lesblogs) }}
+    <div class="d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(lesBlogs) }}
+    </div>
 </div>
-
 {% endblock %}
+
 
 {% block javascript %}
     {% include "include/_modale.html.twig" %}

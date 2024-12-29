@@ -6,14 +6,15 @@ use App\Entity\Blog;
 use App\Entity\Defile;
 use App\Entity\Marque; 
 use App\Entity\Mannequins;
+use App\Entity\Theme;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 
 class DefileType extends AbstractType
 {
@@ -29,7 +30,7 @@ class DefileType extends AbstractType
             ->add('mannequin', EntityType::class, [
                 'class' => Mannequins::class, 
                 'choice_label' => 'nom', 
-                'label' => 'Choisir un mannequin',
+                'label' => 'Mannequins',
                 'multiple' => true,
                 'by_reference' => false, 
             ])
@@ -41,33 +42,28 @@ class DefileType extends AbstractType
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
                 'choice_label' => 'NomM', 
-                'label' => 'Choisir une marque'
+                'label' => 'Choisir une marque',
             ])
             ->add('blogs', EntityType::class, [
                 'class' => Blog::class, 
-                'choice_label' => 'Blogs', 
+                'choice_label' => 'NomArticle',  
                 'label' => 'Saisir les blogs du défilé',
                 'multiple' => true, 
                 'by_reference' => false, 
             ])
-            ->add('description', TextType::class, [
-                'label' => 'Description du défilé',
-                'attr' => [
-                    'placeholder' => 'Saisir une description'
-                ]
+        
+            ->add('description', TextareaType::class, [
+                'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10]
             ])
-            ->add('theme', ChoiceType::class, [
-                'choices' => [
-                    'Solo' => 0,
-                    'Groupe' => 1
-                ],
-                'label' => 'Choisir un thème'
+            ->add('theme', EntityType::class, [
+                'class' => Theme::class,
+                'choice_label' => 'nom', 
+                'placeholder' => 'Choisir un thème',
+                'label' => 'Saisir les blogs du défilé',
             ])
-            
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre'
             ]);
-            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

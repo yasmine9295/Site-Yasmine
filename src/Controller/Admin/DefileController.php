@@ -65,7 +65,7 @@ class DefileController extends AbstractController
             $manager->flush();
             $this->addFlash("success","le defile a bien été supprimé");
         
-        return $this->redirectToRoute('admin_defile');
+        return $this->redirectToRoute('admin_defiles');
     }
 }
     

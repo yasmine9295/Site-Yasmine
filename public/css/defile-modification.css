@@ -172,4 +172,18 @@ select:focus {
     .btn {
         font-size: 0.9rem;
     }
+    .cancel-button-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        width: 80%;  
+    }
+
+    .btn-secondary {
+        width: 100%;
+        font-weight: bold;
+    }
+    
 }

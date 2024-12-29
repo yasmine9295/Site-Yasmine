@@ -32,6 +32,8 @@ class Blog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+
+
   
 
     public function __construct()
@@ -103,6 +105,7 @@ class Blog
 
         return $this;
     }
+
 
 
 }

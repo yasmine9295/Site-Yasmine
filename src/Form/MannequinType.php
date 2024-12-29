@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class MannequinType extends AbstractType
 {
@@ -27,10 +28,11 @@ class MannequinType extends AbstractType
                 'multiple' => true,          
                 'expanded' => false,        
       ])    
-      ->add('imageMannequins', UrlType::class, [
-        'label' => 'Lien vers l\'image du Mannequin',
-        'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
-        'required' => false  
+      ->add('imageMannequins', FileType::class, [
+        'label' => 'Image',
+        'required' => false,
+        'mapped' => false, 
+        'attr' => ['accept' => 'image/*']
     ]);
       ;
     }

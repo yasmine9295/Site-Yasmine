@@ -183,7 +183,9 @@
                     <p class="card-text"><strong>Créateur :</strong> {{ laMarque.createurM }}</p>
                     <p class="card-text"><strong>Histoire :</strong> {{ laMarque.histoireM }}</p>
                     <p class="card-text"><strong>Représentants :</strong> {{ laMarque.representantM }}
-                    <img src="{{ laMarque.image }}" alt="Image" style="width: 200px; height: auto;">
+                      <div class="card-img-container">
+                            <img src="{{ laMarque.image }}" alt="Image de {{ laMarque.nomM}}">
+                        </div>
                     </p>
                     
                 </div>

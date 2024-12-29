@@ -9,6 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Form\DefileType; 
 
 class MarquesType extends AbstractType
 {
@@ -38,8 +41,19 @@ class MarquesType extends AbstractType
             ->add('image', UrlType::class, [
                 'label' => 'Lien vers l\'image de la marque',
                 'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
-                'required' => false  
+                'required' => false,
+                'constraints' => [
+                    new Url(['message' => 'Veuillez entrer une URL valide.']),
+                ],
             ])
+
+            ->add('defiles', CollectionType::class, [
+                'entry_type' => DefileType::class, 
+                'allow_add' => true,  
+                'by_reference' => false, 
+                'label' => 'Défilés',
+            ])
+        
         ;
     
             }

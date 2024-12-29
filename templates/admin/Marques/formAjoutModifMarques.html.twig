@@ -1,10 +1,11 @@
-  {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-{% endblock %} 
- {% extends 'base.html.twig' %} 
+ {% extends 'base.html.twig' %}
 
-{% block title %}Ajout/Modification Mannequins{% endblock %}
+{% block title %}Ajout/Modification Marques{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
 <h1 class="pt-2 text-center">
@@ -16,35 +17,39 @@
     d'un Mannequin
 </h1>
 
-{{ form_start(formMarques, {'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_start(formMarque, {'attr': {'novalidate': 'novalidate'}}) }}
+
 <div class="row">
-    <div class="col">{{ form_row(formMarques.Nom) }}</div>
-    <div class="col">{{ form_row(formMarques.Prenom) }}</div>
+    <div class="col">{{ form_row(formMarque.nomM) }}</div>
+    <div class="col">{{ form_row(formMarque.CreateurM) }}</div>
 </div>
 
 <div class="row">
-    <div class="col">{{ form_row(formMarques.Nationalite) }}</div>
+    <div class="col">{{ form_row(formMarque.HistoireM) }}</div>
 </div>
 
 <div class="row">
-    {% if formMarques.defiles is not empty %}
+    {% if formMarque.defiles is not empty %}
         <div class="col">
-            <h4>defile associés : </h4>
+            <h4>Défilés associés :</h4>
             <ul>
-                {% for defiles in formMarques.defiles %}
-                    <li>{{ defiles.name }}</li> 
+                {% for defiles in formMarque.defiles %}
+                    <li>
+                        {{ form_row(defiles.NomD) }}  
+                    </li>
                 {% endfor %}
             </ul>
         </div>
     {% endif %}
+</div>
+
 <div class="form-group">
-        {{ form_label(formMarques.image, 'Image') }}
-        {{ form_widget(formMarques.image, {'attr': {'placeholder': 'image du mannequin'}}) }}
-    </div>
+    {{ form_label(formMarque.image, 'Image') }}
+    {{ form_widget(formMarque.image, {'attr': {'placeholder': 'Image du mannequin'}}) }}
 </div>
 
 <div class="row">
-    <div class="col">{{ form_row(formMarques.biographieM) }}</div>
+    <div class="col">{{ form_row(formMarque.RepresentantM) }}</div>
 </div>
 
 <div class="row">
@@ -52,11 +57,11 @@
         <a href="{{ path('admin_marque') }}" class="btn btn-dark btn-block">Annuler</a>
     </div>
     <div class="col">
-        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_marque_ajout') %}Ajouter le mannequin{% else %}Modifier le mannequin{% endif %}">
+        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_marque_ajout') %}Ajouter la marque{% else %}Modifier la marque{% endif %}">
     </div>
 </div>
 
-{{ form_end(formMarques) }}
+{{ form_end(formMarque) }}
 {% endblock %}
 
 {% block javascript %}

@@ -1,23 +1,8 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/defile-modification.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <style>
-        /* Ajouter du style pour fixer le bouton Annuler en bas */
-        .cancel-button-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999;
-            width: 80%;  /* Vous pouvez ajuster la largeur selon vos préférences */
-        }
-
-        .btn-secondary {
-            width: 100%;
-            font-weight: bold;
-        }
-    </style>
 {% endblock %}
+
 
 {% block body %}
 <div class="container py-4">
@@ -58,23 +43,30 @@
                 </ul>
             </div>
         {% endif %}
+            {% if formDefile.theme is not empty %}
+                        <div class="col-md-6">
+                            <h4>Theme associé :</h4>
+                            <ul class="list-group">
+                                {% for theme in formDefile.theme %}
+                                    <li class="list-group-item">{{ theme.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
 
-        {% if formDefile.mannequin is not empty %}
-            <div class="col-md-6">
-                <h4>Mannequins associés :</h4>
-                <ul class="list-group">
-                    {% for mannequin in formDefile.mannequin %}
-                        <li class="list-group-item">{{ mannequin.name }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    </div>
+                        {% if formDefile.mannequin is not empty %}
+                            <div class="col-md-6">
+                                <h4>Mannequins associés :</h4>
+                                <ul class="list-group">
+                                    {% for mannequin in formDefile.mannequin %}
+                                        <li class="list-group-item">{{ mannequin.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            {{ form_row(formDefile.theme) }}
-        </div>
+
+       
         <div class="col-md-6">
             {{ form_row(formDefile.description) }}
         </div>

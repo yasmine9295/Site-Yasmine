@@ -10,15 +10,19 @@ Ajout
 Modification
 {% endif %}
 d'un blog</h1>
+{% extends 'base.html.twig' %}
 
-{{form_start(ArticleType)}}
-<div class="row">
-    <div class="col-3">{{form_row(ArticleType.NomArticle)}}</div>
-    <div class="col-2">{{form_row(ArticleType.Contenu)}}</div>
-    <div class="col-2">{{form_row(ArticleType.image)}}</div>
-    <div class="col-2">{{form_row(ArticleType.Date)}}</div>
-    {# <div class="col-2">{{form_row(formBlog.)}}</div> #}
-</div>
+{% block body %}
+    <h1>{{ form.vars.value.id ? 'Modifier' : 'Ajouter' }} un article</h1>
+    {{ form_start(formBlog) }}
+        {{ form_row(formBlog.NomArticle) }}
+        {{ form_row(formBlog.Contenu) }}
+        {{ form_row(formBlog.Date) }}
+        {{ form_row(formBlog.image) }}
+        <button type="submit">Enregistrer</button>
+    {{ form_end(formBlog) }}
+{% endblock %}
+
 
 <div class="row">
     <div class="col"><a href=" {{path('admin_blog')}}" class="btn btn-dark btn-block">Annuler</a></div>
@@ -29,7 +33,7 @@ d'un blog</h1>
 "Modifier le Blog"
 {% endif %}></div>
 </div>
-{{form_end(ArticleType)}}
+{{form_end(BlogType)}}
 {% endblock %}
 
 
