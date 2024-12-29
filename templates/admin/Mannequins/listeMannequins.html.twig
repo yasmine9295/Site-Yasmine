@@ -5,28 +5,28 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        /* Style général des cartes */
+     
         .card {
-            background-color: #f1f1f1f; /* Fond blanc crème */
+            background-color: #f1f1f1f; 
             border: none;
-            border-radius: 10px; /* Coins arrondis pour une apparence chic */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Ombre douce mais marquée */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Animation fluide */
+            border-radius: 10px; 
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; 
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
-            height: auto; /* Laisser les cards s'adapter à la hauteur de leur contenu */
+            height: auto; 
         }
 
-        /* Effet de survol avec brillance élégante */
+    
         .card:hover {
-            transform: translateY(-10px); /* Légère élévation */
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Ombre élégante */
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); /* Dégradé lumineux */
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); 
         }
 
-        /* Style du titre de la carte */
+      
         .card-title {
             font-size: 1.75rem;
             font-family: 'Georgia', serif;
@@ -37,7 +37,7 @@
             letter-spacing: 2px;
         }
 
-        /* Style du sous-titre */
+      
         .card-subtitle {
             font-size: 1.2rem;
             font-family: 'Georgia', serif;
@@ -45,24 +45,24 @@
             margin-bottom: 1.25rem;
         }
 
-        /* Style du texte */
+      
         .card-text {
             font-size: 1.1rem;
             color: #090706;
             line-height: 1.8;
             font-family: 'Times New Roman', serif;
             margin-bottom: 1.75rem;
-            flex-grow: 1; /* Permet d'étendre l'espace de texte pour garantir la même hauteur */
+            flex-grow: 1; 
         }
 
-        /* Style des boutons */
+ 
         .card .btn {
             font-size: 0.95rem;
             padding: 0.6rem 1.2rem;
             text-transform: uppercase;
-            letter-spacing: 1.2px;  /* Espacement légèrement réduit */
-            border-radius: 0;  /* Enlever les coins arrondis pour rendre les boutons carrés */
-            background-color: #090706; /* Couleur élégante */
+            letter-spacing: 1.2px;  
+            border-radius: 0;  
+            background-color: #090706; 
             border: none;
             color: #fff;
             font-weight: bold;
@@ -77,25 +77,25 @@
             background-color: #34495e;
         }
 
-        /* Conteneur pour les boutons à la fin de chaque carte */
+      
         .card-footer {
             display: flex;
-            justify-content: space-between; /* Espacement uniforme entre les boutons */
+            justify-content: space-between; 
             padding-top: 10px;
             padding-bottom: 15px;
             border-top: 1px solid #e3e3e3;
         }
 
-        /* Pour l'encadrement des images */
+ 
         .card-img-container {
             width: 100%;
             height: auto;
             margin-bottom: 1.5rem;
-            border: 5px solid #e3e3e3; /* Bordure grise claire autour de l'image */
-            border-radius: 8px; /* Coins arrondis pour l'image */
+            border: 5px solid #e3e3e3; 
+            border-radius: 8px; 
             overflow: hidden;
             display: flex;
-            justify-content: center; /* Centrer l'image */
+            justify-content: center; 
         }
 
         .card-img-container img {
@@ -106,32 +106,32 @@
         }
 
         .card-img-container img:hover {
-            transform: scale(1.1); /* Zoom sur l'image au survol */
+            transform: scale(1.1); 
         }
 
-        /* Style des colonnes pour que les cartes soient 3 par ligne */
+     
         .row-cols-lg-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem; /* Espacement plus large entre les cartes */
-            height: 100%; /* Garantir que toutes les cartes de la ligne aient la même hauteur */
+            gap: 2rem; 
+            height: 100%; 
         }
 
-        /* Pour les petits écrans */
+
         @media (max-width: 768px) {
             .row-cols-lg-3 {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Pour les écrans moyens */
+      
         @media (min-width: 769px) and (max-width: 991px) {
             .row-cols-md-2 {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
-        /* Amélioration du titre principal */
+     
         h1 {
             font-family: 'Georgia', serif;
             color: #090706;
@@ -145,7 +145,7 @@
             position: relative;
         }
 
-        /* Animation du titre pour le rendre dynamique */
+     
         h1::after {
             content: '';
             position: absolute;
@@ -154,7 +154,7 @@
             transform: translateX(-50%);
             width: 60%;
             height: 2px;
-            background-color: #090706; /* Ligne sous le titre */
+            background-color: #090706; 
             animation: lineAnimation 1.5s ease-in-out infinite;
         }
 
@@ -167,7 +167,7 @@
             }
         }
 
-        /* Style général de la page */
+    
         body {
             background-color: #f5f5f5;
             font-family: 'Arial', sans-serif;
@@ -177,7 +177,7 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Pour que le contenu soit bien visible */
+ 
         .container {
             margin: 50px auto;
             max-width: 1200px;
@@ -272,7 +272,7 @@
         {% endfor %}
     </div>
 
-    <!-- Pagination -->
+
     <div class="navigation mx-auto">
         {{ knp_pagination_render(lesmannequins) }}
     </div>

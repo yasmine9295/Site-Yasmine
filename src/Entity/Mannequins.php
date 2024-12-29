@@ -18,22 +18,31 @@ class Mannequins
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le prénom doit comporter au moins {{ limit }} caractères.")]
     private ?string $Prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La nationalité est obligatoire.")]
     private ?string $Nationalite = null;
 
     #[ORM\ManyToMany(targetEntity: Defile::class, mappedBy: 'mannequin')]
     private Collection $defiles;
 
     #[ORM\Column(length: 1000)]
+    #[Assert\NotBlank(message: "La biographie est obligatoire.")]
+    #[Assert\Length(min: 20, minMessage: "La biographie doit comporter au moins {{ limit }} caractères.")]
     private ?string $biographieM = null;
 
     #[ORM\Column(length: 1000)]
+    #[Assert\Url(message: "Veuillez entrer une URL valide.")]
     private ?string $imageMannequins = null;
+
 
 
 

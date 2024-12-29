@@ -10,34 +10,61 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MannequinType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom')
-            ->add('Prenom')
-            ->add('Nationalite')
+            ->add('Nom', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Le nom est obligatoire.']),
+                    new Length(['min' => 2, 'minMessage' => 'Le nom doit comporter au moins {{ limit }} caractères.']),
+                ],
+            ])
+            ->add('Prenom', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Le prénom est obligatoire.']),
+                    new Length(['min' => 2, 'minMessage' => 'Le prénom doit comporter au moins {{ limit }} caractères.']),
+                ],
+            ])
+            ->add('Nationalite', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'La nationalité est obligatoire.']),
+                ],
+            ])
             ->add('biographieM', TextareaType::class, [
-                'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10]
-                ]) 
+                'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10],
+                'constraints' => [
+                    new NotBlank(['message' => 'La biographie est obligatoire.']),
+                    new Length(['min' => 20, 'minMessage' => 'La biographie doit comporter au moins {{ limit }} caractères.']),
+                ],
+            ]) 
             ->add('defiles', EntityType::class, [
                 'class' => Defile::class,      
                 'choice_label' => 'nomD',     
                 'multiple' => true,          
                 'expanded' => false,        
-      ])    
-      ->add('imageMannequins', FileType::class, [
-        'label' => 'Image',
-        'required' => false,
-        'mapped' => false, 
-        'attr' => ['accept' => 'image/*']
-    ]);
-      ;
-    }
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner au moins un défilé.']),
+                ],
+            ])    
+            ->add('imageMannequins', UrlType::class, [
+                'label' => 'Lien vers l\'image de la marque',
+                'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
+                'required' => false,
+                'constraints' => [
+                    new Url(['message' => 'Veuillez entrer une URL valide.']),
+                ],
+            ]);
 
-   
+
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
