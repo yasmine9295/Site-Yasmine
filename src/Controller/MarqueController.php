@@ -22,7 +22,7 @@ class MarqueController extends AbstractController
             $request->query->getInt('page', 1),
             9
         );
-        return $this->render('marques/listemarques.html.twig', [
+        return $this->render('admin/marques/listemarques.html.twig', [
             'lesmarques' => $marques
         ]);
     }

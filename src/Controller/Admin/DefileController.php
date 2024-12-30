@@ -50,7 +50,7 @@ class DefileController extends AbstractController
         {
             $manager->persist($defile);
             $manager->flush();
-            $this->addFlash("success", "l'defile a bien été $defile");
+            $this->addFlash("success", "le defile a bien été $defile");
             return $this->redirectToRoute('admin_defiles');
         }
         return $this->render('admin/defile/formAjoutModifDefile.html.twig', [

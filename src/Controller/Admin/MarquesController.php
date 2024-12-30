@@ -24,7 +24,7 @@ class MarquesController extends AbstractController
         9
         );
         return $this->render('admin/marques/listeMarques.html.twig', [
-            'lesMarques' => $marques
+            'lesmarques' => $marques
         ]);
     }
     #[Route('/admin/marques/ajout', name: 'admin_marques_ajout' , methods:["GET","POST"])]

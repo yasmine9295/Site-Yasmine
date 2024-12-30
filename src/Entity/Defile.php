@@ -54,6 +54,11 @@ class Defile
         return $this->id;
     }
 
+    public function __toString(): string
+    {
+        return $this->NomD; // Retourne une chaîne représentative, ici le nom.
+    }
+
     public function getNomD(): ?string
     {
         return $this->NomD;
