@@ -241,52 +241,33 @@
         <p>Découvrez nos dernières tendances et collections</p>
     </div>
 
-  {% block body %}
-<div class="container py-5">
-    <h1 class="text-center text-primary mb-5">Liste des Blogs</h1>
+    <!-- Button to Add New Blog (only visible for admin) -->
 
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
-          {% for blog in lesBlogs %} 
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ blog.NomArticle }}</h5>
-                        <h5 class="card-title">{{ blog.Contenu }}</h5>
-                        <h6 class="card-subtitle mb-2">{{ blog.Date|date("Y/m/d") }}</h6>
-                        <p class="card-text">
-                            <strong>Theme:</strong> {{ blog.commentaires }}<br>
-                            <strong>Description:</strong> {{ blog.Description }}
-                        </p>
-                        
-                      
-                            <div class="btn-container">
-                                <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pen"></i> Modifier
-                                </a>
-                                <a class="btn btn-danger btn-sm"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#modalSimple"
-                                   data-titre="Suppression d'un blog"
-                                   data-message="Êtes-vous sûr de vouloir supprimer le blog : {{ blog.NomArticle }} ?"
-                                   data-libelleBouton="Supprimer ce blog"
-                                   href="{{ path('admin_blog_suppression', {'id': blog.id}) }}">
-                                    <i class="far fa-trash-alt"></i> Supprimer
-                                </a>
-                            </div>
-            
-                    </div>
-                </div>
+        <div class="add-button-container">
+            <a href="{{ path('admin_blog_ajout') }}" class="add-button">
+                <i class="fas fa-plus-circle"></i> Ajouter un Blog
+            </a>
+        </div>
+
+
+  {# <!-- Blog posts -->
+<div class="blog-container">
+    <!-- Loop through blog posts -->
+    {% for blog in lesBlogs %}
+        <div class="blog-card">
+            <img src="https://via.placeholder.com/600x400?text=Article+{{ loop.index }}" alt="Article {{ loop.index }}">
+            <div class="blog-card-content">
+                <h3>{{ blog.NomArticle }}</h3>
+                <p>{{ blog.Contenu }}</p>
+
+                <a href="#" class="read-more">Lire plus</a>
             </div>
-        {% endfor %} 
-    </div>
+    {% endfor %}
+</div> #}
 
+    <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
         {{ knp_pagination_render(lesBlogs) }}
     </div>
-</div>
-{% endblock %}
-
-
-{% block javascript %}
-    {% include "include/_modale.html.twig" %}
-{% endblock %}
+</body>
+</html>

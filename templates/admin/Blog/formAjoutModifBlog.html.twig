@@ -178,39 +178,61 @@ ul li:hover {
 
     </style>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">
-            {% if app.request.attributes.get('_route') == 'blog_ajout' %}
-                Ajout
-            {% else %}
-                Modification
-            {% endif %}
-            d'un blog
-        </h1>
 
 
-                {{ form_start(formBlog, {'attr': {'class': 'mb-3'}}) }}
-                    <div class="mb-3">
-                        {{ form_row(formBlog.NomArticle, {'label': 'Titre de l\'article', 'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_row(formBlog.Contenu, {'label': 'Contenu de l\'article', 'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_row(formBlog.Date, {'label': 'Date de publication', 'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_row(formBlog.image, {'label': 'Image', 'attr': {'class': 'form-control'}}) }}
-                    </div>
-                {{ form_end(formBlog) }}
 
-                <div class="row mt-3">
-                    <div class="col">
-                        <a href="{{ path('admin_blog') }}" class="btn btn-dark btn-block">Annuler</a>
-                    </div>
-                </div>
-            </div>
+
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">
+        {% if app.request.get('_route') == 'admin_blog_ajout' %}
+            Ajout
+        {% else %}
+            Modification
+        {% endif %}
+        d'un blog
+    </h1>
+
+    {{ form_start(formBlog, {'attr': {'class': 'mb-4'}}) }}
+        
+        <div class="mb-3">
+            {{ form_row(formBlog.NomArticle, {
+                'label': 'Titre du post', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.Contenu, {
+                'label': 'Contenu du post', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.Date, {
+                'label': 'Date de publication', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.image, {
+                'label': 'Image', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+       
+
+    {{ form_end(formBlog) }}
+
+    <div class="row mt-3">
+        <div class="col">
+            <a href="{{ path('admin_blog') }}" class="btn btn-secondary btn-block">Annuler</a>
         </div>
     </div>
+</div>
 {% endblock %}
+
 
