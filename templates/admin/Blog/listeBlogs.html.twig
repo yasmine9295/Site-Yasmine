@@ -10,6 +10,228 @@
     
     <!-- Google Fonts (Elegant fonts) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Title Section */
+        .title {
+            text-align: center;
+            background: linear-gradient(135deg, #f8efd4, #f2e3c6);
+            padding: 40px 20px;
+            border-bottom: 3px solid #e6d3a3;
+        }
+
+        .title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #8a5c2e;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 400;
+        }
+
+        /* Add Button */
+        .add-button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .add-button {
+            background-color: #8a5c2e;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #6c4823;
+        }
+
+        /* Blog Container */
+        .blog-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 320px;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 4px solid #e6d3a3;
+            transition: filter 0.3s ease;
+        }
+
+        .blog-card img:hover {
+            filter: grayscale(0%);
+        }
+
+        .blog-card-content {
+            padding: 20px;
+        }
+
+        .blog-card-content h3 {
+            font-size: 1.4rem;
+            color: #8a5c2e;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .blog-card-content p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .read-more {
+            text-decoration: none;
+            color: #8a5c2e;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #6c4823;
+            transform: translateX(5px);
+        }
+
+        /* Comment Section */
+        .comments-section {
+            border-top: 2px solid #e6d3a3;
+            padding: 15px 20px;
+            background-color: #fafafa;
+            border-radius: 0 0 10px 10px;
+            margin-top: 20px;
+        }
+
+        .comments-section h4 {
+            font-size: 1.2rem;
+            color: #8a5c2e;
+            margin-bottom: 15px;
+        }
+
+        .comment {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .comment strong {
+            color: #333;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            resize: vertical;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #8a5c2e;
+            outline: none;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #8a5c2e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6c4823;
+            transform: scale(1.05);
+        }
+
+        /* Pagination */
+        .d-flex.justify-content-center {
+            margin-top: 40px;
+        }
+
+        .d-flex.justify-content-center .page-link {
+            background-color: #8a5c2e;
+            color: #fff;
+            border: none;
+            margin: 0 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .d-flex.justify-content-center .page-link:hover {
+            background-color: #6c4823;
+            transform: scale(1.1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .title h1 {
+                font-size: 2rem;
+            }
+
+            .title p {
+                font-size: 1rem;
+            }
+
+            .blog-card {
+                width: 90%;
+            }
+
+            textarea {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -19,77 +241,32 @@
         <p>Découvrez nos dernières tendances et collections</p>
     </div>
 
+    <!-- Button to Add New Blog (only visible for admin) -->
+    {% if "ROLE_ADMIN" in app.user.roles %}
+        <div class="add-button-container">
+            <a href="{{ path('admin_blog_ajout') }}" class="add-button">
+                <i class="fas fa-plus-circle"></i> Ajouter un Blog
+            </a>
+        </div>
+    {% endif %}
+
   <!-- Blog posts -->
 <div class="blog-container">
-    <!-- First blog post -->
-    <div class="blog-card">
-        <img src="https://via.placeholder.com/600x400?text=Article+1" alt="Article 1">
-        <div class="blog-card-content">
-            <h3>Titre de l'Article 1</h3>
-            <p>Découvrez les dernières tendances de la saison avec notre article de mode exclusif. On parle de tissus, de couleurs, et de styles.</p>
-            <a href="#" class="read-more">Lire plus</a> 
-        </div>
-{% block body %}
-        <!-- Comment section -->
-        <div class="comments-section">
-            <h4>Commentaires</h4>
-            <div class="comment">
-                <p><strong>Jean Dupont:</strong> Très intéressant ! Merci pour les infos.</p>
+    <!-- Loop through blog posts -->
+    {% for blog in lesBlogs %}
+        <div class="blog-card">
+            <img src="https://via.placeholder.com/600x400?text=Article+{{ loop.index }}" alt="Article {{ loop.index }}">
+            <div class="blog-card-content">
+                <h3>{{ blog.NomArticle }}</h3>
+                <p>{{ blog.Contenu }}</p>
+                <a href="#" class="read-more">Lire plus</a>
             </div>
-            <textarea placeholder="Ajouter un commentaire..."></textarea>
-            <button>Envoyer</button>
-        </div>
-    </div>
-
-    <!-- Second blog post -->
-    <div class="blog-card">
-        <img src="https://via.placeholder.com/600x400?text=Article+2" alt="Article 2">
-        <div class="blog-card-content">
-            <h3>Titre de l'Article 2</h3>
-            <p>Notre expert mode vous guide à travers les must-haves de cette saison. À ne pas manquer pour rester au top de la tendance.</p>
-            <a href="#" class="read-more">Lire plus</a> 
-        </div>
-
-        <!-- Comment section -->
-        <div class="comments-section">
-            <h4>Commentaires</h4>
-            <div class="comment">
-                <p><strong>Marie Claire:</strong> J'adore cet article, très utile !</p>
-            </div>
-            <textarea placeholder="Ajouter un commentaire..."></textarea>
-            <button>Envoyer</button>
-        </div>
-    </div>
-
-    <!-- Third blog post -->
-    <div class="blog-card">
-        <img src="https://via.placeholder.com/600x400?text=Article+3" alt="Article 3">
-        <div class="blog-card-content">
-            <h3>Titre de l'Article 3</h3>
-            <p>Explorez notre article dédié aux dernières collections de créateurs et trouvez votre look parfait pour les événements à venir.</p>
-            <a href="#" class="read-more">Lire plus</a> 
-        </div>
-
-        <!-- Comment section -->
-        <div class="comments-section">
-            <h4>Commentaires</h4>
-            <div class="comment">
-                <p><strong>Alice:</strong> C'est super inspirant !</p>
-            </div>
-            <textarea placeholder="Ajouter un commentaire..."></textarea>
-            <button>Envoyer</button>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
+    <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
         {{ knp_pagination_render(lesBlogs) }}
     </div>
-</div>
-{% endblock %}
-
-
-{% block javascript %}
-    {% include "include/_modale.html.twig" %}
-{% endblock %}
 </body>
 </html>

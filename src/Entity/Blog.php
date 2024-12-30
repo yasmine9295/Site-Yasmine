@@ -32,6 +32,9 @@ class Blog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\OneToMany(mappedBy: 'Blog', targetEntity: Commentaire::class)]
+    private Collection $commentaires;
+
 
 
   
@@ -39,6 +42,7 @@ class Blog
     public function __construct()
     {
         $this->imageBlogs = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +106,36 @@ class Blog
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setBlog($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getBlog() === $this) {
+                $commentaire->setBlog(null);
+            }
+        }
 
         return $this;
     }

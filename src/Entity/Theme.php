@@ -14,21 +14,21 @@ class Theme
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nomT = null;
+    private ?string $nom = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomT(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomT;
+        return $this->nom;
     }
 
-    public function setNomT(string $nomT): static
+    public function setNom(string $nom): static
     {
-        $this->nomT = $nomT;
+        $this->nom = $nom;
 
         return $this;
     }

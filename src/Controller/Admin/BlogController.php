@@ -39,7 +39,7 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('admin_blog');
         }
 
-        return $this->render('admin/blog/formAjoutBlog.html.twig', [
+        return $this->render('admin/Blog/formAjoutBlog.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -61,7 +61,7 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('admin_blog');
         }
 
-        return $this->render('admin/blog/formAjoutBlog.html.twig', [
+        return $this->render('admin/Blog/formAjoutBlog.html.twig', [
             'form' => $form->createView(),
         ]);
     }
