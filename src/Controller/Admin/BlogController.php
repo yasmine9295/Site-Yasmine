@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
-    #[Route('/admin/blogs', name: 'admin_blogs')]
+    #[Route('/admin/blogs', name: 'admin_blog')]
     public function listeBlogs(BlogRepository $repo): Response
     {
         $blogs = $repo->findBy(['user' => $this->getUser()]);
@@ -36,7 +36,7 @@ class BlogController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success', 'Blog ajouté avec succès.');
-            return $this->redirectToRoute('admin_blogs');
+            return $this->redirectToRoute('admin_blog');
         }
 
         return $this->render('admin/blog/formAjoutBlog.html.twig', [
@@ -58,7 +58,7 @@ class BlogController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success', 'Blog modifié avec succès.');
-            return $this->redirectToRoute('admin_blogs');
+            return $this->redirectToRoute('admin_blog');
         }
 
         return $this->render('admin/blog/formAjoutBlog.html.twig', [
@@ -77,6 +77,6 @@ class BlogController extends AbstractController
         $manager->flush();
 
         $this->addFlash('success', 'Blog supprimé avec succès.');
-        return $this->redirectToRoute('admin_blogs');
+        return $this->redirectToRoute('admin_blog');
     }
 }

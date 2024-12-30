@@ -25,7 +25,7 @@ class BlogController extends AbstractController
             9
         );
         return $this->render('admin/Blog/listeBlogs.html.twig', [
-            'lesblogs' => $blogs
+            'lesBlogs' => $blogs
         ]);
     }
 
@@ -57,7 +57,7 @@ class BlogController extends AbstractController
             $manager->persist($blog);
             $manager->flush();
             $this->addFlash("success", "L'article a bien été $mode");
-            return $this->redirectToRoute('admin_blog');
+            return $this->redirectToRoute('admin_blogs');
         }
         return $this->render('admin/Blog/formAjoutModifBlog.html.twig', [
             'formBlog' => $form->createView()
