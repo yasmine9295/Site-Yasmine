@@ -18,13 +18,13 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomArticle', TextType::class, [
+            ->add('NomArticle', TextType::class, [
                 'label' => 'Nom de l\'article',
             ])
-            ->add('contenu', TextareaType::class, [
+            ->add('Contenu', TextareaType::class, [
                 'label' => 'Contenu',
             ])
-            ->add('date', DateTimeType::class, [
+            ->add('Date', DateTimeType::class, [
                 'label' => 'Date',
                 'widget' => 'single_text',
                 'data' => new \DateTime(),
