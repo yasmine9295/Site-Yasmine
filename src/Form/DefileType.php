@@ -59,7 +59,8 @@ class DefileType extends AbstractType
                 'class' => Theme::class,
                 'choice_label' => 'nom', 
                 'placeholder' => 'Choisir un thème',
-                'label' => 'Saisir les blogs du défilé',
+                'label' => 'Thème du défilé',
+                'invalid_message' => 'Le thème sélectionné est invalide.',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Soumettre'

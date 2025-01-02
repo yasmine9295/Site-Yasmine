@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Marque;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MarqueRepository;
 use Doctrine\Common\Collections\Collection;

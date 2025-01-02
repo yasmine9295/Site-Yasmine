@@ -41,12 +41,10 @@ class Defile
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $description = null;
 
-
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
         $this->mannequin = new ArrayCollection();
-
     }
 
     public function getId(): ?int
@@ -56,7 +54,7 @@ class Defile
 
     public function __toString(): string
     {
-        return $this->NomD; // Retourne une chaîne représentative, ici le nom.
+        return $this->NomD;
     }
 
     public function getNomD(): ?string

@@ -8,7 +8,6 @@ use App\Entity\Defile;
 use App\Form\DefileType;
 use App\Repository\DefileRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Controller\Admin\DefileController;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

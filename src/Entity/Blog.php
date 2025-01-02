@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\BlogRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
+use App\Entity\Defile;
+use DateTimeInterface;
+use App\Entity\Commentaire;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BlogRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
@@ -23,25 +27,20 @@ class Blog
     private ?string $Contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date = null;
+    private ?DateTimeInterface $Date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'blogs')]
+    #[ORM\ManyToOne(targetEntity: Defile::class, inversedBy: 'blogs')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Defile $defile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'Blog', targetEntity: Commentaire::class)]
+    #[ORM\OneToMany(mappedBy: 'Blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
     private Collection $commentaires;
-
-
-
-  
 
     public function __construct()
     {
-        $this->imageBlogs = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
     }
 
@@ -91,7 +90,7 @@ class Blog
         return $this->defile;
     }
 
-    public function setDefile(?Defile $defile): static
+    public function setDefile(?Defile $defile): self
     {
         $this->defile = $defile;
 
@@ -139,7 +138,4 @@ class Blog
 
         return $this;
     }
-
-
-
 }

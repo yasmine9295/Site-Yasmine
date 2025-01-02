@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Entity\Mannequins;
-use App\Entity\ImageMannequin;
+use App\Entity\Defile;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MannequinsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MannequinsRepository::class)]
 class Mannequins
@@ -20,16 +20,16 @@ class Mannequins
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le nom est obligatoire.")]
     #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
-    private ?string $Nom = null;
+    private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
     #[Assert\Length(min: 2, minMessage: "Le prénom doit comporter au moins {{ limit }} caractères.")]
-    private ?string $Prenom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "La nationalité est obligatoire.")]
-    private ?string $Nationalite = null;
+    private ?string $nationalite = null;
 
     #[ORM\ManyToMany(targetEntity: Defile::class, mappedBy: 'mannequin')]
     private Collection $defiles;
@@ -37,19 +37,15 @@ class Mannequins
     #[ORM\Column(length: 1000)]
     #[Assert\NotBlank(message: "La biographie est obligatoire.")]
     #[Assert\Length(min: 20, minMessage: "La biographie doit comporter au moins {{ limit }} caractères.")]
-    private ?string $biographieM = null;
+    private ?string $biographie = null;
 
     #[ORM\Column(length: 1000)]
     #[Assert\Url(message: "Veuillez entrer une URL valide.")]
-    private ?string $imageMannequins = null;
-
-
-
+    private ?string $imageMannequin = null;
 
     public function __construct()
     {
         $this->defiles = new ArrayCollection();
-        $this->imageMannequins = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,36 +55,36 @@ class Mannequins
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): static
+    public function setNom(string $nom): static
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     public function getNationalite(): ?string
     {
-        return $this->Nationalite;
+        return $this->nationalite;
     }
 
-    public function setNationalite(string $Nationalite): static
+    public function setNationalite(string $nationalite): static
     {
-        $this->Nationalite = $Nationalite;
+        $this->nationalite = $nationalite;
 
         return $this;
     }
@@ -120,30 +116,27 @@ class Mannequins
         return $this;
     }
 
-    public function getBiographieM(): ?string
+    public function getBiographie(): ?string
     {
-        return $this->biographieM;
+        return $this->biographie;
     }
 
-    public function setBiographieM(string $biographieM): static
+    public function setBiographie(string $biographie): static
     {
-        $this->biographieM = $biographieM;
+        $this->biographie = $biographie;
 
         return $this;
     }
 
-    public function getImageMannequins(): ?string
+    public function getImageMannequin(): ?string
     {
-        return $this->imageMannequins;
+        return $this->imageMannequin;
     }
 
-    public function setImageMannequins(string $imageMannequins): static
+    public function setImageMannequin(string $imageMannequin): static
     {
-        $this->imageMannequins = $imageMannequins;
+        $this->imageMannequin = $imageMannequin;
 
         return $this;
     }
-
-   
-    }
-
+}

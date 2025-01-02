@@ -4,197 +4,164 @@
 
 {% block body %}
     <style>
-  /* Corps de la page */
-body {
-    background: url('URL_DE_TON_IMAGE_DE_FOND') no-repeat center center fixed; /* Image de fond */
-    background-size: cover; /* Couvre toute la page */
-    font-family: 'Playfair Display', serif; /* Police luxe et élégante */
-    color: #2c2c2c; /* Gris subtile */
-    margin: 0;
-    padding: 0;
-}
+        /* Corps de la page */
+        body {
+            background: url('URL_DE_TON_IMAGE_DE_FOND') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Playfair Display', serif;
+            color: #2c2c2c;
+            margin: 0;
+            padding: 0;
+        }
 
-  /* Navigation Bar */
-  .navbar {
-    background-color: #ffffff; /* Fond blanc pour un look épuré */
-    padding: 15px 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre douce et élégante */
-    border-bottom: 1px solid #e0e0e0; /* Ajouter une bordure subtile */
-    font-family: 'Montserrat', sans-serif; /* Police moderne et élégante */
-}
+        /* Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-.navbar-brand {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #2c3e50; /* Couleur sombre pour un aspect sophistiqué */
-    text-decoration: none;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
-    transition: color 0.3s ease;
-}
+        .navbar-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
 
-.navbar-brand:hover {
-    color: #34495e; /* Subtle hover effect for brand */
-}
+        .navbar-brand:hover {
+            color: #34495e;
+        }
 
-.navbar-nav {
-    list-style-type: none;
-    display: flex;
-    margin-left: auto;
-    align-items: center;
-}
+        /* Conteneur principal */
+        .container {
+            max-width: 900px;
+            margin: 120px auto 40px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            border: none;
+        }
 
-.nav-item {
-    margin-right: 30px; /* Espacement plus large entre les éléments */
-}
+        /* Titre principal */
+        h1 {
+            font-size: 2.4rem;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.nav-link {
-    color: #555555; /* Gris élégant pour le texte */
-    font-size: 1.1rem;
-text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.3s ease, transform 0.3s ease;
-text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-}
+        /* Formulaire */
+        form .form-group {
+            margin-bottom: 25px;
+        }
 
-.nav-link:hover {
-    color: #2c3e50; /* Changement de couleur plus foncé pour un survol élégant */
-    transform: translateY(-3px); /* Légère élévation pour un effet de survol plus élégant */
-}
+        form label {
+            font-weight: bold;
+            color: #2c2c2c;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
 
-/* Conteneur principal */
-.container {
-    max-width: 900px;
-    margin: 120px auto 40px; /* Espace sous la navbar */
-    background: rgba(255, 255, 255, 0.9); /* Fond blanc transparent */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    border-radius: 15px;
-    border: none;
-}
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            border: 1px solid #e0d6cc;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
 
-/* Titre principal */
-h1 {
-    font-size: 2.4rem;
-    color: #2c2c2c;
-    text-align: center;
-    margin-bottom: 30px;
-    font-family: 'Playfair Display', serif;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile */
-}
+        form input:focus, form select:focus, form textarea:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+        }
 
-/* Formulaire */
-form .form-group {
-    margin-bottom: 25px;
-}
+        /* Boutons */
+        form .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+        }
 
-form label {
-    font-weight: bold;
-    color: #2c2c2c;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 1rem;
-}
+        form .btn-block {
+            margin-top: 20px;
+        }
 
-form input, form select, form textarea {
-    width: 100%;
-    padding: 14px 18px;
-    font-size: 1rem;
-    border: 1px solid #e0d6cc;
-    border-radius: 12px;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
+        form .btn-dark {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            font-weight: bold;
+        }
 
-form input:focus, form select:focus, form textarea:focus {
-    border-color: #d4af37; /* Or au focus */
-    box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
-}
+        form .btn-dark:hover {
+            background-color: #d4af37;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
 
-/* Boutons */
-form .btn {
-    display: inline-block;
-    width: 100%;
-    padding: 14px;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
-    font-family: 'Playfair Display', serif;
-    text-transform: uppercase;
-}
+        /* Liste des éléments associés */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-form .btn-block {
-    margin-top: 20px;
-}
+        ul li {
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #ffffff;
+            border: 1px solid #e0d6cc;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #2c2c2c;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-form .btn-dark {
-    background-color: #2c2c2c; /* Noir subtil */
-    color: #ffffff; /* Texte blanc */
-    font-weight: bold;
-}
-
-form .btn-dark:hover {
-    background-color: #d4af37; /* Or intense */
-    color: #fff; /* Blanc */
-    transform: scale(1.05); /* Effet survol */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Ombre douce */
-}
-
-/* Liste des éléments associés */
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-ul li {
-    margin: 10px 0;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e0d6cc;
-    border-radius: 10px;
-    font-size: 1rem;
-    color: #2c2c2c;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-ul li:hover {
-    background-color: #f9f9f9;
-    transform: translateX(5px); /* Légère animation au survol */
-}
-
-
+        ul li:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
     </style>
 
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">
+            {% if app.request.get('_route') == 'admin_blog_ajout' %}
+                Ajout
+            {% else %}
+                Modification
+            {% endif %}
+            d'un blog
+        </h1>
 
+        {{ form_start(formBlog, {'attr': {'class': 'mb-4'}}) }}
 
-
-
-
-<div class="container mt-5">
-    <h1 class="text-center mb-4">
-        {% if app.request.get('_route') == 'admin_blog_ajout' %}
-            Ajout
-        {% else %}
-            Modification
-        {% endif %}
-        d'un blog
-    </h1>
-
-    {{ form_start(formBlog, {'attr': {'class': 'mb-4'}}) }}
-        
         <div class="mb-3">
             {{ form_row(formBlog.NomArticle, {
                 'label': 'Titre du post', 
@@ -223,16 +190,12 @@ ul li:hover {
             }) }}
         </div>
 
-       
+        {{ form_end(formBlog) }}
 
-    {{ form_end(formBlog) }}
-
-    <div class="row mt-3">
-        <div class="col">
-            <a href="{{ path('admin_blog') }}" class="btn btn-secondary btn-block">Annuler</a>
+        <div class="row mt-3">
+            <div class="col">
+                <a href="{{ path('admin_blog') }}" class="btn btn-secondary btn-block">Annuler</a>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
-
-
