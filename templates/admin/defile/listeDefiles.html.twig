@@ -185,17 +185,13 @@
                             <strong>Theme:</strong> {{ ledefile.theme }}<br>
                             <strong>Description:</strong> {{ ledefile.Description }}
                     <ul>
-                    
                     <strong>Mannequins associés:</strong> {% for mannequin in ledefile.mannequin %}
                             <li>{{ mannequin.Nom}}</li>  
                         {% else %}
                             <li>Aucun mannequin associé</li>
                         {% endfor %}
-                       
                     </ul>
-                        
                         </p>
-                        
                         {% if "ROLE_ADMIN" in app.user.roles %}
                             <div class="btn-container">
                                 <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">

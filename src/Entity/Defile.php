@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Entity\Blog;
-use App\Entity\Marque;
 use DateTimeInterface;
 use App\Entity\Mannequins;
 use Doctrine\DBAL\Types\Types;

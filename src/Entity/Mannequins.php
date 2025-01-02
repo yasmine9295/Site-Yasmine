@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Defile;
+use App\Entity\ImageMannequin;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MannequinsRepository;
 use Doctrine\Common\Collections\Collection;
@@ -20,16 +20,16 @@ class Mannequins
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le nom est obligatoire.")]
     #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
-    private ?string $nom = null;
+    private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
     #[Assert\Length(min: 2, minMessage: "Le prénom doit comporter au moins {{ limit }} caractères.")]
-    private ?string $prenom = null;
+    private ?string $Prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "La nationalité est obligatoire.")]
-    private ?string $nationalite = null;
+    private ?string $Nationalite = null;
 
     #[ORM\ManyToMany(targetEntity: Defile::class, mappedBy: 'mannequin')]
     private Collection $defiles;
@@ -37,15 +37,19 @@ class Mannequins
     #[ORM\Column(length: 1000)]
     #[Assert\NotBlank(message: "La biographie est obligatoire.")]
     #[Assert\Length(min: 20, minMessage: "La biographie doit comporter au moins {{ limit }} caractères.")]
-    private ?string $biographie = null;
+    private ?string $biographieM = null;
 
     #[ORM\Column(length: 1000)]
     #[Assert\Url(message: "Veuillez entrer une URL valide.")]
-    private ?string $imageMannequin = null;
+    private ?string $imageMannequins = null;
+
+
+
 
     public function __construct()
     {
         $this->defiles = new ArrayCollection();
+        $this->imageMannequins = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,36 +59,36 @@ class Mannequins
 
     public function getNom(): ?string
     {
-        return $this->nom;
+        return $this->Nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $Nom): static
     {
-        $this->nom = $nom;
+        $this->Nom = $Nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->prenom;
+        return $this->Prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(string $Prenom): static
     {
-        $this->prenom = $prenom;
+        $this->Prenom = $Prenom;
 
         return $this;
     }
 
     public function getNationalite(): ?string
     {
-        return $this->nationalite;
+        return $this->Nationalite;
     }
 
-    public function setNationalite(string $nationalite): static
+    public function setNationalite(string $Nationalite): static
     {
-        $this->nationalite = $nationalite;
+        $this->Nationalite = $Nationalite;
 
         return $this;
     }
@@ -116,26 +120,26 @@ class Mannequins
         return $this;
     }
 
-    public function getBiographie(): ?string
+    public function getBiographieM(): ?string
     {
-        return $this->biographie;
+        return $this->biographieM;
     }
 
-    public function setBiographie(string $biographie): static
+    public function setBiographieM(string $biographieM): static
     {
-        $this->biographie = $biographie;
+        $this->biographieM = $biographieM;
 
         return $this;
     }
 
-    public function getImageMannequin(): ?string
+    public function getImageMannequins(): ?string
     {
-        return $this->imageMannequin;
+        return $this->imageMannequins;
     }
 
-    public function setImageMannequin(string $imageMannequin): static
+    public function setImageMannequins(string $imageMannequins): static
     {
-        $this->imageMannequin = $imageMannequin;
+        $this->imageMannequins = $imageMannequins;
 
         return $this;
     }
