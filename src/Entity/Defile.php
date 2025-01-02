@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Blog;
+use App\Entity\Marque;
 use DateTimeInterface;
 use App\Entity\Mannequins;
 use Doctrine\DBAL\Types\Types;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DefileRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DefileRepository::class)]
 class Defile
@@ -20,6 +22,8 @@ class Defile
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
     private ?string $NomD = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -34,10 +38,12 @@ class Defile
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
     private Collection $mannequin;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $theme = null;
+    #[ORM\ManyToOne(targetEntity: Theme::class)]
+    private ?Theme $theme = null;
 
-    #[ORM\Column(length: 1000, nullable: true)]
+    #[ORM\Column(length: 1000)]
+    #[Assert\NotBlank(message: "La description est obligatoire.")]
+    #[Assert\Length(min: 20, minMessage: "La description doit comporter au moins {{ limit }} caractères.")]
     private ?string $description = null;
 
     public function __construct()
@@ -146,12 +152,12 @@ class Defile
         return $this;
     }
 
-    public function getTheme(): ?string
+    public function getTheme(): ?Theme
     {
         return $this->theme;
     }
 
-    public function setTheme(?string $theme): static
+    public function setTheme(?Theme $theme): self
     {
         $this->theme = $theme;
 
