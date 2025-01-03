@@ -37,12 +37,11 @@ class Blog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'Blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
     private Collection $commentaires;
 
     public function __construct()
     {
-        $this->defile = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
     }
 

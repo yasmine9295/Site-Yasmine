@@ -48,7 +48,6 @@ class Defile
 
     public function __construct()
     {
-        $this->blogs = new ArrayCollection();
         $this->mannequin = new ArrayCollection();
     }
 
