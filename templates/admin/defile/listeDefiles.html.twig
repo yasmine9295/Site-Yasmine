@@ -183,7 +183,7 @@
                         <h6 class="card-subtitle mb-2">{{ ledefile.Date|date("Y/m/d") }}</h6>
                         <p class="card-text">
                         {% if ledefile.theme %}
-                            <strong>Thème:</strong> {{ ledefile.theme.nom }}
+                            <strong>Thème:</strong> {{ ledefile.theme }}
                         {% endif %}
                         <br>
                         <strong>Description:</strong> {{ ledefile.Description }}
@@ -206,7 +206,8 @@
                                    data-bs-target="#modalSimple"
                                    data-titre="Suppression d'un défilé"
                                    data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
-                                   data-libelleBouton="Supprimer ce défilé">
+                                   data-libelleBouton="Supprimer ce défilé"
+                                   <a href="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
                                    <i class="far fa-trash-alt"></i> Supprimer
                                 </a>
                             </div>

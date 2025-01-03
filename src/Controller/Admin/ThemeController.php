@@ -16,19 +16,16 @@ class ThemeController extends AbstractController
     #[Route('/admin/theme/ajouter', name: 'admin_theme_ajouter')]
     public function ajouter(Request $request, ThemeRepository $themeRepository): Response
     {
-        $theme = new Theme(); // Créer une nouvelle instance de l'entité Theme
-        $form = $this->createForm(ThemeType::class, $theme); // Créer le formulaire pour Theme
+        $theme = new Theme(); 
+        $form = $this->createForm(ThemeType::class, $theme); 
 
-        // Traiter la soumission du formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Sauvegarder le thème dans la base de données
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($theme);
             $entityManager->flush();
 
-            // Rediriger vers la liste des thèmes ou une autre page après l'ajout
             return $this->redirectToRoute('admin_theme_liste');
         }
 

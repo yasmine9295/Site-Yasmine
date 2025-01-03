@@ -44,14 +44,6 @@ class DefileType extends AbstractType
                 'choice_label' => 'NomM', 
                 'label' => 'Choisir une marque',
             ])
-            ->add('blogs', EntityType::class, [
-                'class' => Blog::class, 
-                'choice_label' => 'NomArticle',  
-                'label' => 'Saisir les blogs du défilé',
-                'multiple' => true, 
-                'by_reference' => false, 
-            ])
-        
             ->add('description', TextareaType::class, [
                 'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10]
             ])

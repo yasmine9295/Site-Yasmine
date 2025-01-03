@@ -11,14 +11,14 @@ class Theme
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $theme_id = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     public function getId(): ?int
     {
-        return $this->theme_id;
+        return $this->id;
     }
 
     public function getNom(): ?string
@@ -26,7 +26,7 @@ class Theme
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 

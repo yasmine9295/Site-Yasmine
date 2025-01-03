@@ -15,7 +15,7 @@ class ThemeType extends AbstractType
     {
         $builder
             ->add('nom', EntityType::class, [
-                'label' => 'Nom du Thème',
+                'choice_label' => 'Nom du Thème',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('save', SubmitType::class, [

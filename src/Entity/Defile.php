@@ -38,8 +38,8 @@ class Defile
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
     private Collection $mannequin;
 
-    #[ORM\ManyToOne(targetEntity: Theme::class)]
-    private ?Theme $theme = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $theme = null;
 
     #[ORM\Column(length: 1000)]
     #[Assert\NotBlank(message: "La description est obligatoire.")]
@@ -119,7 +119,6 @@ class Defile
     public function removeBlog(Blog $blog): static
     {
         if ($this->blogs->removeElement($blog)) {
-            // set the owning side to null (unless already changed)
             if ($blog->getDefile() === $this) {
                 $blog->setDefile(null);
             }
@@ -152,7 +151,7 @@ class Defile
         return $this;
     }
 
-    public function getTheme(): ?Theme
+    public function getTheme(): ?string
     {
         return $this->theme;
     }
