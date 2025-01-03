@@ -99,16 +99,10 @@
             margin-bottom: 15px;
         }
 
-        .blog-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
         .blog-date {
             font-size: 1rem;
             color: #888;
+            margin-bottom: 10px;
         }
 
         .heart-button {
@@ -116,7 +110,6 @@
             cursor: pointer;
             color: #ccc;
             transition: color 0.3s ease;
-            margin-left: 50px; /* Décale le cœur encore plus à droite */
         }
 
         .heart-button.liked {
@@ -174,6 +167,25 @@
             resize: vertical;
         }
 
+        .comment-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .comment-actions .edit-comment, .comment-actions .delete-comment {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b4f2d;
+            transition: color 0.3s ease;
+        }
+
+        .comment-actions .edit-comment:hover,
+        .comment-actions .delete-comment:hover {
+            color: #e15f5f;
+        }
+
         /* Pagination */
         .d-flex.justify-content-center {
             margin-top: 40px;
@@ -211,7 +223,7 @@
                 const commentContainer = document.getElementById(`comments-${cardId}`);
                 const newComment = document.createElement('div');
                 newComment.classList.add('comment-item');
-                newComment.innerHTML = ` 
+                newComment.innerHTML = `
                     <p>${commentText}</p>
                     <div class="comment-actions">
                         <i class="fas fa-pen edit-comment" onclick="editComment(event)"></i>
@@ -258,11 +270,9 @@
                 <div class="blog-card">
                     <div class="blog-card-content">
                         <h3>{{ blog.NomArticle }}</h3>
-                        <div class="blog-info">
-                            <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
-                            <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
-                        </div>
                         <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+                        <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
+                        <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
                     </div>
 
                     <div class="comment-section">
@@ -271,6 +281,15 @@
                         <button class="btn" onclick="addComment({{ blog.id }})">Ajouter un commentaire</button>
                         <div id="comments-{{ blog.id }}" class="comments-container"></div>
                     </div>
+                    <div class="card-actions">
+                        <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
+                            <i class="fas fa-edit"></i> Modifier
+                        </a>
+                        <a href="{{ path('admin_blog_suppression', {'id': blog.id}) }}" class="btn">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </a>
+                    </div>
+
                 </div>
             {% endfor %}
         </div>
