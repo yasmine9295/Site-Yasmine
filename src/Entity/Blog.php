@@ -22,10 +22,13 @@ class Blog
     private ?int $id = null;
     
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Vous devez nommer votre article.")]
     private ?string $NomArticle = null;
 
     #[ORM\Column(length: 1000)]
+    #[Assert\Length(min: 10, minMessage: "Le contenu doit comporter au moins {{ limit }} caractères.")]
     private ?string $Contenu = null;
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?DateTimeInterface $Date;
