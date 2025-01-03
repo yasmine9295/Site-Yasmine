@@ -215,6 +215,17 @@
                     <p class="card-text"><strong>Créateur :</strong> {{ laMarque.createurM }}</p>
                     <p class="card-text"><strong>Histoire :</strong> {{ laMarque.histoireM }}</p>
                     <p class="card-text"><strong>Représentants :</strong> {{ laMarque.representantM }}</p>
+                    <p class="card-text"><strong>Défilés :</strong>
+                        {% if laMarque.defiles is not empty %}
+                            <ul>
+                                {% for defile in laMarque.defiles %}
+                                    <li>{{ defile.NomD }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            Aucun défilé associé.
+                        {% endif %}
+                    </p>
                 </div>
                 {% if "ROLE_ADMIN" in app.user.roles %}
                     <div class="card-footer">

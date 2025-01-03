@@ -12,9 +12,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
+use Symfony\Component\Validator\Constraints\Date;
+use \DateTime;
 
 class DefileType extends AbstractType
 {
@@ -35,9 +38,13 @@ class DefileType extends AbstractType
                 'by_reference' => false, 
             ])
             ->add('Date', DateType::class, [
-                'widget' => 'single_text', 
                 'label' => 'Date du défilé',
                 'format' => 'yyyy-MM-dd',
+                'required' => true,
+                'attr' => [
+                    'max' => (new \DateTime())->format('Y-m-d'), 
+                ],
+
             ])
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
