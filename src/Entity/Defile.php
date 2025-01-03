@@ -32,7 +32,7 @@ class Defile
     #[ORM\ManyToOne(inversedBy: 'defiles')]
     private ?Marque $marque = null;
 
-    #[ORM\ManyToOne(inversedBy: 'defile', targetEntity: Blog::class)]
+    #[ORM\OneToMany(mappedBy: 'defile', targetEntity: Blog::class)]
     private Collection $blogs;
 
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
