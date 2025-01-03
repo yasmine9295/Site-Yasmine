@@ -1,3 +1,4 @@
+/* Style de base du body */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -5,6 +6,7 @@ body {
     color: #333;
 }
 
+/* Titre de la page */
 .title {
     text-align: center;
     background: linear-gradient(135deg, #f3f1e7, #e9d8b8);
@@ -16,7 +18,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
     color: #6b4f2d;
-    letter-spacing: 2px; /* Espacement des lettres pour donner un effet plus élégant */
+    letter-spacing: 2px;
 }
 
 .title p {
@@ -34,7 +36,7 @@ body {
     background-color: #6b4f2d;
     color: white;
     padding: 12px 25px;
-    border-radius: 25px; /* Arrondis plus prononcés */
+    border-radius: 25px;
     font-size: 1.1rem;
     text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -44,7 +46,7 @@ body {
 .add-button:hover {
     background-color: #4e3722;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px); /* Ajout d'une animation de survol */
+    transform: translateY(-2px);
 }
 
 /* Container des cartes */
@@ -59,26 +61,27 @@ body {
 /* Carte individuelle */
 .blog-card {
     background: #fff;
-    border-radius: 20px; /* Bord arrondi plus marqué */
+    border-radius: 20px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 340px;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto; /* Ajuster la hauteur de la carte pour accueillir tout le contenu */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .blog-card:hover {
-    transform: translateY(-8px); /* Légère élévation à l'effet de survol */
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15); /* Ombre plus marquée */
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* Contenu de la carte */
 .blog-card-content {
-    padding: 30px; /* Un peu plus d'espacement */
+    padding: 30px;
     flex-grow: 1;
+    height: auto;
 }
 
 .blog-card-content h3 {
@@ -87,7 +90,7 @@ body {
     margin-bottom: 15px;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-    letter-spacing: 1px; /* Espacement léger des lettres */
+    letter-spacing: 1px;
 }
 
 .blog-card-content p {
@@ -95,7 +98,10 @@ body {
     color: #555;
     line-height: 1.7;
     margin-bottom: 20px;
-    text-align: justify; /* Alignement du texte pour une lecture fluide */
+    text-align: justify;
+    max-height: none; /* Enlever la hauteur maximale pour afficher tout le texte */
+    overflow: visible; /* Permet à tout le texte de s'afficher */
+    white-space: normal; /* Afficher tout le texte sans restriction */
 }
 
 /* Image de la carte */
@@ -109,7 +115,7 @@ body {
 }
 
 .blog-card:hover .card-img-container img {
-    transform: scale(1.05); /* Légère zoom de l'image lors du survol */
+    transform: scale(1.05);
 }
 
 /* Meta de la carte (date et cœur) */
