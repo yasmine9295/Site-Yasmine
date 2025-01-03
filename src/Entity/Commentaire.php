@@ -16,7 +16,7 @@ class Commentaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 500)]
     private ?string $contenuCommentaire = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -25,8 +25,10 @@ class Commentaire
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'commentaires')]
     private Collection $User;
 
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?Blog $Blog = null;
+    #[ORM\ManyToOne(targetEntity: Blog::class, inversedBy: 'commentaires')]
+    #[ORM\JoinColumn(nullable: false)]  
+    private ?Blog $blog = null;
+
 
     public function __construct()
     {
@@ -88,12 +90,12 @@ class Commentaire
 
     public function getBlog(): ?Blog
     {
-        return $this->Blog;
+        return $this->blog;
     }
 
-    public function setBlog(?Blog $Blog): static
+    public function setBlog(?Blog $blog): static
     {
-        $this->Blog = $Blog;
+        $this->blog = $blog;
 
         return $this;
     }

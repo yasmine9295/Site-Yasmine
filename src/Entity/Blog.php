@@ -19,19 +19,20 @@ class Blog
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $NomArticle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 1000)]
     private ?string $Contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?DateTimeInterface $Date = null;
+    private ?DateTimeInterface $Date;
 
     #[ORM\ManyToOne(targetEntity: Defile::class, inversedBy: 'blogs')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Defile $defile = null;
+    private ?Defile $defile = null;    
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
@@ -41,6 +42,7 @@ class Blog
 
     public function __construct()
     {
+        $this->defile = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
     }
 
@@ -90,7 +92,7 @@ class Blog
         return $this;
     }
 
-    public function getDefile(): ?Defile
+    public function getDefile(): ?string
     {
         return $this->defile;
     }

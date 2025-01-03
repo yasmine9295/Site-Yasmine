@@ -32,7 +32,7 @@ class Defile
     #[ORM\ManyToOne(inversedBy: 'defiles')]
     private ?Marque $marque = null;
 
-    #[ORM\OneToMany(mappedBy: 'defile', targetEntity: Blog::class)]
+    #[ORM\ManyToOne(inversedBy: 'defile', targetEntity: Blog::class)]
     private Collection $blogs;
 
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
@@ -156,7 +156,7 @@ class Defile
         return $this->theme;
     }
 
-    public function setTheme(?Theme $theme): self
+    public function setTheme(?string $theme): self
     {
         $this->theme = $theme;
 

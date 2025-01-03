@@ -29,7 +29,7 @@ class DefileType extends AbstractType
             ])
             ->add('mannequin', EntityType::class, [
                 'class' => Mannequins::class, 
-                'choice_label' => 'nom', 
+                'label' => 'nom', 
                 'label' => 'Mannequins',
                 'multiple' => true,
                 'by_reference' => false, 
@@ -41,7 +41,7 @@ class DefileType extends AbstractType
             ])
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
-                'choice_label' => 'NomM', 
+                'label' => 'NomM', 
                 'label' => 'Choisir une marque',
             ])
             ->add('description', TextareaType::class, [
@@ -49,7 +49,7 @@ class DefileType extends AbstractType
             ])
             ->add('theme', EntityType::class, [
                 'class' => Theme::class,
-                'choice_label' => 'nom', 
+                'label' => 'nom', 
                 'placeholder' => 'Choisir un thème',
                 'label' => 'Thème du défilé',
             ])
