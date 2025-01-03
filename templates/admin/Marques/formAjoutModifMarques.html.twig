@@ -1,11 +1,9 @@
- {% extends 'base.html.twig' %}
-
-{% block title %}Ajout/Modification Marques{% endblock %}
-
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/marque-modification.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
+
+{% extends 'base.html.twig' %}
 
 {% block body %}
 <h1 class="pt-2 text-center">
@@ -52,14 +50,16 @@
     <div class="col">{{ form_row(formMarque.RepresentantM) }}</div>
 </div>
 
-<div class="row">
-    <div class="col">
-        <a href="{{ path('admin_marque') }}" class="btn btn-dark btn-block">Annuler</a>
+ <div class="form-group">
+        <button type="submit" class="btn btn-dark btn-block">
+            {% if app.request.attributes.get('_route') == 'admin_marques_ajout' %}
+                Ajouter la marque
+            {% else %}
+                Enregistrer les modifications
+            {% endif %}
+        </button>
+        <a href="{{ path('admin_marques') }}" class="btn btn-secondary btn-block">Annuler</a>
     </div>
-    <div class="col">
-        <input type="submit" class="btn btn-dark btn-block" value="{% if (app.request.attributes.get('_route') == 'admin_marque_ajout') %}Ajouter la marque{% else %}Modifier la marque{% endif %}">
-    </div>
-</div>
 
 {{ form_end(formMarque) }}
 {% endblock %}
