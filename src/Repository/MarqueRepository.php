@@ -32,6 +32,33 @@ public function listemarquesCompletePaginee()
         ->getQuery();
 }
 
+/**
+     * Récupère les marques dont le nom commence par une lettre spécifiée
+     *
+     * @param string $search
+     * @return Query
+     */
+    public function findBySearchQuery(string $search)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.NomM LIKE :search')
+            ->setParameter('search', $search . '%')  // Le % signifie "tout ce qui suit"
+            ->orderBy('m.NomM', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    /**
+     * Retourne toutes les marques triés par nom
+     *
+     * @return Query
+     */
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.NomM', 'ASC')
+            ->getQuery();
+    }
+
 //    /**
 //     * @return Marque[] Returns an array of Marque objects
 //     */

@@ -33,8 +33,34 @@ class DefileRepository extends ServiceEntityRepository
             ->getQuery()
            
         ;
-   
- }
+    }
+
+  /**
+     * Récupère les defile dont le nom commence par une lettre spécifiée
+     *
+     * @param string $search
+     * @return Query
+     */
+    public function findBySearchQuery(string $search)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.NomD LIKE :search')
+            ->setParameter('search', $search . '%')  // Le % signifie "tout ce qui suit"
+            ->orderBy('d.NomD', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    /**
+     * Retourne tous les defiles triés par nom
+     *
+     * @return Query
+     */
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.NomD', 'ASC')
+            ->getQuery();
+    }
 
 //    /**
 //     * @return Defile[] Returns an array of Defile objects

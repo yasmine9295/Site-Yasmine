@@ -161,6 +161,46 @@
             max-width: 1200px;
             padding: 30px;
         }
+         /* Stylisation de la barre de recherche */
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color:rgb(0, 0, 0);
+            outline: none;
+            box-shadow: 0 0 8px rgb(227, 240, 255);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: none;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color:rgb(0, 0, 0);
+        }
     </style>
 {% endblock %}
 
@@ -173,15 +213,30 @@
                 <i class="fas fa-plus-circle me-2"></i> Ajouter un défilé
             </a>
         </div>
+        <form method="get" action="{{ path('defile_index') }}" class="mb-4">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="Rechercher un defile par nom..." 
+                    value="{{ app.request.query.get('search') }}"
+                >
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
     {% endif %}
+
     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
         {% for ledefile in lesDefiles %}
+         {% if app.request.query.get('search') is not empty %}
+            {% if ledefile.NomD matches '/^' ~ app.request.query.get('search') ~ '/i' %}
             <div class="col">
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body">
                         <h5 class="card-title">{{ ledefile.NomD }}</h5>
                         <h6 class="card-subtitle mb-2">{{ ledefile.Date|date("Y/m/d") }}</h6>
-                        <p class="card-text">
+                    <p class="card-text">
                         {% if ledefile.theme %}
                             <strong>Thème:</strong> {{ ledefile.theme }}
                         {% endif %}
@@ -196,6 +251,7 @@
                             {% endfor %}
                         </ul>
                     </p>
+                </div>
                         {% if "ROLE_ADMIN" in app.user.roles %}
                             <div class="btn-container">
                                 <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
@@ -214,10 +270,50 @@
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            {% endif %}
+        {% else %}
+        <div class="col">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ledefile.NomD }}</h5>
+                        <h6 class="card-subtitle mb-2">{{ ledefile.Date|date("Y/m/d") }}</h6>
+                    <p class="card-text">
+                        {% if ledefile.theme %}
+                            <strong>Thème:</strong> {{ ledefile.theme }}
+                        {% endif %}
+                        <br>
+                        <strong>Description:</strong> {{ ledefile.Description }}
+                        <ul>
+                            <strong>Mannequins associés:</strong>
+                            {% for mannequin in ledefile.mannequin %}
+                                <li>{{ mannequin.Nom }}</li>
+                            {% else %}
+                                <li>Aucuns mannequins associés</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="btn-container">
+                                <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un défilé"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
+                                   data-libelleBouton="Supprimer ce défilé"
+                                   <a href="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                   <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
-</div>
 {% endblock %}
 
 {% block javascript %}
