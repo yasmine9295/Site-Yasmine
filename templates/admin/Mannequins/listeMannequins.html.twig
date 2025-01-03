@@ -257,6 +257,19 @@
                 <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
             </a>
         </div>
+
+ <div class="filters">
+        <div class="form-group">
+            <label for="defiles">Filtrer par défilés</label>
+            <input 
+                type="text" 
+                name="defiles" 
+                class="form-control" 
+                placeholder="Nom du défilé..." 
+                value="{{ app.request.query.get('defiles') }}"
+            >
+        </div>
+        
         <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
             <div class="search-bar">
                 <input 
