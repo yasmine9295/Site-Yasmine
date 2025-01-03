@@ -10,6 +10,7 @@ defile_index:
     path: /defiles
     controller: App\Controller\DefileController::index
 
-marque_index:
-    path: /marques
-    controller: App\Controller\MarqueController::index
+marque_liste:
+  path: /marques
+  controller: App\Controller\MarqueController::listeMarques
+

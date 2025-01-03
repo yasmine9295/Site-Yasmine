@@ -66,6 +66,24 @@ class DefileController extends AbstractController
         
         return $this->redirectToRoute('admin_defiles');
     }
+
+    public function index(Request $request, DefileRepository $DefileRepository, PaginatorInterface $paginator): Response
+    {
+        $search = $request->query->get('search', '');
+
+        $query = $search 
+            ? $DefileRepository->findBySearchQuery($search) 
+            : $DefileRepository->findAllQuery();
+        $lesDefiles = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1), 
+            9 
+        );
+
+        return $this->render('defile/listeDefile.html.twig', [
+            'lesDefiles' => $lesDefiles,
+        ]);
+    }
 }
     
 

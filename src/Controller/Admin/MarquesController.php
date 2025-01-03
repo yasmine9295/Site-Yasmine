@@ -63,4 +63,22 @@ class MarquesController extends AbstractController
         
         return $this->redirectToRoute('admin_marques');
     }
+
+    public function index(Request $request, MarqueRepository $MarqueRepository, PaginatorInterface $paginator): Response
+    {
+        $search = $request->query->get('search', '');
+
+        $query = $search 
+            ? $MarqueRepository->findBySearchQuery($search) 
+            : $MarqueRepository->findAllQuery();
+        $lesmarques = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1), 
+            9 
+        );
+
+        return $this->render('marque/listeMarques.html.twig', [
+            'lesmarques' => $lesmarques,
+        ]);
+    }
 }
