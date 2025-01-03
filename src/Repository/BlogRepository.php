@@ -32,7 +32,7 @@ class BlogRepository extends ServiceEntityRepository
     ->getQuery();
           
        ;
-  
+   }
 }
 
 //    public function findOneBySomeField($value): ?Blog
@@ -44,4 +44,4 @@ class BlogRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+

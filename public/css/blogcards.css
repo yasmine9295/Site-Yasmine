@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.title {
+    text-align: center;
+    background: linear-gradient(135deg, #f3f1e7, #e9d8b8);
+    padding: 60px 20px;
+    border-bottom: 3px solid #b2a98b;
+}
+
+.title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #6b4f2d;
+}
+
+.title p {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.add-button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.add-button {
+    background-color: #6b4f2d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover {
+    background-color: #4e3722;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.blog-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.blog-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 340px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.blog-card-content {
+    padding: 25px;
+    flex-grow: 1;
+}
+
+.blog-card-content h3 {
+    font-size: 1.6rem;
+    color: #6b4f2d;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+}
+
+.blog-card-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blog-meta .blog-date {
+    font-size: 1rem;
+    color: #888;
+}
+
+.heart-button {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.heart-button.liked {
+    color: red;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: #f9f9f9;
+    border-top: 1px solid #e1d6b5;
+    border-radius: 0 0 15px 15px;
+    align-items: center;
+}
+
+.btn {
+    background-color: #6b4f2d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #4e3722;
+    transform: scale(1.05);
+}
+
+.comment-section {
+    margin-top: 20px;
+    border-top: 1px solid #f9f9f9;
+    padding-top: 15px;
+}
+
+.comment-section h4 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #6b4f2d;
+    font-weight: bold;
+}
+
+.comment-section textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+    resize: vertical;
+}
+
+.comments-container {
+    margin-top: 10px;
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+.comment-actions .edit-comment, .comment-actions .delete-comment {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6b4f2d;
+    transition: color 0.3s ease;
+}
+
+.comment-actions .edit-comment:hover,
+.comment-actions .delete-comment:hover {
+    color: #e15f5f;
+}
+
+/* Pagination */
+.d-flex.justify-content-center {
+    margin-top: 40px;
+}
+
+.page-link {
+    background-color: #6b4f2d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.page-link:hover {
+    background-color: #4e3722;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .blog-card {
+        width: 90%;
+    }
+}
+
+ /* Ajout du style pour l'image */
+ .blog-card img.blog-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

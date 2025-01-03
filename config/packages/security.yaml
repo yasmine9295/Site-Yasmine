@@ -37,6 +37,7 @@ security:
         
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
+        - { path: ^/blog, roles: PUBLIC_ACCESS }
 
     role_hierarchy:
         ROLE_SUPERVISEUR: ROLE_USER

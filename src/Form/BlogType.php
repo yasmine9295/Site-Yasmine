@@ -32,7 +32,7 @@ class BlogType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Image',
                 'required' => false,
-                'mapped' => false, // This is not bound to the entity field
+                'mapped' => false, 
                 'attr' => ['accept' => 'image/*']
             ])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer']);

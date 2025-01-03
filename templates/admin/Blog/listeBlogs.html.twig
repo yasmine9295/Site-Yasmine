@@ -5,218 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YM - Blog{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/Blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/blogcards.css') }}">
     <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        /* Global styling */
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        .title {
-            text-align: center;
-            background: linear-gradient(135deg, #f3f1e7, #e9d8b8);
-            padding: 60px 20px;
-            border-bottom: 3px solid #b2a98b;
-        }
-
-        .title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: #6b4f2d;
-        }
-
-        .title p {
-            font-size: 1.5rem;
-            color: #666;
-        }
-
-        .add-button-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .add-button {
-            background-color: #6b4f2d;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .add-button:hover {
-            background-color: #4e3722;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .blog-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .blog-card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 340px;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .blog-card-content {
-            padding: 25px;
-            flex-grow: 1;
-        }
-
-        .blog-card-content h3 {
-            font-size: 1.6rem;
-            color: #6b4f2d;
-            margin-bottom: 10px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .blog-card-content p {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        .blog-date {
-            font-size: 1rem;
-            color: #888;
-            margin-bottom: 10px;
-        }
-
-        .heart-button {
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #ccc;
-            transition: color 0.3s ease;
-        }
-
-        .heart-button.liked {
-            color: red;
-        }
-
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background: #f9f9f9;
-            border-top: 1px solid #e1d6b5;
-            border-radius: 0 0 15px 15px;
-            align-items: center;
-        }
-
-        .btn {
-            background-color: #6b4f2d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #4e3722;
-            transform: scale(1.05);
-        }
-
-        .comment-section {
-            margin-top: 20px;
-            border-top: 1px solid #f9f9f9;
-            padding-top: 15px;
-        }
-
-        .comment-section h4 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #6b4f2d;
-            font-weight: bold;
-        }
-
-        .comment-section textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 1.1rem;
-            resize: vertical;
-        }
-
-        .comment-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .comment-actions .edit-comment, .comment-actions .delete-comment {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6b4f2d;
-            transition: color 0.3s ease;
-        }
-
-        .comment-actions .edit-comment:hover,
-        .comment-actions .delete-comment:hover {
-            color: #e15f5f;
-        }
-
-        /* Pagination */
-        .d-flex.justify-content-center {
-            margin-top: 40px;
-        }
-
-        .page-link {
-            background-color: #6b4f2d;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-        }
-
-        .page-link:hover {
-            background-color: #4e3722;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .blog-card {
-                width: 90%;
-            }
-        }
-    </style>
+  
     <script>
-        // Script pour gérer le changement de couleur du coeur
         function toggleHeart(event) {
-            event.target.classList.toggle('liked');
+            const heartIcon = event.target;
+            heartIcon.classList.toggle('liked');
         }
-
-        // Script pour ajouter un commentaire
         function addComment(cardId) {
             const commentText = document.getElementById(`comment-text-${cardId}`).value;
             if (commentText) {
@@ -231,11 +28,10 @@
                     </div>
                 `;
                 commentContainer.appendChild(newComment);
-                document.getElementById(`comment-text-${cardId}`).value = ''; // Clear the textarea
+                document.getElementById(`comment-text-${cardId}`).value = '';
             }
         }
 
-        // Modifier un commentaire
         function editComment(event) {
             const comment = event.target.closest('.comment-item');
             const text = comment.querySelector('p').innerText;
@@ -244,8 +40,6 @@
                 comment.querySelector('p').innerText = newText;
             }
         }
-
-        // Supprimer un commentaire
         function deleteComment(event) {
             const comment = event.target.closest('.comment-item');
             comment.remove();
@@ -264,36 +58,41 @@
         </a>
     </div>
 
-    {% if "ROLE_ADMIN" in app.user.roles %}
-        <div class="blog-container">
-            {% for blog in lesBlogs %}
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <h3>{{ blog.NomArticle }}</h3>
-                        <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+    <div class="blog-container">
+        {% for blog in lesBlogs %}
+            <div class="blog-card">
+                {% if blog.image %}
+                    <img src="{{ asset('uploads/images/' ~ blog.image) }}" alt="{{ blog.NomArticle }}" class="blog-image">
+                {% endif %}
+                <div class="blog-card-content">
+                    <h3>{{ blog.NomArticle }}</h3>
+                    <div class="blog-meta">
                         <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
                         <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
                     </div>
+                    <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+                </div>
 
-                    <div class="comment-section">
-                        <h4>Commentaires :</h4>
-                        <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
-                        <button class="btn" onclick="addComment({{ blog.id }})">Ajouter un commentaire</button>
-                        <div id="comments-{{ blog.id }}" class="comments-container"></div>
-                    </div>
-                    <div class="card-actions">
+                <div class="comment-section">
+                    <h4>Commentaires :</h4>
+                    <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
+                    <button class="btn" onclick="addComment({{ blog.id }})">Ajouter un commentaire</button>
+                    <div id="comments-{{ blog.id }}" class="comments-container"></div>
+                </div>
+
+                <div class="card-actions">
+                    {% if "ROLE_ADMIN" in app.user.roles or blog.auteur == app.user %}
                         <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
                             <i class="fas fa-edit"></i> Modifier
                         </a>
                         <a href="{{ path('admin_blog_suppression', {'id': blog.id}) }}" class="btn">
                             <i class="fas fa-trash"></i> Supprimer
                         </a>
-                    </div>
-
+                    {% endif %}
                 </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 
     <div class="d-flex justify-content-center mt-4">
         {{ knp_pagination_render(lesBlogs) }}
