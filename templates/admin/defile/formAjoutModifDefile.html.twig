@@ -8,11 +8,10 @@
 <div class="container py-4">
     <h1 class="text-center mb-4">
         {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
-            Ajout
+            Ajout d'un défilé
         {% else %}
-            Modification
+            Modification d'un Défilé
         {% endif %}
-        d'un Défilé
     </h1>
 
     {{ form_start(formDefile, {'attr': {'novalidate': 'novalidate'}}) }}

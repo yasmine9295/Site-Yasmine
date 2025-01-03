@@ -23,7 +23,7 @@ class BlogController extends AbstractController
         $request->query->getInt('page', 1),
         9
         );
-        return $this->render('admin/blog/listeBlogs.html.twig', [
+        return $this->render('admin/Blog/listeBlogs.html.twig', [
             'lesBlogs' => $blogs
         ]);
     }
@@ -48,7 +48,7 @@ class BlogController extends AbstractController
             $manager->persist($blog);
             $manager->flush();
             $this->addFlash("success", "le blog a bien été $blog");
-            return $this->redirectToRoute('admin_blogs');
+            return $this->redirectToRoute('admin_blog');
         }
         return $this->render('admin/blog/formAjoutModifBlog.html.twig', [
             'formBlog' => $form->createView()
@@ -62,7 +62,7 @@ class BlogController extends AbstractController
             $manager->flush();
             $this->addFlash("success","le blog a bien été supprimé");
         
-        return $this->redirectToRoute('admin_blogs');
+        return $this->redirectToRoute('admin_blog');
     }
 }
     

@@ -54,6 +54,11 @@ class Blog
         return $this->NomArticle;
     }
 
+    public function __toString(): string
+    {
+        return $this->NomArticle;
+    }
+
     public function setNomArticle(string $NomArticle): static
     {
         $this->NomArticle = $NomArticle;
