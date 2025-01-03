@@ -5,7 +5,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-     
         .card {
             background-color: #f1f1f1f; 
             border: none;
@@ -19,14 +18,12 @@
             height: auto; 
         }
 
-    
         .card:hover {
             transform: translateY(-10px); 
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); 
         }
 
-      
         .card-title {
             font-size: 1.75rem;
             font-family: 'Georgia', serif;
@@ -37,7 +34,6 @@
             letter-spacing: 2px;
         }
 
-      
         .card-subtitle {
             font-size: 1.2rem;
             font-family: 'Georgia', serif;
@@ -45,7 +41,6 @@
             margin-bottom: 1.25rem;
         }
 
-      
         .card-text {
             font-size: 1.1rem;
             color: #090706;
@@ -55,7 +50,6 @@
             flex-grow: 1; 
         }
 
- 
         .card .btn {
             font-size: 0.95rem;
             padding: 0.6rem 1.2rem;
@@ -77,7 +71,6 @@
             background-color: #34495e;
         }
 
-      
         .card-footer {
             display: flex;
             justify-content: space-between; 
@@ -86,7 +79,6 @@
             border-top: 1px solid #e3e3e3;
         }
 
- 
         .card-img-container {
             width: 100%;
             height: auto;
@@ -109,7 +101,6 @@
             transform: scale(1.1); 
         }
 
-     
         .row-cols-lg-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -117,21 +108,18 @@
             height: 100%; 
         }
 
-
         @media (max-width: 768px) {
             .row-cols-lg-3 {
                 grid-template-columns: 1fr;
             }
         }
 
-      
         @media (min-width: 769px) and (max-width: 991px) {
             .row-cols-md-2 {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
-     
         h1 {
             font-family: 'Georgia', serif;
             color: #090706;
@@ -145,7 +133,6 @@
             position: relative;
         }
 
-     
         h1::after {
             content: '';
             position: absolute;
@@ -167,7 +154,6 @@
             }
         }
 
-    
         body {
             background-color: #f5f5f5;
             font-family: 'Arial', sans-serif;
@@ -177,7 +163,6 @@
             transition: background-color 0.3s ease;
         }
 
- 
         .container {
             margin: 50px auto;
             max-width: 1200px;
@@ -218,67 +203,161 @@
             margin-top: 20px;
             text-align: center;
         }
+
+        /* Stylisation de la barre de recherche */
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color:rgb(0, 0, 0);
+            outline: none;
+            box-shadow: 0 0 8px rgb(227, 240, 255);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: none;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color:rgb(0, 0, 0);
+        }
     </style>
 {% endblock %}
 
 {% block body %}
 <div class="container py-5">
     <h1 class="text-center text-primary mb-5">Liste des Mannequins</h1>
+    
     {% if "ROLE_ADMIN" in app.user.roles %}
         <div class="d-flex justify-content-between align-items-center mb-5">
             <a href="{{ path('admin_mannequin_ajout') }}" class="btn btn-outline-primary btn-lg">
                 <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
             </a>
         </div>
+        <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="Rechercher un mannequin par nom..." 
+                    value="{{ app.request.query.get('search') }}"
+                >
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
     {% endif %}
+
     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
         {% for lemannequin in lesmannequins %}
-            <div class="col">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
-                        <div class="card-img-container">
-                            <img src="{{ lemannequin.imageMannequins }}" alt="Image de {{ lemannequin.Nom }}">
+            {% if app.request.query.get('search') is not empty %}
+                {% if lemannequin.Nom matches '/^' ~ app.request.query.get('search') ~ '/i' %}
+                    <div class="col">
+                        <div class="card shadow-lg border-0 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
+                                <div class="card-img-container">
+                                    <img src="{{ lemannequin.imageMannequins }}" alt="Image de {{ lemannequin.Nom }}"/>
+                                </div>
+                                <p class="card-text">
+                                    <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
+                                    <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
+                                    <strong>Défilés :</strong>
+                                    <ul>
+                                        {% for defile in lemannequin.defiles %}
+                                            <li>{{ defile.nomD }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </p>
+                            </div>
+                            {% if "ROLE_ADMIN" in app.user.roles %}
+                                <div class="card-footer">
+                                    <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-pen"></i> Modifier
+                                    </a>
+                                    <a class="btn btn-danger btn-sm"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#modalSimple"
+                                       data-titre="Suppression d'un mannequin"
+                                       data-message="Êtes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
+                                       data-libelleBouton="Supprimer ce mannequin"
+                                       href="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                                        <i class="far fa-trash-alt"></i> Supprimer
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
-                        <p class="card-text">
-                            <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
-                            <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
-                            <strong>Défilés :</strong>
-                            <ul>
-                                {% for defile in lemannequin.defiles %}
-                                    <li>{{ defile.nomD }}</li>
-                                {% endfor %}
-                            </ul>
-                        </p>
                     </div>
-                    {% if "ROLE_ADMIN" in app.user.roles %}
-                        <div class="card-footer">
-                            <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pen"></i> Modifier
-                            </a>
-                            <a class="btn btn-danger btn-sm"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modalSimple"
-                               data-titre="Suppression d'un mannequin"
-                               data-message="Êtes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
-                               data-libelleBouton="Supprimer ce mannequin"
-                               <a href="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
-                                <i class="far fa-trash-alt"></i> Supprimer
-                            </a>
+                {% endif %}
+            {% else %}
+                <div class="col">
+                    <div class="card shadow-lg border-0 rounded-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
+                            <div class="card-img-container">
+                                <img src="{{ lemannequin.imageMannequins }}" alt="Image de {{ lemannequin.Nom }}"/>
+                            </div>
+                            <p class="card-text">
+                                <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
+                                <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
+                                <strong>Défilés :</strong>
+                                <ul>
+                                    {% for defile in lemannequin.defiles %}
+                                        <li>{{ defile.nomD }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </p>
                         </div>
-                    {% endif %}
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="card-footer">
+                                <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un mannequin"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
+                                   data-libelleBouton="Supprimer ce mannequin"
+                                   href="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                                    <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 
-
-    <div class="navigation mx-auto">
-        {{ knp_pagination_render(lesmannequins) }}
+    <!-- Pagination -->
+    <div class="navigation">
+        <ul class="pagination">
+            <li class="page-item">{{ knp_pagination_render(lesmannequins) }}</li>
+        </ul>
     </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
-    {% include "include/_modale.html.twig" %}
 {% endblock %}

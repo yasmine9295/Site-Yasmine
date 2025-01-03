@@ -58,39 +58,29 @@
         </a>
     </div>
 
-    <div class="blog-container">
-        {% for blog in lesBlogs %}
-            <div class="blog-card">
-                <div class="col">
-                            <div class="card shadow-lg">
-                        <div class="card-img-container">
-                            <img src="{{ blog.image }}" alt="Image de {{ blog.id }}">
-                        </div>
-                            <div class="blog-card-content">
-                                <h3>{{ blog.NomArticle }}</h3>
-                                <div class="blog-meta">
-                                    <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
-                                    <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
-                                </div>
-                                <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
-                            </div>
-
+ <div class="blog-container">
+    {% for blog in lesBlogs %}
+        <div class="blog-card">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-img-container">
+                    <img src="{{ blog.image }}" alt="Image de {{ blog.id }}">
+                </div>
+                <div class="blog-card-content">
+                    <h3>{{ blog.NomArticle }}</h3>
+                    <div class="blog-meta">
+                        <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
+                        <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
+                    </div>
+                    <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+                </div>
                 <div class="comment-section">
                     <h4>Commentaires :</h4>
                     <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
                     <button class="btn" onclick="addComment({{ blog.id }})">Ajouter un commentaire</button>
                     <div id="comments-{{ blog.id }}" class="comments-container"></div>
                 </div>
-
                 <div class="card-actions">
                     {% if "ROLE_ADMIN" in app.user.roles or blog.auteur == app.user %}
-                        <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
-                            <i class="fas fa-edit"></i> Modifier
-                        </a>
-                        <a href="{{ path('admin_blog_suppression', {'id': blog.id}) }}" class="btn">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </a>
-                        {% elseif blog.auteur == app.user %}
                         <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
                             <i class="fas fa-edit"></i> Modifier
                         </a>
@@ -100,8 +90,10 @@
                     {% endif %}
                 </div>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
+</div>
+
 
 
     <div class="d-flex justify-content-center mt-4">

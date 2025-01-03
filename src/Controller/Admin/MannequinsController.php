@@ -79,4 +79,22 @@ class MannequinsController extends AbstractController
         
         return $this->redirectToRoute('admin_mannequins');
     }
+
+    public function index(Request $request, MannequinsRepository $mannequinsRepository, PaginatorInterface $paginator): Response
+    {
+        $search = $request->query->get('search', '');
+
+        $query = $search 
+            ? $mannequinsRepository->findBySearchQuery($search) 
+            : $mannequinsRepository->findAllQuery();
+        $lesmannequins = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1), 
+            9 
+        );
+
+        return $this->render('mannequin/listeMannequins.html.twig', [
+            'lesmannequins' => $lesmannequins,
+        ]);
+    }
 }

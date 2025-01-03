@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BlogRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
@@ -20,7 +21,6 @@ class Blog
     #[ORM\Column]
     private ?int $id = null;
     
-
     #[ORM\Column(length: 255)]
     private ?string $NomArticle = null;
 
@@ -34,7 +34,8 @@ class Blog
     #[ORM\JoinColumn(nullable: true)]
     private ?Defile $defile = null;    
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 1000)]
+    #[Assert\Url(message: "Veuillez entrer une URL valide.")]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Mannequins;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Mannequins>
@@ -21,24 +22,54 @@ class MannequinsRepository extends ServiceEntityRepository
         parent::__construct($registry, Mannequins::class);
     }
 
-     /**
- * @return Query
- */
-public function listeMannequinsCompletePaginee()
-{
-    return $this->createQueryBuilder('a')
-        ->select('a')  // Sélectionnez toutes les colonnes que vous souhaitez
-        ->orderBy('a.Nom', 'ASC')  // Tri par nom
-        ->getQuery();
-}
+    /**
+     * Récupère les mannequins dont le nom commence par une lettre spécifiée
+     *
+     * @param string $search
+     * @return Query
+     */
+    public function findBySearchQuery(string $search)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.Nom LIKE :search')
+            ->setParameter('search', $search . '%')  // Le % signifie "tout ce qui suit"
+            ->orderBy('m.Nom', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
 
-//    public function findOneBySomeField($value): ?Mannequins
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Retourne tous les mannequins triés par nom
+     *
+     * @return Query
+     */
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.Nom', 'ASC')
+            ->getQuery();
+    }
+
+    /**
+     * Retourne la liste complète des mannequins avec pagination
+     *
+     * @return Query
+     */
+    public function listeMannequinsCompletePaginee()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a')  // Sélection de toutes les colonnes
+            ->orderBy('a.Nom', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    // Méthode supplémentaire si nécessaire pour d'autres requêtes
+    // public function findOneBySomeField($value): ?Mannequins
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->andWhere('m.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->getQuery()
+    //         ->getOneOrNullResult()
+    //     ;
+    // }
 }

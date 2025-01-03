@@ -7,11 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Validator\Constraints\Url;
 
 class BlogType extends AbstractType
 {
@@ -29,11 +30,13 @@ class BlogType extends AbstractType
                 'widget' => 'single_text',
                 'data' => new \DateTime(),
             ])
-            ->add('image', FileType::class, [
-                'label' => 'Image',
+            ->add('image', UrlType::class, [
+                'label' => 'Lien vers l\'image du blog',
+                'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
                 'required' => false,
-                'mapped' => false, 
-                'attr' => ['accept' => 'image/*']
+                'constraints' => [
+                    new Url(['message' => 'Veuillez entrer une URL valide.']),
+                ],
             ])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }
