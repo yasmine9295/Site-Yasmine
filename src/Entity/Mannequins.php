@@ -57,6 +57,11 @@ class Mannequins
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->Nom; 
+    }
+
     public function getNom(): ?string
     {
         return $this->Nom;
