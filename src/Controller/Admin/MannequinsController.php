@@ -83,22 +83,16 @@ class MannequinsController extends AbstractController
 
     public function index(Request $request, MannequinsRepository $mannequinRepository, DefileRepository $defileRepository): Response
     {
-        // Récupérer la valeur du paramètre 'defiles' depuis la requête GET
+    
         $defileSearch = $request->query->get('defiles', '');
-    
-        // Récupérer tous les défilés
         $defiles = $defileRepository->findAll();
-    
-        // Si un défilé est sélectionné, on filtre les mannequins associés à ce défilé
+
         if ($defileSearch) {
-            // Récupérer les mannequins associés au défilé sélectionné
             $mannequins = $mannequinRepository->findByDefile($defileSearch);
         } else {
-            // Sinon, on récupère tous les mannequins
             $mannequins = $mannequinRepository->findAll();
         }
     
-        // Passer les mannequins et les défilés au template
         return $this->render('mannequin/index.html.twig', [
             'mannequins' => $mannequins,
             'defiles' => $defiles,  // Liste des défilés pour la liste déroulante
