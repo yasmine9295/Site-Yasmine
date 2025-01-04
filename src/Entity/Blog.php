@@ -38,7 +38,6 @@ class Blog
     private ?Defile $defile = null;    
 
     #[ORM\Column(length: 1000)]
-    #[Assert\Url(message: "Veuillez entrer une URL valide.")]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
