@@ -14,14 +14,17 @@
             const heartIcon = event.target;
             heartIcon.classList.toggle('liked');
         }
+
         function addComment(cardId) {
             const commentText = document.getElementById(`comment-text-${cardId}`).value;
+            const pseudo = document.getElementById(`pseudo-${cardId}`).value || "Anonyme"; // Si pas de pseudo, afficher "Anonyme"
+            
             if (commentText) {
                 const commentContainer = document.getElementById(`comments-${cardId}`);
                 const newComment = document.createElement('div');
                 newComment.classList.add('comment-item');
                 newComment.innerHTML = `
-                    <p>${commentText}</p>
+                    <p><strong>${pseudo}</strong>: ${commentText}</p> <!-- Affichage du pseudo -->
                     <div class="comment-actions">
                         <i class="fas fa-pen edit-comment" onclick="editComment(event)"></i>
                         <i class="fas fa-trash delete-comment" onclick="deleteComment(event)"></i>
@@ -29,6 +32,7 @@
                 `;
                 commentContainer.appendChild(newComment);
                 document.getElementById(`comment-text-${cardId}`).value = '';
+                document.getElementById(`pseudo-${cardId}`).value = ''; // Réinitialiser le pseudo
             }
         }
 
@@ -40,6 +44,7 @@
                 comment.querySelector('p').innerText = newText;
             }
         }
+
         function deleteComment(event) {
             const comment = event.target.closest('.comment-item');
             comment.remove();
@@ -58,49 +63,50 @@
         </a>
     </div>
 
- <div class="blog-container">
-    {% for blog in lesBlogs %}
-        <div class="blog-card">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-img-container">
-                    <img src="{{ blog.image }}" alt="Image de {{ blog.id }}">
-                </div>
-                <div class="blog-card-content">
-                    <h3>{{ blog.NomArticle }}</h3>
-                    <div class="blog-meta">
-                        <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
-                        <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
+    <div class="blog-container">
+        {% for blog in lesBlogs %}
+            <div class="blog-card">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-img-container">
+                        <img src="{{ blog.image }}" alt="Image de {{ blog.id }}">
                     </div>
-                    <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+                    <div class="blog-card-content">
+                        <h3>{{ blog.NomArticle }}</h3>
+                        <div class="blog-meta">
+                            <p class="blog-author">Publié par :</p>
+                            <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
+                            <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
                         </div>
-                            {% if blog.defile %}
-                                <p><strong>Défilé associé :</strong> {{ blog.defile }}</p>
-                            {% endif %}
-                                        <div class="comment-section">
-                                            <h4>Commentaires :</h4>
-                                            <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
-                                            <button class="btn" onclick="addComment({{ blog.id }})">Ajouter un commentaire</button>
-                                            <div id="comments-{{ blog.id }}" class="comments-container"></div>
-                                        </div>
-                                        <div class="card-actions">
-                                            {% if "ROLE_ADMIN" in app.user.roles or blog.auteur == app.user %}
-                                                <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
-                                                    <i class="fas fa-edit"></i> Modifier
-                                                </a>
-                                                <a href="{{ path('admin_blog_suppression', {'id': blog.id}) }}" class="btn">
-                                                    <i class="fas fa-trash"></i> Supprimer
-                                                </a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
+                        <p>{{ blog.Contenu|slice(0, 100) ~ '...' }}</p>
+                    </div>
+                    {% if blog.defile %}
+                        <p><strong>Défilé associé :</strong> {{ blog.defile }}</p>
+                    {% endif %}
+                
+                    <div class="comment-section">
+                        <h4>Commentaires :</h4>
+                        <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
+                        <button class="btn" onclick="addComment({{ blog.id }})" id="pseudo-{{ blog.id }}"class="pseudo-input">Ajouter un commentaire</button>
+                        <div id="comments-{{ blog.id }}" class="comments-container"></div>
+                    </div>
+                    <div class="card-actions">
+                        {% if "ROLE_ADMIN" in app.user.roles or blog.auteur == app.user %}
+                            <a href="{{ path('admin_blog_modif', {'id': blog.id}) }}" class="btn">
+                                <i class="fas fa-edit"></i> Modifier
+                            </a>
+                            <a href="{{ path('admin_blog_suppression', {'id': blog.id}) }}" class="btn">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
+    <div class="d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(lesBlogs) }}
+    </div>
 
-
-        <div class="d-flex justify-content-center mt-4">
-            {{ knp_pagination_render(lesBlogs) }}
-        </div>
-    </body>
-    </html>
+</body>
+</html>
