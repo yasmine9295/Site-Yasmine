@@ -3,10 +3,10 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Album;
-use App\Entity\Style;
-use App\Entity\Artiste;
-use App\Entity\Morceau;
+use App\Entity\Marque;
+use App\Entity\Blog;
+use App\Entity\Defile;
+use App\Entity\Mannequins;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
