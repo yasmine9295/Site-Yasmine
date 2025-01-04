@@ -40,7 +40,6 @@ class Mannequins
     private ?string $biographieM = null;
 
     #[ORM\Column(length: 1000)]
-    #[Assert\Url(message: "Veuillez entrer une URL valide.")]
     private ?string $imageMannequins = null;
 
 

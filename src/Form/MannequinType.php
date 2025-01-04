@@ -22,45 +22,40 @@ class MannequinType extends AbstractType
     {
         $builder
             ->add('Nom', TextType::class, [
-                'constraints' => [
-                    new NotBlank(['message' => 'Le nom est obligatoire.']),
-                    new Length(['min' => 2, 'minMessage' => 'Le nom doit comporter au moins {{ limit }} caractères.']),
-                ],
             ])
             ->add('Prenom', TextType::class, [
-                'constraints' => [
-                    new NotBlank(['message' => 'Le prénom est obligatoire.']),
-                    new Length(['min' => 2, 'minMessage' => 'Le prénom doit comporter au moins {{ limit }} caractères.']),
-                ],
+                // 'constraints' => [
+                //     new NotBlank(['message' => 'Le prénom est obligatoire.']),
+                //     new Length(['min' => 2, 'minMessage' => 'Le prénom doit comporter au moins {{ limit }} caractères.']),
+                // ],
             ])
             ->add('Nationalite', TextType::class, [
-                'constraints' => [
-                    new NotBlank(['message' => 'La nationalité est obligatoire.']),
-                ],
+                // 'constraints' => [
+                //     new NotBlank(['message' => 'La nationalité est obligatoire.']),
+                // ],
             ])
             ->add('biographieM', TextareaType::class, [
                 'attr' => ['placeholder' => 'Courte biographie...', 'rows' => 10],
-                'constraints' => [
-                    new NotBlank(['message' => 'La biographie est obligatoire.']),
-                    new Length(['min' => 20, 'minMessage' => 'La biographie doit comporter au moins {{ limit }} caractères.']),
-                ],
+                // 'constraints' => [
+                //     new NotBlank(['message' => 'La biographie est obligatoire.']),
+                //     new Length(['min' => 20, 'minMessage' => 'La biographie doit comporter au moins {{ limit }} caractères.']),
+                // ],
             ]) 
             ->add('defiles', EntityType::class, [
                 'class' => Defile::class,      
                 'choice_label' => 'nomD',     
                 'multiple' => true,          
                 'expanded' => false,        
-                'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner au moins un défilé.']),
-                ],
+                // 'constraints' => [
+                //     new NotBlank(['message' => 'Veuillez sélectionner au moins un défilé.']),
+                // ],
             ])    
-            ->add('imageMannequins', UrlType::class, [
-                'label' => 'Lien vers l\'image de la marque',
-                'attr' => ['placeholder' => 'Entrez l\'URL de l\'image...'],
+            ->add('imageMannequins', FileType::class, [
+                'label' => 'Image',
                 'required' => false,
-                'constraints' => [
-                    new Url(['message' => 'Veuillez entrer une URL valide.']),
-                ],
+                'mapped' => false, 
+                'attr' => ['accept' => 'image/*']
+                
             ]);
 
 
