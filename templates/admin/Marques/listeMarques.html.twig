@@ -257,7 +257,9 @@
             </div>
         </form>
 <form method="get" action="{{ path('marque_liste') }}" class="mb-4">
-    <div class="search-bar">
+    <div class="filters">
+        <div class="form-group">
+            <label for="createur">Filtrer par créateur</label>
         <input 
             type="text" 
             name="createur" 
@@ -265,11 +267,9 @@
             placeholder="Nom du créateur..." 
             value="{{ app.request.query.get('createur') }}"
             >
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div>
-        </form>
-<form method="get" action="{{ path('marque_liste') }}" class="mb-4">
-    <div class="search-bar">
+
+        <div class="form-group">
+            <label for="representant">Représentant</label>
             <input 
                 type="text" 
                 name="representant" 
@@ -277,8 +277,7 @@
                 placeholder="Nom du représentant..." 
                 value="{{ app.request.query.get('representant') }}"
             >
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div>
+        </div>
         </form>
   {% endif %}
 

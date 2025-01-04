@@ -258,8 +258,9 @@
             </a>
         </div>
 
- <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
-    <div class="search-bar">
+ <div class="filters">
+        <div class="form-group">
+            <label for="defiles">Filtrer par défilés</label>
         <input 
             type="text" 
             name="defiles" 
@@ -267,8 +268,6 @@
             placeholder="Nom du défilé..." 
             value="{{ app.request.query.get('defiles') }}"
            >
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-         </div>
     </form>
         
         <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
