@@ -62,6 +62,16 @@ class MannequinsRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    public function findByDefile($defileId)
+{
+    return $this->createQueryBuilder('m')
+        ->innerJoin('m.defiles', 'd')  // Jointure avec la table des défilés
+        ->where('d.id = :defileId')
+        ->setParameter('defileId', $defileId)
+        ->getQuery()
+        ->getResult();
+}
+
     // Méthode supplémentaire si nécessaire pour d'autres requêtes
     // public function findOneBySomeField($value): ?Mannequins
     // {

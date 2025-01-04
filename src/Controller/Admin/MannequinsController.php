@@ -8,6 +8,7 @@ namespace App\Controller\Admin;
 use App\Entity\Mannequins;
 
 use App\Form\MannequinType;
+use App\Repository\DefileRepository;
 use App\Repository\MannequinsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\DefileController;
@@ -80,21 +81,28 @@ class MannequinsController extends AbstractController
         return $this->redirectToRoute('admin_mannequins');
     }
 
-    public function index(Request $request, MannequinsRepository $mannequinsRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, MannequinsRepository $mannequinRepository, DefileRepository $defileRepository): Response
     {
-        $search = $request->query->get('search', '');
-
-        $query = $search 
-            ? $mannequinsRepository->findBySearchQuery($search) 
-            : $mannequinsRepository->findAllQuery();
-        $lesmannequins = $paginator->paginate(
-            $query, 
-            $request->query->getInt('page', 1), 
-            9 
-        );
-
-        return $this->render('mannequin/listeMannequins.html.twig', [
-            'lesmannequins' => $lesmannequins,
+        // Récupérer la valeur du paramètre 'defiles' depuis la requête GET
+        $defileSearch = $request->query->get('defiles', '');
+    
+        // Récupérer tous les défilés
+        $defiles = $defileRepository->findAll();
+    
+        // Si un défilé est sélectionné, on filtre les mannequins associés à ce défilé
+        if ($defileSearch) {
+            // Récupérer les mannequins associés au défilé sélectionné
+            $mannequins = $mannequinRepository->findByDefile($defileSearch);
+        } else {
+            // Sinon, on récupère tous les mannequins
+            $mannequins = $mannequinRepository->findAll();
+        }
+    
+        // Passer les mannequins et les défilés au template
+        return $this->render('mannequin/index.html.twig', [
+            'mannequins' => $mannequins,
+            'defiles' => $defiles,  // Liste des défilés pour la liste déroulante
+            'defilesSearch' => $defileSearch,  // Terme de recherche
         ]);
     }
 }
