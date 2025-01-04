@@ -252,23 +252,24 @@
             class="form-control" 
             placeholder="Rechercher une marque par nom..." 
             value="{{ app.request.query.get('search') }}"
-        >
-    </div>
-
-    <div class="filters">
-        <div class="form-group">
-            <label for="createur">Filtrer par créateur</label>
-            <input 
-                type="text" 
-                name="createur" 
-                class="form-control" 
-                placeholder="Nom du créateur..." 
-                value="{{ app.request.query.get('createur') }}"
+       >
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+<form method="get" action="{{ path('marque_liste') }}" class="mb-4">
+    <div class="search-bar">
+        <input 
+            type="text" 
+            name="createur" 
+            class="form-control" 
+            placeholder="Nom du créateur..." 
+            value="{{ app.request.query.get('createur') }}"
             >
-        </div>
-
-        <div class="form-group">
-            <label for="representant">Représentant</label>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+<form method="get" action="{{ path('marque_liste') }}" class="mb-4">
+    <div class="search-bar">
             <input 
                 type="text" 
                 name="representant" 
@@ -276,7 +277,6 @@
                 placeholder="Nom du représentant..." 
                 value="{{ app.request.query.get('representant') }}"
             >
-        </div>
                 <button type="submit" class="btn btn-primary">Rechercher</button>
             </div>
         </form>

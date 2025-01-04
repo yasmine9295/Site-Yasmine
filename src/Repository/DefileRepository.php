@@ -62,6 +62,31 @@ class DefileRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    /**
+     * Retourne la liste complète des defiles avec pagination
+     *
+     * @return Query
+     */
+    public function listeMannequinsCompletePaginee()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a')  // Sélection de toutes les colonnes
+            ->orderBy('a.Nom', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    // Méthode supplémentaire si nécessaire pour d'autres requêtes
+    // public function findOneBySomeField($value): ?Mannequins
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->andWhere('m.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->getQuery()
+    //         ->getOneOrNullResult()
+    //     ;
+    // }
+}
+
 //    /**
 //     * @return Defile[] Returns an array of Defile objects
 //     */
@@ -86,4 +111,3 @@ class DefileRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
