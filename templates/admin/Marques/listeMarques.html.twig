@@ -243,7 +243,8 @@
         <a href="{{ path('admin_marques_ajout') }}" class="btn btn-outline-primary btn-lg">
             <i class="fas fa-plus-circle me-2"></i> Ajouter une marque
         </a>
-    </div>
+    </div> 
+     {% endif %}
 <form method="get" action="{{ path('marque_liste') }}" class="mb-4">
     <div class="search-bar">
         <input 
@@ -279,7 +280,7 @@
             >
         </div>
         </form>
-  {% endif %}
+
 
    <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
     {% for laMarque in lesmarques %}

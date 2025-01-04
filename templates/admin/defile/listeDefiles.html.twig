@@ -213,11 +213,12 @@
                 <i class="fas fa-plus-circle me-2"></i> Ajouter un défilé
             </a>
         </div>
+        {% endif %}
         <div class="form-group">
             <label for="mannequins">Filtrer par mannequin</label>
             <select name="mannequins" class="form-control">
             <option value="">Choisir un mannequins</option>
-                {% for mannequin in range(2000, 2025) %}
+                {% for mannequin in ledefile.mannequin %}
                     <option value="{{ mannequin }}" 
                         {% if app.request.query.get('mannequins') == mannequin %}selected{% endif %}>
                         {{ mannequin }}
@@ -251,7 +252,7 @@
                 <button type="submit" class="btn btn-primary">Rechercher</button>
             </div>
         </form>
-    {% endif %}
+    
 
     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
         {% for ledefile in lesDefiles %}
