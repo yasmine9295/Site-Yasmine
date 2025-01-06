@@ -33,8 +33,59 @@ class DefileRepository extends ServiceEntityRepository
             ->getQuery()
            
         ;
-   
- }
+    }
+
+  /**
+     * Récupère les defile dont le nom commence par une lettre spécifiée
+     *
+     * @param string $search
+     * @return Query
+     */
+    public function findBySearchQuery(string $search)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.NomD LIKE :search')
+            ->setParameter('search', $search . '%')  // Le % signifie "tout ce qui suit"
+            ->orderBy('d.NomD', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    /**
+     * Retourne tous les defiles triés par nom
+     *
+     * @return Query
+     */
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.NomD', 'ASC')
+            ->getQuery();
+    }
+
+    /**
+     * Retourne la liste complète des defiles avec pagination
+     *
+     * @return Query
+     */
+    public function listeMannequinsCompletePaginee()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a')  // Sélection de toutes les colonnes
+            ->orderBy('a.Nom', 'ASC')  // Tri par nom
+            ->getQuery();
+    }
+
+    // Méthode supplémentaire si nécessaire pour d'autres requêtes
+    // public function findOneBySomeField($value): ?Mannequins
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->andWhere('m.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->getQuery()
+    //         ->getOneOrNullResult()
+    //     ;
+    // }
+}
 
 //    /**
 //     * @return Defile[] Returns an array of Defile objects
@@ -60,4 +111,3 @@ class DefileRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}

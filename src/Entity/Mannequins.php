@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\MannequinsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\ImageMannequin;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MannequinsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MannequinsRepository::class)]
 class Mannequins
@@ -16,22 +18,32 @@ class Mannequins
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le prénom doit comporter au moins {{ limit }} caractères.")]
     private ?string $Prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La nationalité est obligatoire.")]
     private ?string $Nationalite = null;
 
     #[ORM\ManyToMany(targetEntity: Defile::class, mappedBy: 'mannequin')]
     private Collection $defiles;
 
     #[ORM\Column(length: 1000)]
+    #[Assert\NotBlank(message: "La biographie est obligatoire.")]
+    #[Assert\Length(min: 20, minMessage: "La biographie doit comporter au moins {{ limit }} caractères.")]
     private ?string $biographieM = null;
 
-    #[ORM\OneToMany(mappedBy: 'mannequinId', targetEntity: ImageMannequin::class)]
-    private Collection $imageMannequins;
+    #[ORM\Column(length: 1000)]
+    private ?string $imageMannequins = null;
+
+
+
 
     public function __construct()
     {
@@ -42,6 +54,11 @@ class Mannequins
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return $this->Nom; 
     }
 
     public function getNom(): ?string
@@ -119,32 +136,14 @@ class Mannequins
         return $this;
     }
 
-    /**
-     * @return Collection<int, ImageMannequin>
-     */
-    public function getImageMannequins(): Collection
+    public function getImageMannequins(): ?string
     {
         return $this->imageMannequins;
     }
 
-    public function addImageMannequin(ImageMannequin $imageMannequin): static
+    public function setImageMannequins(string $imageMannequins): static
     {
-        if (!$this->imageMannequins->contains($imageMannequin)) {
-            $this->imageMannequins->add($imageMannequin);
-            $imageMannequin->setMannequinId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImageMannequin(ImageMannequin $imageMannequin): static
-    {
-        if ($this->imageMannequins->removeElement($imageMannequin)) {
-            // set the owning side to null (unless already changed)
-            if ($imageMannequin->getMannequinId() === $this) {
-                $imageMannequin->setMannequinId(null);
-            }
-        }
+        $this->imageMannequins = $imageMannequins;
 
         return $this;
     }

@@ -1,59 +1,347 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion Defiles{% endblock %}
+{% block title %}Liste des Défilés{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Style général des cartes */
+        .card {
+            background-color: #f1f1f1f; /* Fond blanc crème */
+            border: none;
+            border-radius: 10px; /* Coins arrondis pour une apparence chic */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Ombre douce mais marquée */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Animation fluide */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Garantir que toutes les cartes aient la même hauteur */
+        }
+
+        /* Effet de survol avec brillance élégante */
+        .card:hover {
+            transform: translateY(-10px); /* Légère élévation */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Ombre élégante */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); /* Dégradé lumineux */
+        }
+
+        /* Style du titre de la carte */
+        .card-title {
+            font-size: 1.75rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            color: #090706;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Style du sous-titre */
+        .card-subtitle {
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #090706;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Style du texte */
+        .card-text {
+            font-size: 1.1rem;
+            color: #090706;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1.75rem;
+            flex-grow: 1; /* Permet d'étendre l'espace de texte pour garantir la même hauteur */
+        }
+
+        /* Style des boutons */
+        .card .btn {
+            font-size: 0.9rem;  /* Taille du texte réduite pour les rendre plus petits */
+            padding: 0.5rem 1rem;  /* Réduire le padding pour des boutons plus compacts */
+            text-transform: uppercase;
+            letter-spacing: 1.2px;  /* Espacement légèrement réduit */
+            border-radius: 0;  /* Enlever les coins arrondis pour rendre les boutons carrés */
+            background-color: #090706; /* Couleur élégante */
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;  /* Ajouter un espacement sous chaque bouton */
+        }
+
+        .card .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #34495e;  /* Changement subtil de couleur au survol */
+        }
+
+        /* Centrer les boutons dans la carte */
+        .card .btn-container {
+            display: flex;
+            justify-content: center; /* Centrer horizontalement */
+            gap: 1rem;  /* Ajouter un espacement entre les boutons */
+        }
+
+        /* Style des colonnes pour que les cartes soient 3 par ligne */
+        .row-cols-lg-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; /* Espacement plus large entre les cartes */
+            height: 100%; /* Garantir que toutes les cartes de la ligne aient la même hauteur */
+        }
+
+        /* Pour les petits écrans */
+        @media (max-width: 768px) {
+            .row-cols-lg-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pour les écrans moyens */
+        @media (min-width: 769px) and (max-width: 991px) {
+            .row-cols-md-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Amélioration du titre principal */
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #090706;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            text-align: center; /* Centrage du titre */
+            font-weight: bold;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        /* Animation du titre pour le rendre dynamique */
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background-color: #090706; /* Ligne sous le titre */
+            animation: lineAnimation 1.5s ease-in-out infinite;
+        }
+
+        @keyframes lineAnimation {
+            0%, 100% {
+                width: 60%;
+            }
+            50% {
+                width: 100%;
+            }
+        }
+
+        .text-primary {
+            color: #090706 !important;
+        }
+
+        /* Style général de la page */
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Pour que le contenu soit bien visible */
+        .container {
+            margin: 50px auto;
+            max-width: 1200px;
+            padding: 30px;
+        }
+         /* Stylisation de la barre de recherche */
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color:rgb(0, 0, 0);
+            outline: none;
+            box-shadow: 0 0 8px rgb(227, 240, 255);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: none;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color:rgb(0, 0, 0);
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Gestion des Defiles</h1>
-<a href=" {{path('admin_defiles')}}" class="btn btn-dark">Ajouter un defile</a>
+<div class="container py-5">
+    <h1 class="text-center text-primary mb-5">Liste des Défilés</h1>
+    {% if "ROLE_ADMIN" in app.user.roles %}
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <a href="{{ path('admin_defile_ajout') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-plus-circle me-2"></i> Ajouter un défilé
+            </a>
+        </div>
+         <div class="filters">
+        <div class="form-group">
+            <label for="mannequins">Filtrer par mannequin</label>
+            <input 
+                type="text" 
+                name="mannequins" 
+                class="form-control" 
+                placeholder="Nom du mannequin..." 
+                value="{{ app.request.query.get('mannequins') }}"
+            >
+        </div>
+ <div class="form-group">
+            <label for="annee">Filtrer par année</label>
+            <select name="annee" class="form-control">
+                <option value="">Choisir une année</option>
+                {% for annee in range(2000, 2025) %}
+                    <option value="{{ annee }}" 
+                        {% if app.request.query.get('annee') == annee %}selected{% endif %}>
+                        {{ annee }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
 
-<hr> 
-<table class="table table-hover">
-<thead>
-    <tr>
-      <th scope="col-1"></th>
-      <th scope="col-3">Marque</th>
-      <th scope="col-1">Nom</th>
-      <th scope="col-2">Date</th>
-      <th scope="col-1">Thème</th>
-      <th scope="col-2">Description</th>
-    </tr>
-</thead>  
-    <tbody>
+    <button type="submit" class="btn btn-primary">Filtrer</button>
+</form>
+        <form method="get" action="{{ path('defile_index') }}" class="mb-4">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="Rechercher un defile par nom..." 
+                    value="{{ app.request.query.get('search') }}"
+                >
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+    {% endif %}
+
+    <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
         {% for ledefile in lesDefiles %}
-            <tr>
-            <td class="col-3">{{ledefile.marque.id}}</td>
-            <td class="col-1">{{ledefile.NomD}}</td>
-            <td class="col-1">{{ledefile.Date|date("Y/m/d")}}</td>
-            <td class="col-1">{{ledefile.Thème}}</td>
-            <td class="col-1">{{ledefile.Description}}</td>
-            <td class="col-1">
-            {# {% for leStyle in ledefile.styles %} 
-            <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
-            {# {% endfor %} 
-            </td>
-            <td class="col-2">
-            <span class="align-self-center badge bg-dark"> {{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</span>
-            {# </td> #}
-            <td class="col-2">
-                <a href=" {{path('admin_defile_modif', {'id': ledefile.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
-                <a class="btn btn-dark"
-                data-bs-toggle="modal" 
-                data-bs-target="#modalSimple"
-                data-titre="Suppression d'un defile"
-                data-message="Etes vous sur de vouloir supprimer l'defile : {{ledefile.NomD}}"
-                data-libelleBouton="Supprimer l'defile"
-                data-lien="{{path('admin_defile_suppression', {'id': ledefile.id}) }}">
-                <i class="far fa-trash-alt"></i></a>
-            </td>
-            </tr>
-            {% endfor %}
-    </tbody>
-</table>
-<div class="navigation mx-auto">
-		{{ knp_pagination_render(lesDefiles) }}
-	</div>
-</div>
+         {% if app.request.query.get('search') is not empty %}
+            {% if ledefile.NomD matches '/^' ~ app.request.query.get('search') ~ '/i' %}
+            <div class="col">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ledefile.NomD }}</h5>
+                        <h6 class="card-subtitle mb-2">{{ ledefile.Date|date("Y/m/d") }}</h6>
+                    <p class="card-text">
+                        {% if ledefile.theme %}
+                            <strong>Thème:</strong> {{ ledefile.theme }}
+                        {% endif %}
+                        <br>
+                        <strong>Description:</strong> {{ ledefile.Description }}
+                        <ul>
+                            <strong>Mannequins associés:</strong>
+                            {% for mannequin in ledefile.mannequin %}
+                                <li>{{ mannequin.Nom }}</li>
+                            {% else %}
+                                <li>Aucuns mannequins associés</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="btn-container">
+                                <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un défilé"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
+                                   data-libelleBouton="Supprimer ce défilé"
+                                   <a href="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                   <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+        <div class="col">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ledefile.NomD }}</h5>
+                        <h6 class="card-subtitle mb-2">{{ ledefile.Date|date("Y/m/d") }}</h6>
+                    <p class="card-text">
+                        {% if ledefile.theme %}
+                            <strong>Thème:</strong> {{ ledefile.theme }}
+                        {% endif %}
+                        <br>
+                        <strong>Description:</strong> {{ ledefile.Description }}
+                        <ul>
+                            <strong>Mannequins associés:</strong>
+                            {% for mannequin in ledefile.mannequin %}
+                                <li>{{ mannequin.Nom }}</li>
+                            {% else %}
+                                <li>Aucuns mannequins associés</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="btn-container">
+                                <a href="{{ path('admin_defile_modif', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un défilé"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le défilé : {{ ledefile.NomD }} ?"
+                                   data-libelleBouton="Supprimer ce défilé"
+                                   <a href="{{ path('admin_defile_suppression', {'id': ledefile.id}) }}" class="btn btn-warning btn-sm">
+                                   <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
+
 {% block javascript %}
     {% include "include/_modale.html.twig" %}
 {% endblock %}

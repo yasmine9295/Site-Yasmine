@@ -1,11 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Email de réinitialisation du mot de passe envoyé{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <div class="reset-password-container">
+        <div class="reset-card">
+            <h1 class="reset-title">Email de réinitialisation envoyé</h1>
+            <p class="reset-description">
+                Si un compte correspondant à votre adresse email existe, un email vient de vous être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+                Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <p class="reset-description">
+                Si vous ne recevez pas d'email, veuillez vérifier votre dossier de spam ou <a href="{{ path('app_forgot_password_request') }}">réessayer</a>.
+            </p>
+            <a href="{{ path('accueil') }}" class="btn-return">Retour à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        .reset-password-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .reset-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reset-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset-title {
+            font-size: 2.5em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .reset-description {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
+        .reset-description a {
+            color:rgb(235, 166, 231);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .reset-description a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-return {
+            background-color:rgb(236, 167, 228);
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-return:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .btn-return:active {
+            transform: translateY(2px);
+        }
+    </style>
 {% endblock %}

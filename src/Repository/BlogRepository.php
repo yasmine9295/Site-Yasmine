@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Blog;
-use App\Repository\BlogRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -27,14 +26,13 @@ class BlogRepository extends ServiceEntityRepository
     */
    public function listeBlogsCompletePaginee()
    {
-       return $this->createQueryBuilder('b')
-           ->select('b','d')
-           ->leftJoin('b.defile','d')
-           ->orderBy('b.id')         
-           ->getQuery()
+    return $this->createQueryBuilder('b')
+    ->select('b')  // Sélectionnez toutes les colonnes que vous souhaitez
+    ->orderBy('b.NomArticle')  // Tri par nom
+    ->getQuery();
           
        ;
-  
+   }
 }
 
 //    public function findOneBySomeField($value): ?Blog
@@ -46,4 +44,4 @@ class BlogRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Marque;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MarqueRepository;
 use Doctrine\Common\Collections\Collection;
@@ -47,6 +46,11 @@ class Marque
     public function getNomM(): ?string
     {
         return $this->nomM;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nomM; 
     }
 
     public function setNomM(string $nomM): static

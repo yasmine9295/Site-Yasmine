@@ -1,7 +1,7 @@
 /* Style général */
 body {
     font-family: 'Arial', sans-serif;
-    background: url('https://th.bing.com/th/id/OIP.KMn3JNXAK5Ep5WRxXe9KRAAAAA?rs=1&pid=ImgDetMain') no-repeat center center fixed;
+    background-image: url('https://cdn.photoroom.com/v1/assets-cached.jpg?path=backgrounds_v3/white/Photoroom_white_background_extremely_fine_texture_only_white_co_d285fc74-d562-4a9f-b0b8-8cf7500231d8.jpg'); /* Replace with your image path */
     background-size: cover;
     color: #333;
     margin: 0;

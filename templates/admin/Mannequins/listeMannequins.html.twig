@@ -1,58 +1,380 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion mannequin{% endblock %}
+{% block title %}Liste des Mannequins{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card {
+            background-color: #f1f1f1f; 
+            border: none;
+            border-radius: 10px; 
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; 
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: auto; 
+        }
+
+        .card:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); 
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            color: #090706;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card-subtitle {
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #090706;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: #090706;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 1.75rem;
+            flex-grow: 1; 
+        }
+
+        .card .btn {
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;  
+            border-radius: 0;  
+            background-color: #090706; 
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            display: inline-block;
+            width: 48%;
+            text-align: center;
+        }
+
+        .card .btn:hover {
+            background-color: #34495e;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between; 
+            padding-top: 10px;
+            padding-bottom: 15px;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border: 5px solid #e3e3e3; 
+            border-radius: 8px; 
+            overflow: hidden;
+            display: flex;
+            justify-content: center; 
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-img-container img:hover {
+            transform: scale(1.1); 
+        }
+
+        .row-cols-lg-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; 
+            height: 100%; 
+        }
+
+        @media (max-width: 768px) {
+            .row-cols-lg-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 991px) {
+            .row-cols-md-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #090706;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background-color: #090706; 
+            animation: lineAnimation 1.5s ease-in-out infinite;
+        }
+
+        @keyframes lineAnimation {
+            0%, 100% {
+                width: 60%;
+            }
+            50% {
+                width: 100%;
+            }
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            margin: 50px auto;
+            max-width: 1200px;
+            padding: 30px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .pagination .page-item {
+            margin: 0;
+        }
+
+        .pagination .page-link {
+            color:rgb(0, 0, 0);
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #e3e3e3;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color:rgb(0, 0, 0);
+            color: white;
+        }
+
+        .navigation {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Stylisation de la barre de recherche */
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color:rgb(0, 0, 0);
+            outline: none;
+            box-shadow: 0 0 8px rgb(227, 240, 255);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: none;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color:rgb(0, 0, 0);
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Gestion des mannequins</h1>
-{# <a href=" {{path('admin_mannequin')}}" class="btn btn-dark">Ajouter un defile</a> #}
-
-<hr> 
-<table class="table table-hover">
-<thead>
-    <tr>
-      <th scope="col-1">Nom</th>
-      <th scope="col-3">Prenom</th>
-      <th scope="col-1">Nationalité</th>
-      <th scope="col-1">Biographie</th>
+<div class="container py-5">
+    <h1 class="text-center text-primary mb-5">Liste des Mannequins</h1>
     
-    </tr>
-</thead>  
-    <tbody>
-        {% for lemannequin in lesmannequins %}
-            <tr>
-            <td class="col-3">{{lemannequin.id}}</td>
-            <td class="col-1">{{lemannequin.Nom}}</td>
-            <td class="col-1">{{lemannequin.Prenom}}</td>
-            <td class="col-1">{{lemannequin.Nationalite}}</td>
-             <td class="col-1">{{lemannequin.biographieM}}</td>
-            <td class="col-1">
-            {# {% for leStyle in ledefile.styles %} 
-            <span class="badge bg-dark" style="background-color: {{leStyle.couleur}};"> {{leStyle.nom}}</span>
-            {# {% endfor %} 
-            </td>
-            <td class="col-2">
-            <span class="align-self-center badge bg-dark"> {{nbMorceaux}} {% if nbMorceaux > 1 %} morceaux {% else %} morceau {% endif %}</span>
-            {# </td> #}
-            {# <td class="col-2">
-                <a href=" {{path('admin_mannequins_modif', {'id': lemannequin.id })}}" class="btn btn-dark"><i class="fas fa-pen"></i></a>
-                <a class="btn btn-dark"
-                data-bs-toggle="modal" 
-                data-bs-target="#modalSimple"
-                data-titre="Suppression d'un mannequin"
-                data-message="Etes vous sur de vouloir supprimer l'mannequin : {{lemannequin.Nom}}"
-                data-libelleBouton="Supprimer l'mannequin"
-                data-lien="{{path('admin_mannequins_suppression', {'id': lemannequin.id}) }}">
-                <i class="far fa-trash-alt"></i></a>
-            </td> #}
-            </tr>
-            {% endfor %}
-    </tbody>
-</table>
-<div class="navigation mx-auto">
-		{{ knp_pagination_render(lesmannequins) }}
-	</div>
+    {% if "ROLE_ADMIN" in app.user.roles %}
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <a href="{{ path('admin_mannequin_ajout') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
+            </a>
+        </div>
+  {% endif %}
+ <div class="filters">
+        <div class="form-group">
+            <label for="defiles">Filtrer par défilé</label>
+            <input 
+                type="text" 
+                name="defiles" 
+                id="defiles"
+                class="form-control" 
+                placeholder="Nom du défilé..."
+                value="{{ app.request.query.get('defiles') }}"
+                onkeyup="submitOnEnter(event)" 
+            >
+        </div>
+    </form>
 </div>
-{% endblock %}
-{% block javascript %}
-    {% include "include/_modale.html.twig" %}
+
+        <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="Rechercher un mannequin par nom..." 
+                    value="{{ app.request.query.get('search') }}"
+                >
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+  
+
+    <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
+        {% for lemannequin in lesmannequins %}
+            {% if app.request.query.get('search') is not empty %}
+                {% if lemannequin.Nom matches '/^' ~ app.request.query.get('search') ~ '/i' %}
+                    <div class="col">
+                        <div class="card shadow-lg border-0 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
+                                <div class="card-img-container">
+                                    <img src="{{ lemannequin.imageMannequins }}" alt="Image de {{ lemannequin.Nom }}"/>
+                                </div>
+                                <p class="card-text">
+                                    <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
+                                    <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
+                                    <strong>Défilés :</strong>
+                                    <ul>
+                                        {% for defile in lemannequin.defiles %}
+                                            <li>{{ defile.nomD }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </p>
+                            </div>
+                            {% if "ROLE_ADMIN" in app.user.roles %}
+                                <div class="card-footer">
+                                    <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-pen"></i> Modifier
+                                    </a>
+                                    <a class="btn btn-danger btn-sm"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#modalSimple"
+                                       data-titre="Suppression d'un mannequin"
+                                       data-message="Êtes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
+                                       data-libelleBouton="Supprimer ce mannequin"
+                                       href="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                                        <i class="far fa-trash-alt"></i> Supprimer
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="col">
+                    <div class="card shadow-lg border-0 rounded-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
+                            <div class="card-img-container">
+                                <img src="{{ lemannequin.imageMannequins }}" alt="Image de {{ lemannequin.Nom }}"/>
+                            </div>
+                            <p class="card-text">
+                                <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
+                                <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
+                                <strong>Défilés :</strong>
+                                <ul>
+                                    {% for defile in lemannequin.defiles %}
+                                        <li>{{ defile.nomD }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </p>
+                        </div>
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <div class="card-footer">
+                                <a href="{{ path('admin_mannequin_modif', {'id': lemannequin.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i> Modifier
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modalSimple"
+                                   data-titre="Suppression d'un mannequin"
+                                   data-message="Êtes-vous sûr de vouloir supprimer le mannequin : {{ lemannequin.Nom }} ?"
+                                   data-libelleBouton="Supprimer ce mannequin"
+                                   href="{{ path('admin_mannequin_suppression', {'id': lemannequin.id}) }}">
+                                    <i class="far fa-trash-alt"></i> Supprimer
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="navigation">
+        <ul class="pagination">
+            <li class="page-item">{{ knp_pagination_render(lesmannequins) }}</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

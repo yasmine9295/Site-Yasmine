@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Blog;
+use App\Entity\Marque;
 use DateTimeInterface;
+use App\Entity\Mannequins;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DefileRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DefileRepository::class)]
 class Defile
@@ -18,6 +22,8 @@ class Defile
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(min: 2, minMessage: "Le nom doit comporter au moins {{ limit }} caractères.")]
     private ?string $NomD = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -32,23 +38,28 @@ class Defile
     #[ORM\ManyToMany(targetEntity: Mannequins::class, inversedBy: 'defiles')]
     private Collection $mannequin;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Thème = null;
 
-    #[ORM\Column(length: 1000, nullable: true)]
+    #[ORM\Column(length: 1000)]
+    #[Assert\NotBlank(message: "La description est obligatoire.")]
+    #[Assert\Length(min: 20, minMessage: "La description doit comporter au moins {{ limit }} caractères.")]
     private ?string $description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'defiles')]
+    private ?Theme $theme = null;
 
     public function __construct()
     {
-        $this->blogs = new ArrayCollection();
         $this->mannequin = new ArrayCollection();
-
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString(): string
+    {
+        return $this->NomD;
     }
 
     public function getNomD(): ?string
@@ -108,7 +119,6 @@ class Defile
     public function removeBlog(Blog $blog): static
     {
         if ($this->blogs->removeElement($blog)) {
-            // set the owning side to null (unless already changed)
             if ($blog->getDefile() === $this) {
                 $blog->setDefile(null);
             }
@@ -141,18 +151,6 @@ class Defile
         return $this;
     }
 
-    public function getThème(): ?string
-    {
-        return $this->Thème;
-    }
-
-    public function setThème(?string $Thème): static
-    {
-        $this->Thème = $Thème;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -161,6 +159,18 @@ class Defile
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): static
+    {
+        $this->theme = $theme;
 
         return $this;
     }

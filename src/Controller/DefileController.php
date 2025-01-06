@@ -4,7 +4,6 @@ namespace App\Controller;
 
 
 use App\Entity\Defile;
-use App\Controller\DefileController;
 use App\Repository\DefileRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,5 +36,3 @@ class DefileController extends AbstractController
         ]);
     }
 }
-
-

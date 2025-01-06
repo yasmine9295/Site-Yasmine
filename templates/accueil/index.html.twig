@@ -4,175 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YM{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>☾★</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤍</text></svg>">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
-
+    
+    <!-- Google Fonts (Elegant fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
     {% block stylesheets %}
     <style>
         /* Global styles */
         body {
-            font-family: 'Helvetica', sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0d0d0d; /* Fond sombre élégant */
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
 
-        /* Navbar styles */
-        .navbar {
-            background-color: #fff;
-            padding: 15px 30px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #222;
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .navbar-nav {
-            list-style-type: none;
-            display: flex;
-            margin-left: auto;
-        }
-
-        .nav-item {
-            margin-right: 20px;
-        }
-
-        .nav-link {
-            color: #555;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .nav-link:hover {
-            color: #333;
-            transform: translateY(-2px);
-        }
-
-        /* Main section with video */
-        .main-section {
-            display: flex;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        .left-section {
-            width: 50%;
-            background-color: #222;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .right-section {
-            width: 50%;
-            background-color: #f1f1f1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .video-container {
+        /* Centrer le titre en haut de la page */
+        .title {
             position: absolute;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Centrage horizontal */
+            font-size: 2.5rem;  /* Taille du titre */
+            font-weight: bold;  /* Gras pour rendre le titre plus visible */
+            color: #fff; /* Couleur blanche pour le texte */
+            z-index: 2; /* Assurez-vous qu'il est au-dessus des autres éléments */
+            text-align: center;  /* Centrer le texte */
+            width: 100%; /* Prendre toute la largeur */
+        }
+
+        /* Main content section */
+        .main-section {
+            position: relative;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: space-between;
+            width: 100%; /* Prendre toute la largeur */
+            z-index: 1;
+        }
+
+        .video-section {
+            flex: 1; /* Occupy equal width */
+            position: relative;
+            overflow: hidden; /* Ensure videos stay within their containers */
+        }
+
+        /* Style for the video iframe */
+        .video-container {
             width: 100%;
             height: 100%;
+            border: none;
             object-fit: cover;
-            z-index: -1; /* To keep the text on top */
-            filter: blur(5px);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Hover effect on video */
+        .video-section:hover .video-container {
+            transform: scale(1.1); /* Zoom in effect */
         }
 
         .content-text {
-            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
+            z-index: 2;
             padding: 20px;
+            max-width: 80%;
         }
 
         .content-text h1 {
-            font-size: 3rem;
-            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         }
 
         .content-text p {
             font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #f1f1f1;
         }
 
-        .btn {
-            background-color: #f1f1f1;
-            color: #333;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            text-decoration: none;
+        /* Style pour le bouton élégant */
+        .btn-elegant {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-color: #090706;
+            color: #fff;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            display: inline-block;
         }
 
-        .btn:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
+        /* Effet de survol élégant */
+        .btn-elegant:hover {
+            background-color: #34495e;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            color: #fff;
+        }
+
+        /* Focus effect on button */
+        .btn-elegant:focus {
+            outline: none;
+            border-color: #fff;
         }
     </style>
     {% endblock %}
 </head>
+
 <body>
-
-<!-- Navbar -->
-<nav class="navbar">
-    <a href="{{ path('accueil') }}" class="navbar-brand">
-        <img src="{{ asset('images/logo.png') }}" alt="Y&M Logo" class="navbar-logo">
-    </a>
-    <div class="navbar-menu">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_defiles') }}">Défilés</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_marque') }}">Marques</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_mannequins') }}">Mannequins</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('admin_blogs') }}">Partie Blog</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Main content area with video background -->
+<!-- Main section for videos -->
 <div class="main-section">
-    <!-- Left section with video background -->
-    <div class="left-section">
-        <video autoplay muted loop class="video-container">
-            <source src="https://www.example.com/video.mp4" type="video/mp4"> 
-            Your browser does not support the video tag.
-        </video>
-        <div class="content-text">
+    <!-- First video section (left) -->
+    <div class="video-section">
+        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="content-text"> 
             <h1>Notre Présentation</h1>
-            <p>Plongez dans l'univers de Y&M </p>
-            <p>où l'élégance rencontre la mode.</p>
-            <a href="{{ path('accueil') }}" class="btn">Découvrir</a>
+            <p>Plongez dans l'univers de Y&M</p>
+            <p>Où l'élégance rencontre la mode.</p>
+            <a href="{{ path('admin_defiles') }}" class="btn-elegant">Découvrir</a>
         </div>
     </div>
 
-    <!-- Right section for presentation or other content -->
-    <div class="right-section">
+    <!-- Second video section (right) -->
+    <div class="video-section">
+        <iframe class="video-container" src="https://www.youtube.com/embed/6BLAYgOV0Tg?autoplay=1&mute=1&loop=1&playlist=6BLAYgOV0Tg" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <div class="content-text">
-           <h1>Bienvenue dans le monde du luxe</h1>
-             <p>Découvrez nos dernières collections et défilés</p>
-            <a href="{{ path('admin_blogs') }}" class="btn">Explorez le Blog</a>
+            <h1>Bienvenue dans le monde du luxe</h1>
+            <p>Découvrez nos dernières collections et défilés</p>
+            <a href="{{ path('admin_blog') }}" class="btn-elegant">Explorez le Blog</a>
         </div>
     </div>
 </div>

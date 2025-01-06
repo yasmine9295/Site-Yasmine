@@ -1,0 +1,189 @@
+/* Importation de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400&display=swap');
+
+/* Design général */
+body {
+    font-family: 'Roboto', sans-serif; /* Police élégante pour le corps */
+    background-color: #f4f7fa; /* Fond général */
+    color: #333; /* Couleur du texte par défaut */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 600px; /* Taille plus compacte */
+    margin: 50px auto; /* Centré verticalement */
+    padding: 30px;
+    background-color: #fff; /* Fond blanc */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre élégante */
+    transition: transform 0.3s ease;
+}
+
+/* Titre principal */
+h1 {
+    font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
+    font-size: 2.5rem;
+    color: #000; /* Titre en noir */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Sous-titre */
+h4 {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Effet d'apparition (Fade-in) lors du scroll */
+.container, .form-group, .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Formulaire */
+form {
+    margin-top: 30px;
+}
+
+input, select, textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 12px;
+    width: 100%;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #000; /* Bordure noire lors du focus */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+/* Sélecteurs */
+select {
+    background-color: #fff;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #000; /* Bordure noire sur focus */
+}
+
+/* Boutons */
+.btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #000;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #000; /* Fond noir pour le bouton Annuler */
+    color: white; /* Texte en blanc */
+    border: none;
+    font-family: 'Playfair Display', serif; /* Police élégante */
+    font-weight: 600; /* Police en gras pour un effet luxueux */
+    letter-spacing: 1px; /* Espacement des lettres pour l'élégance */
+    padding: 15px 40px; /* Un peu plus de padding pour l'élégance */
+    text-transform: uppercase; /* Texte en majuscules */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #333; /* Hover avec un gris plus foncé */
+    transform: translateY(-2px);
+}
+
+/* Positionner le bouton Annuler en bas de la page */
+.cancel-button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: auto; /* Pour ne pas étirer le bouton sur toute la largeur */
+}
+
+.list-group {
+    padding: 0;
+    list-style-type: none;
+}
+
+.list-group-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Optimisation responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+    .cancel-button-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        width: 80%;  
+    }
+
+    .btn-secondary {
+        width: 100%;
+        font-weight: bold;
+    }
+    
+}

@@ -1,46 +1,82 @@
-{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/defile-modification.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
 
-{% block title %}Ajout Modif Album{% endblock %}
-{% block stylesheets %}  
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-  {% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_album_ajout") %}
-Ajout
-{% else %}
-Modification
-{% endif %}
-d'un Albums</h1>
+<div class="container py-4">
+    <h1 class="text-center mb-4">
+        {% if app.request.attributes.get('_route') == 'admin_defile_ajout' %}
+            Ajout d'un défilé
+        {% else %}
+            Modification d'un Défilé
+        {% endif %}
+    </h1>
 
-{{form_start(formAlbum,{'attr':{'novalidate':'novalidate'}})}}
-<div class="row">
-    <div class="col">{{form_row(formAlbum.nom)}}</div>
-    <div class="col">{{form_row(formAlbum.image)}}</div>
-</div>
-<div class="row">
-    <div class="col">{{form_row(formAlbum.date)}}</div>
-    <div class="col">{{form_row(formAlbum.artiste)}}</div>
-    <div class="col">{{form_row(formAlbum.styles)}}</div>
+    {{ form_start(formDefile, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            {{ form_row(formDefile.NomD) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(formDefile.Date) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            {{ form_row(formDefile.marque) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+            {% if formDefile.theme is not empty %}
+                        <div class="col-md-6">
+                            <h4>Thème associé :</h4>
+                            <ul class="list-group">
+                                {% for theme in formDefile.theme %}
+                                    <li class="list-group-item">{{ theme.nomT }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                        {% if formDefile.mannequin is not empty %}
+                            <div class="col-md-6">
+                                <h4>Mannequins associés :</h4>
+                                <ul class="list-group">
+                                    {% for mannequin in formDefile.mannequin %}
+                                        <li class="list-group-item">{{ mannequin.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+
+       
+        <div class="col-md-6">
+            {{ form_row(formDefile.description) }}
+        </div>
+    </div>
+
+    {{ form_end(formDefile) }}
 </div>
 
-<div class="row">
-    <div class="col"><a href=" {{path('admin_albums')}}" class="btn btn-dark btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_album_ajout") %}
-"Ajouter l'album"
-{% else %}
-"Modifier l'album"
-{% endif %}></div>
+
+
+<div class="cancel-button-container">
+    <a href="{{ path('admin_defiles') }}" class="btn btn-secondary btn-block">Annuler</a>
 </div>
-{{form_end(formAlbum)}}
+
 {% endblock %}
+
 {% block javascript %}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('selectStyles').select2();
-});</script>
+    $(document).ready(function() {
+        $('select').select2();  
+    });
+</script>
 {% endblock %}

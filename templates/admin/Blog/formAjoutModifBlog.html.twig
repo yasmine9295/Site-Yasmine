@@ -1,30 +1,201 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout/modif Style{% endblock %}
+{% block title %}Ajout/modif Blog{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_style_ajout") %}
-Ajout
-{% else %}
-Modification
-{% endif %}
-d'un style</h1>
+    <style>
+        /* Corps de la page */
+        body {
+            background: url('URL_DE_TON_IMAGE_DE_FOND') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Playfair Display', serif;
+            color: #2c2c2c;
+            margin: 0;
+            padding: 0;
+        }
 
-{{form_start(formStyle)}}
-<div class="row">
-    <div class="col-7">{{form_row(formStyle.nom)}}</div>
-    <div class="col-5">{{form_row(formStyle.couleur)}}</div>
-</div>
+        /* Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-<div class="row">
-    <div class="col"><a href=" {{path('admin_blog')}}" class="btn btn-dark btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_style_ajout") %}
-"Ajouter le style"
-{% else %}
-"Modifier le style"
-{% endif %}></div>
-</div>
-{{form_end(formStyle)}}
+        .navbar-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #34495e;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 900px;
+            margin: 120px auto 40px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            border: none;
+        }
+
+        /* Titre principal */
+        h1 {
+            font-size: 2.4rem;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Formulaire */
+        form .form-group {
+            margin-bottom: 25px;
+        }
+
+        form label {
+            font-weight: bold;
+            color: #2c2c2c;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            border: 1px solid #e0d6cc;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        form input:focus, form select:focus, form textarea:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Boutons */
+        form .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+        }
+
+        form .btn-block {
+            margin-top: 20px;
+        }
+
+        form .btn-dark {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        form .btn-dark:hover {
+            background-color: #d4af37;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Liste des éléments associés */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #ffffff;
+            border: 1px solid #e0d6cc;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #2c2c2c;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        ul li:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
+    </style>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">
+            {% if app.request.get('_route') == 'admin_blog_ajout' %}
+                Ajout
+            {% else %}
+                Modification
+            {% endif %}
+            d'un blog
+        </h1>
+
+        {{ form_start(formBlog, {'attr': {'class': 'mb-4'}}) }}
+
+        <div class="mb-3">
+            {{ form_row(formBlog.NomArticle, {
+                'label': 'Titre du post', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.Contenu, {
+                'label': 'Contenu du post', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.Date, {
+                'label': 'Date de publication', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formBlog.image, {
+                'label': 'Image', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+
+        {{ form_end(formBlog) }}
+
+        <div class="row mt-3">
+            <div class="col">
+                <a href="{{ path('admin_blog') }}" class="btn btn-secondary btn-block">Annuler</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,34 +1,122 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/mannequin-modification.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout Artiste{% endblock %}
-
 {% block body %}
-<h1 class="pt-2 text-center">
-{% if (app.request.attributes.get('_route')=="admin_artiste_ajout") %}
-Ajout
-{% else %}
-Modification
-{% endif %}
-d'un Artistes</h1>
 
-{{form_start(formArtiste,{'attr':{'novalidate':'novalidate'}})}}
+<div class="container py-4">
+    <h1 class="text-center mb-4">
+        {% if app.request.attributes.get('_route') == 'admin_mannequin_ajout' %}
+            Ajouter un mannequin
+        {% else %}
+            Modifier un mannequin
+        {% endif %}
+    </h1>
 
-{{form_row(formArtiste.nom)}}
-{{form_row(formArtiste.description)}}
-<div class="row">
-    <div class="col">{{form_row(formArtiste.site)}}</div>
-    <div class="col">{{form_row(formArtiste.type)}}</div>
+    {{ form_start(formMannequin, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <div class="form-group">
+        {{ form_label(formMannequin.Nom, 'Nom') }}
+        {{ form_widget(formMannequin.Nom, {'attr': {'placeholder': 'Nom du mannequin'}}) }}
+        {% if formMannequin.Nom.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.Nom.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formMannequin.Prenom, 'Prénom') }}
+        {{ form_widget(formMannequin.Prenom, {'attr': {'placeholder': 'Prénom du mannequin'}}) }}
+        {% if formMannequin.Prenom.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.Prenom.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formMannequin.Nationalite, 'Nationalité') }}
+        {{ form_widget(formMannequin.Nationalite, {'attr': {'placeholder': 'Nationalité du mannequin'}}) }}
+        {% if formMannequin.Nationalite.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.Nationalite.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formMannequin.biographieM, 'Biographie') }}
+        {{ form_widget(formMannequin.biographieM, {
+            'attr': {
+                'placeholder': 'Courte biographie...',
+                'class': 'form-control',
+                'style': 'height: 200px;'
+            }
+        }) }}
+        {% if formMannequin.biographieM.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.biographieM.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formMannequin.defiles, 'Défilés') }}
+        {{ form_widget(formMannequin.defiles, {'attr': {'placeholder': 'Défilés du mannequin'}}) }}
+        {% if formMannequin.defiles.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.defiles.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formMannequin.imageMannequins, 'Image') }}
+        {{ form_widget(formMannequin.imageMannequins, {'attr': {'placeholder': 'Image du mannequin'}}) }}
+        {% if formMannequin.imageMannequins.vars.errors|length > 0 %}
+            <div class="invalid-feedback">
+                {% for error in formMannequin.imageMannequins.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark btn-block">
+            {% if app.request.attributes.get('_route') == 'admin_mannequin_ajout' %}
+                Ajouter le mannequin
+            {% else %}
+                Enregistrer les modifications
+            {% endif %}
+        </button>
+        <a href="{{ path('admin_mannequins') }}" class="btn btn-secondary btn-block">Annuler</a>
+    </div>
+
+    {{ form_end(formMannequin) }}
 </div>
-{{form_row(formArtiste.image)}}
 
-<div class="row">
-    <div class="col"><a href=" {{path('admin_artistes')}}" class="btn btn-dark btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-dark btn-block" value=
-    {% if (app.request.attributes.get('_route')=="admin_artiste_ajout") %}
-"Ajouter l'artiste"
-{% else %}
-"Modifier l'artiste"
-{% endif %}></div>
-</div>
-{{form_end(formArtiste)}}
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').select2();  
+        });
+    </script>
 {% endblock %}
