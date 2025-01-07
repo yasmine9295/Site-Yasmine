@@ -203,7 +203,6 @@
     {% endblock %}
 </head>
 <body>
-<!-- Navigation bar -->
 <nav class="navbar">
    <a href="{{ path('accueil') }}" class="navbar-brand">
         <img src="{{ asset('images.jpg/logo.png') }}" class="navbar-logo">
@@ -243,8 +242,6 @@
     </div>
 </nav>
 
-
-<!-- Main content area -->
 <div class="container">
     {% for label, messages in app.flashes %}
     <div class="alert alert-{{ label }} mt-3">

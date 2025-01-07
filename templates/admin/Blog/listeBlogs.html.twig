@@ -17,7 +17,7 @@
 
         function addComment(cardId) {
             const commentText = document.getElementById(`comment-text-${cardId}`).value;
-            const pseudo = document.getElementById(`pseudo-${cardId}`).value || "Anonyme"; // Si pas de pseudo, afficher "Anonyme"
+            const pseudo = document.getElementById(`pseudo-${cardId}`).value || "Anonyme"; 
             
             if (commentText) {
                 const commentContainer = document.getElementById(`comments-${cardId}`);
@@ -32,7 +32,7 @@
                 `;
                 commentContainer.appendChild(newComment);
                 document.getElementById(`comment-text-${cardId}`).value = '';
-                document.getElementById(`pseudo-${cardId}`).value = ''; // Réinitialiser le pseudo
+                document.getElementById(`pseudo-${cardId}`).value = ''; 
             }
         }
 
@@ -73,7 +73,6 @@
                     <div class="blog-card-content">
                         <h3>{{ blog.NomArticle }}</h3>
                         <div class="blog-meta">
-                            <p class="blog-author">Publié par :</p>
                             <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
                             <i class="fas fa-heart heart-button" onclick="toggleHeart(event)"></i>
                         </div>
