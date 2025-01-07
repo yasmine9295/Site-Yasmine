@@ -29,7 +29,6 @@ class Blog
     #[Assert\Length(min: 10, minMessage: "Le contenu doit comporter au moins {{ limit }} caractères.")]
     private ?string $Contenu = null;
 
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?DateTimeInterface $Date;
 

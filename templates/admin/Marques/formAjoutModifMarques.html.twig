@@ -59,11 +59,13 @@
         {% endif %}
     </button>
 </div>
-<div class="form-group">
+
+{{ form_end(formMarque) }}
+
+<div class="cancel-button-container">
     <a href="{{ path('admin_marques') }}" class="btn btn-secondary btn-block">Annuler</a>
 </div>
 
-{{ form_end(formMarque) }}
 {% endblock %}
 
 {% block javascript %}
