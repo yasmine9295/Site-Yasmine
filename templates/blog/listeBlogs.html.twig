@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -72,6 +72,9 @@
                         <img src="{{ blog.image }}" alt="Image de {{ blog.id }}">
                     </div>
                     <div class="blog-card-content">
+                     <p>{{ blog.user.avatar }}</p>
+                    <p>{{ blog.user.pseudo }}</p>
+                    
                         <h3>{{ blog.NomArticle }}</h3>
                         <div class="blog-meta">
                             <p class="blog-date">Publié le : {{ blog.Date|date("d-m-Y") }}</p>
@@ -83,7 +86,7 @@
                         <p><strong>Défilé associé :</strong> {{ blog.defile }}</p>
                     {% endif %}
 
-                 <p><strong>nom associé :</strong> {{ blog.user.pseudo }}</p>
+                 
                     <div class="comment-section">
                         <h4>Commentaires :</h4>
                         <textarea id="comment-text-{{ blog.id }}" rows="3" placeholder="Écrivez un commentaire..."></textarea>
