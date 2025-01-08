@@ -42,6 +42,9 @@ class Blog
     #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
     private Collection $commentaires;
 
+    #[ORM\ManyToOne(inversedBy: 'blogs')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -143,6 +146,18 @@ class Blog
                 $commentaire->setBlog(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
