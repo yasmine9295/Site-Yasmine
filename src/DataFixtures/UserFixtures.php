@@ -53,6 +53,13 @@ class UserFixtures extends Fixture
         "admintest"
         ));
     $manager->persist($admin);
+
+        for( $i= 0; $i < 10; $i++){
+            $user = (new User())
+                ->setEmail("user$i@domain.fr")
+                ->setPassword("0000");
+            $manager->persist($user);
+        }
     $manager->flush();
     }
 }
