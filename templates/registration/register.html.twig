@@ -21,6 +21,114 @@
             flex-direction: column;
         }
 
+                /* Navigation Bar */
+        .navbar {
+            background-color: #ffffff; /* White background for a clean look */
+            padding: 10px 30px; /* Adjusted padding for a more compact navbar */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            border-bottom: 1px solid #e0e0e0; /* Subtle border */
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: space-between; /* Distribute items with space */
+            align-items: center;
+        }
+
+        /* Navbar Brand (Logo) */
+        .navbar-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50; /* Dark color for the brand */
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #34495e; /* Hover color */
+        }
+
+        /* Navbar Menu */
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-right: 20px; /* Adjust spacing between links */
+            position: relative; /* Important for dropdown positioning */
+        }
+
+        .nav-link {
+            color: #555555; /* Elegant grey color */
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-link:hover {
+            color: #2c3e50; /* Dark color on hover */
+            transform: translateY(-3px); /* Elevation effect */
+        }
+
+        /* Dropdown Menu */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block; /* Make dropdown visible when hovered */
+        }
+
+        .nav-item.dropdown .dropdown-menu {
+            display: none; /* Hide dropdown by default */
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            border-radius: 5px;
+            padding: 10px 0;
+            position: absolute; /* To position it properly */
+            top: 100%;
+            left: 0;
+            min-width: 200px; /* Minimum width to prevent narrow menus */
+            z-index: 1000; /* Ensure dropdown is on top of other elements */
+        }
+
+        /* Dropdown Item */
+        .nav-item.dropdown .dropdown-menu .dropdown-item {
+            font-family: 'Montserrat', sans-serif;
+            color: #555555;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+            background-color: #f4f4f4; /* Soft hover color */
+            color: #2c3e50; /* Dark color on hover */
+        }
+
+        /* Right-aligned Navbar Items (Login / Logout) */
+        .navbar-nav-right {
+            display: flex;
+            justify-content: flex-end; /* Align right */
+            align-items: center; 
+        }
+
+        .navbar-nav-right .nav-item {
+            margin-left: 20px; 
+        }
+
         /* Form container */
         .form-container {
             background: rgba(255, 248, 248, 0.8); /* Fond semi-transparent pour améliorer la lisibilité */

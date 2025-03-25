@@ -15,203 +15,167 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
     {% block stylesheets %}
-    <style>
-        /* Global styles */
-        body {
-            font-family: 'Helvetica', sans-serif;
-            background-color: ; /* Light cream background */
-            color: #f1f1f1; /* Dark grey text */
-            margin: 0;
-            padding: 0;
-        }
+   <style>
+/* Global styles */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #fafafa; /* Light cream background */
+    color: #333; /* Dark grey text */
+    margin: 0;
+    padding: 0;
+}
 
-        /* Background image for the fashion show theme */
-        .main-background {
-            background-image: url('https://cdn.photoroom.com/v1/assets-cached.jpg?path=backgrounds_v3/white/Photoroom_white_background_extremely_fine_texture_only_white_co_d285fc74-d562-4a9f-b0b8-8cf7500231d8.jpg'); /* Replace with your image path */
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-            height: 100vh;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
+/* Navigation Bar */
+.navbar {
+    background-color: #ffffff; /* White background for a clean look */
+    padding: 10px 30px; /* Adjusted padding for a more compact navbar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border-bottom: 1px solid #e0e0e0; /* Subtle border */
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between; /* Distribute items with space */
+    align-items: center;
+}
 
-        .intro-text {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
+/* Navbar Brand (Logo) */
+.navbar-brand {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50; /* Dark color for the brand */
+    text-decoration: none;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    transition: color 0.3s ease;
+}
 
-        .intro-text p {
-            font-size: 1.2rem;
-            font-weight: normal;
-            margin-top: 10px;
-        }
+.navbar-brand:hover {
+    color: #34495e; /* Hover color */
+}
 
-            /* Importation de la police élégante */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@500&display=swap');
+/* Navbar Menu */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
 
-        /* Navigation Bar */
-        .navbar {
-            background-color: #ffffff; /* Fond blanc pour un look épuré */
-            padding: 15px 30px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre douce et élégante */
-            border-bottom: 1px solid #e0e0e0; /* Ajouter une bordure subtile */
-            font-family: 'Montserrat', sans-serif; /* Police moderne et élégante */
-        }
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
 
-        .navbar-brand {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #2c3e50; /* Couleur sombre pour un aspect sophistiqué */
-            text-decoration: none;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-family: 'Playfair Display', serif; /* Police élégante pour le titre */
-            transition: color 0.3s ease;
-        }
+.nav-item {
+    margin-right: 20px; /* Adjust spacing between links */
+    position: relative; /* Important for dropdown positioning */
+}
 
-        .navbar-brand:hover {
-            color: #34495e; /* Subtle hover effect for brand */
-        }
+.nav-link {
+    color: #555555; /* Elegant grey color */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        .navbar-nav {
-            list-style-type: none;
-            display: flex;
-            margin-left: auto;
-            align-items: center;
-        }
+.nav-link:hover {
+    color: #2c3e50; /* Dark color on hover */
+    transform: translateY(-3px); /* Elevation effect */
+}
 
-        .nav-item {
-            margin-right: 30px; /* Espacement plus large entre les éléments */
-        }
+/* Dropdown Menu */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Make dropdown visible when hovered */
+}
 
-        .nav-link {
-            color: #555555; /* Gris élégant pour le texte */
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.3s ease;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-        }
+.nav-item.dropdown .dropdown-menu {
+    display: none; /* Hide dropdown by default */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border-radius: 5px;
+    padding: 10px 0;
+    position: absolute; /* To position it properly */
+    top: 100%;
+    left: 0;
+    min-width: 200px; /* Minimum width to prevent narrow menus */
+    z-index: 1000; /* Ensure dropdown is on top of other elements */
+}
 
-        .nav-link:hover {
-            color: #2c3e50; /* Changement de couleur plus foncé pour un survol élégant */
-            transform: translateY(-3px); /* Légère élévation pour un effet de survol plus élégant */
-        }
+/* Dropdown Item */
+.nav-item.dropdown .dropdown-menu .dropdown-item {
+    font-family: 'Montserrat', sans-serif;
+    color: #555555;
+    transition: background-color 0.3s ease;
+}
 
-        .nav-item.dropdown .dropdown-menu {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Ombre plus douce pour un menu élégant */
-            border-radius: 5px;
-            padding: 10px 0;
-        }
+.nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #f4f4f4; /* Soft hover color */
+    color: #2c3e50; /* Dark color on hover */
+}
 
-        .nav-item.dropdown .dropdown-menu .dropdown-item {
-            font-family: 'Montserrat', sans-serif;
-            color: #555555;
-            transition: background-color 0.3s ease;
-        }
+/* Right-aligned Navbar Items (Login / Logout) */
+.navbar-nav-right {
+    display: flex;
+    justify-content: flex-end; /* Align right */
+    align-items: center; 
+}
 
-        .nav-item.dropdown .dropdown-menu .dropdown-item:hover {
-            background-color: #f4f4f4; /* Effet de survol pour les éléments du menu */
-            color: #2c3e50; /* Couleur élégante au survol */
-        }
+.navbar-nav-right .nav-item {
+    margin-left: 20px; 
+}
 
-        /* Mobile Responsiveness: NavBar Adaptation */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 10px 20px;
-            }
+.btn {
+    background-color: #F1f1f1; 
+    color: #333;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-            .navbar-brand {
-                font-size: 1.8rem; /* Réduire la taille de la marque sur mobile */
-            }
+.btn:hover {
+    background-color: #d1c59a; 
+    transform: translateY(-2px); 
+}
 
-            .navbar-nav {
-                display: block;
-                text-align: center;
-            }
+/* Main content area */
+.container {
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin-top: 100px; 
+}
 
-            .nav-item {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
+/* Alert styles */
+.alert {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
 
-            .nav-item:last-child {
-                margin-bottom: 0;
-            }
-        }
-        
-        .dropdown-item {
-            color: #f1f1f1;
-            font-weight: 500;
-        }
 
-        .dropdown-item:hover {
-            background-color: #F1f1f1; /* Soft cream color */
-            color: #333;
-        }
+h1, h2, h3 {
+    color: #f1f1f1;
+    font-weight: bold;
+}
 
-        .navbar-nav-right {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            background-color: #F1f1f1; /* Cream color */
-            color: #333;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #d1c59a; /* Slightly darker cream on hover */
-            transform: translateY(-2px); /* Elegant hover effect */
-        }
-
-        /* Main content area */
-        .container {
-            padding: 40px 20px;
-            border-radius: 8px;
-            margin-top: 100px; /* Avoid content being hidden behind navbar */
-        }
-
-        /* Alert styles */
-        .alert {
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        /* Styling for section headings */
-        h1, h2, h3 {
-            color: #f1f1f1;
-            font-weight: bold;
-        }
-
-    </style>
+</style>
     {% endblock %}
 </head>
 <body>
 <nav class="navbar">
    <a href="{{ path('accueil') }}" class="navbar-brand">
-        <img src="{{ asset('images.jpg/logo.png') }}" class="navbar-logo">
+        <img src="{{ asset('image.logo.png') }}" class="navbar-logo" alt="Logo yetm" width="50">
     </a>
     <div class="navbar-menu">
         <ul class="navbar-nav">
@@ -231,19 +195,18 @@
             </li>
             {% endif %}
         </ul>
-        <ul class="navbar-nav-right">
-            {% if app.user %}
-            <li class="nav-item dropdown">
-
-                <ul class="dropdown-menu">
-                    {# <li><a class="dropdown-item" href="#">Mon profil</a></li> #}
-                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                </ul>
-            </li>
-            {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Se Connecter</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a></li>
-            {% endif %}
+         <ul class="navbar-nav-right">
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#">Mon Profil</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Se Connecter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a></li>
+                {% endif %}
         </ul>
     </div>
 </nav>
