@@ -48,7 +48,6 @@ class DefileType extends AbstractType
             ])
             ->add('marque', EntityType::class, [
                 'class' => Marque::class, 
-                'label' => 'NomM', 
                 'label' => 'Choisir une marque',
             ])
             ->add('description', TextareaType::class, [
@@ -56,7 +55,7 @@ class DefileType extends AbstractType
             ])
             ->add('theme', EntityType::class, [
                 'class' => Theme::class,
-                'label' => 'nom', 
+                'label' => 'Thème', 
                 'placeholder' => 'Choisir un thème',
             ])
             ->add('submit', SubmitType::class, [

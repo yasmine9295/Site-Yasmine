@@ -40,10 +40,12 @@ class ResetPasswordController extends AbstractController
     #[Route('', name: 'app_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
+        // Crée le formulaire de demande de réinitialisation
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Traite l'envoi de l'email de réinitialisation de mot de passe
             return $this->processSendingPasswordResetEmail(
                 $form->get('email')->getData(),
                 $mailer,
@@ -51,6 +53,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
+        // Affiche le formulaire
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
@@ -77,11 +80,13 @@ class ResetPasswordController extends AbstractController
     #[Route('/reset/{token}', name: 'app_reset_password')]
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
+        // Si un token est passé dans l'URL, stockez-le dans la session
         if ($token) {
             $this->storeTokenInSession($token);
             return $this->redirectToRoute('app_reset_password');
         }
 
+        // Sinon, récupérez le token de la session
         $token = $this->getTokenFromSession();
         if (null === $token) {
             throw $this->createNotFoundException('Aucun jeton de réinitialisation de mot de passe trouvé dans l\'URL ou dans la session.');
@@ -99,12 +104,15 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_forgot_password_request');
         }
 
+        // Créez le formulaire de changement de mot de passe
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Supprime la demande de réinitialisation
             $this->resetPasswordHelper->removeResetRequest($token);
 
+            // Hash du mot de passe et mise à jour de l'utilisateur
             $encodedPassword = $userPasswordHasher->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
@@ -113,11 +121,14 @@ class ResetPasswordController extends AbstractController
             $user->setPassword($encodedPassword);
             $this->entityManager->flush();
 
+            // Nettoie la session après réinitialisation
             $this->cleanSessionAfterReset();
 
+            // Redirige vers la page de connexion
             return $this->redirectToRoute('app_login');
         }
 
+        // Affiche le formulaire de réinitialisation
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
@@ -128,6 +139,7 @@ class ResetPasswordController extends AbstractController
      */
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
     {
+        // Recherche de l'utilisateur par email
         $user = $this->entityManager->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
@@ -137,13 +149,15 @@ class ResetPasswordController extends AbstractController
         }
 
         try {
+            // Génération du token de réinitialisation
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
             return $this->redirectToRoute('app_check_email');
         }
 
+        // Envoi de l'email de réinitialisation
         $email = (new TemplatedEmail())
-            ->from(new Address('no-reply@btssio.fr', 'Webmaster BTS SIO'))
+            ->from(new Address('no-reply@dimawork.fr', 'Webmaster BTS SIO'))
             ->to($user->getEmail())
             ->subject('Réinitialisation de votre mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
@@ -153,9 +167,9 @@ class ResetPasswordController extends AbstractController
 
         $mailer->send($email);
 
+        // Stocke le token dans la session
         $this->setTokenObjectInSession($resetToken);
 
         return $this->redirectToRoute('app_check_email');
     }
 }
-

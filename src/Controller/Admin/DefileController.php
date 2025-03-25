@@ -26,7 +26,7 @@ class DefileController extends AbstractController
             9
         );
 
-        return $this->render('admin/defile/listeDefiles.html.twig', [
+        return $this->render('defile/listeDefiles.html.twig', [
             'lesDefiles' => $defiles,
         ]);
     }
@@ -34,8 +34,8 @@ class DefileController extends AbstractController
     /**
      * Ajouter ou modifier un défilé
      */
-    #[Route('/admin/defile/ajout', name: 'admin_defile_ajout', methods: ['GET', 'POST'])]
-    #[Route('/admin/defile/modif/{id?}', name: 'admin_defile_modif', methods: ['GET', 'POST'])]
+    #[Route('/defile/ajout', name: 'admin_defile_ajout', methods: ['GET', 'POST'])]
+    #[Route('/defile/modif/{id?}', name: 'admin_defile_modif', methods: ['GET', 'POST'])]
     public function ajoutModifDefile(?Defile $defile, Request $request, EntityManagerInterface $manager): Response
     {
         $mode = $defile ? 'modifié' : 'ajouté';
@@ -52,7 +52,7 @@ class DefileController extends AbstractController
             return $this->redirectToRoute('admin_defiles');
         }
 
-        return $this->render('admin/defile/formAjoutModifDefile.html.twig', [
+        return $this->render('defile/formAjoutModifDefile.html.twig', [
             'formDefile' => $form->createView(),
         ]);
     }

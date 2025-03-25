@@ -7,6 +7,12 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤍</text></svg>">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/Blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/blogcards.css') }}">
+    <script src="https://kit.fontawesome.com/2bcd4f9bb1.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
     {% block stylesheets %}
     <style>
@@ -206,7 +212,7 @@
 <nav class="navbar">
    <a href="{{ path('accueil') }}" class="navbar-brand">
         <img src="{{ asset('images.jpg/logo.png') }}" class="navbar-logo">
-    </a
+    </a>
     <div class="navbar-menu">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{{ path('defiles') }}">Défilés</a></li>
@@ -220,7 +226,7 @@
                     <li><a class="dropdown-item" href="{{ path('admin_defiles') }}">Gestion des Défilés</a></li>
                     <li><a class="dropdown-item" href="{{ path('admin_marque') }}">Gestion des Marques</a></li>
                     <li><a class="dropdown-item" href="{{ path('admin_mannequins') }}">Gestion des Mannequins</a></li>
-                    <li><a class="dropdown-item" href="{{ path('admin_blog') }}">Gestion du blog</a></li>
+                    <li><a class="dropdown-item" href="{{ path('blog') }}">Gestion du blog</a></li>
                 </ul>
             </li>
             {% endif %}
@@ -230,7 +236,7 @@
             <li class="nav-item dropdown">
 
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Mon profil</a></li>
+                    {# <li><a class="dropdown-item" href="#">Mon profil</a></li> #}
                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
                 </ul>
             </li>
