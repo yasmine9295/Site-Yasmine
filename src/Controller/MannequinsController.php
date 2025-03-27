@@ -26,12 +26,12 @@ class MannequinsController extends AbstractController
         ]);
     }
         
-    #[Route('/mannequin/{id}', name: 'ficheMannequin' , methods:"GET")]
+    // #[Route('/mannequin/{id}', name: 'ficheMannequin' , methods:"GET")]
 
-    public function ficheMannequin(Mannequins $mannequin)
-    {
-        return $this->render('Mannequin/ficheMannequin.html.twig', [
-            'leMannequin' => $mannequin
-        ]);
-    }
+    // public function ficheMannequin(Mannequins $mannequin)
+    // {
+    //     return $this->render('Mannequin/ficheMannequin.html.twig', [
+    //         'leMannequin' => $mannequin
+    //     ]);
+    // }
 }

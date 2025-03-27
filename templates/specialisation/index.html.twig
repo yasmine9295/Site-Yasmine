@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spécialisations{% endblock %}
+
+{% block body %}
+<style>
+
+/* Ajoute une police élégante */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Style global de la page */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-top: 40px;
+    color: #2c3e50;
+    text-transform: uppercase;
+}
+
+/* Liste des spécialisations */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 30px;
+}
+
+/* Cartes de chaque spécialisation */
+h3 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+h3::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #3498db;
+    margin-top: 10px;
+}
+
+/* Style des mannequins dans la spécialisation */
+ul ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+ul ul li {
+    font-size: 1.2em;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+/* Style du nombre de mannequins */
+h3 span {
+    font-size: 1.2em;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Design des éléments dans le conteneur global */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Ajout d'un effet hover sur chaque spécialisation */
+li:hover {
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour la page */
+.page-content {
+    margin: 30px 0;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-content h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Ajouter un peu d'espace entre les cartes des spécialisations */
+.specialisation-card {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajout d'un gradient pour les titres */
+.specialisation-card h3 {
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Ajouter un effet de hover sur chaque spécialisation */
+.specialisation-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+</style>
+    <div class="container page-content">
+        <h1>Liste des spécialisations</h1>
+
+        <div class="row">
+            {% for item in specialisationMannequins %}
+                <div class="col-md-4 specialisation-card">
+                    <h3>{{ item.specialisation.nom }} ({{ item.count }} mannequins)</h3>
+                    <ul>
+                        {% for mannequin in item.mannequins %}
+                            <li>{{ mannequin.Nom }} {{ mannequin.Prenom }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p>Aucune spécialisation trouvée.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

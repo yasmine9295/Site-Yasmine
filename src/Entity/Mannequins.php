@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\ImageMannequin;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Specialisation;
 use App\Repository\MannequinsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -42,13 +43,14 @@ class Mannequins
     #[ORM\Column(length: 1000)]
     private ?string $imageMannequins = null;
 
-
+    #[ORM\ManyToOne(inversedBy: 'mannequins')]
+    private ?Specialisation $specialisation = null;
 
 
     public function __construct()
     {
-        $this->defiles = new ArrayCollection();
         $this->imageMannequins = new ArrayCollection();
+        $this->defiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,4 +149,17 @@ class Mannequins
 
         return $this;
     }
+
+    public function getSpecialisation(): ?Specialisation
+    {
+        return $this->specialisation;
+    }
+
+    public function setSpecialisation(?Specialisation $specialisation): static
+    {
+        $this->specialisation = $specialisation;
+
+        return $this;
+    }
+
 }

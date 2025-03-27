@@ -3,18 +3,19 @@
 namespace App\Form;
 use App\Entity\Defile;
 use App\Entity\Mannequins;
+use App\Entity\Specialisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\Url;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType; 
 
 class MannequinType extends AbstractType
 {
@@ -49,6 +50,12 @@ class MannequinType extends AbstractType
                 // 'constraints' => [
                 //     new NotBlank(['message' => 'Veuillez sélectionner au moins un défilé.']),
                 // ],
+            ])
+            ->add('specialisation', EntityType::class, [
+                'class' => Specialisation::class,
+                'choice_label' => 'nom', 
+                'label' => 'Spécialistion', 
+                'placeholder' => 'Choisir une Spécialistion',
             ])    
             ->add('imageMannequins', FileType::class, [
                 'label' => 'Image',

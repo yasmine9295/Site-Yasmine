@@ -244,6 +244,11 @@
         .search-bar button:hover {
             background-color:rgb(0, 0, 0);
         }
+
+        .spe{
+            margin-top : -20px;
+            margin-left: 900px;
+        }
     </style>
 {% endblock %}
 
@@ -257,9 +262,12 @@
                 <i class="fas fa-plus-circle me-2"></i> Ajouter un mannequin
             </a>
         </div>
+        <div class="spe">
+            <a href="{{ path('specialisations') }}" class="btn btn-primary">Voir les spécialisations</a>
+        </div>
     {% endif %}
 
-    <form method="get" action="{{ path('mannequin_index') }}" class="mb-4">
+    <form method="get" action="{{ path('admin_mannequins') }}" class="mb-4">
         <div class="search-bar">
             <input 
                 type="text" 
@@ -269,13 +277,25 @@
                 value="{{ app.request.query.get('search') }}"
             >
             <button type="submit" class="btn btn-primary">Rechercher</button>
-        </div>
+        </div>    
+        <div class="filter-bar d-flex">
+        <select name="specialisation">
+            <option value="">Choisissez une spécialisation</option>
+            {% for specialisation in specialisations %}
+                <option value="{{ specialisation.id }}" 
+                    {% if app.request.query.get('specialisation') == specialisation.id %}selected{% endif %}>
+                    {{ specialisation.nom }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
     </form>
+
 
     <div class="row row-cols-1 row-cols-md-9 row-cols-lg-3 g-4">
         {% for lemannequin in lesmannequins %}
-            {% if app.request.query.get('search') is not empty %}
-                {% if lemannequin.Nom matches '/^' ~ app.request.query.get('search') ~ '/i' %}
+            {# {% if app.request.query.get('search') is not empty %}
+                {% if lemannequin.Nom matches '/^' ~ app.request.query.get('search') ~ '/i' %} #}
                     <div class="col">
                         <div class="card shadow-lg border-0 rounded-4">
                             <div class="card-body">
@@ -286,13 +306,17 @@
                                 <p class="card-text">
                                     <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
                                     <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
-                                    <strong>Défilés :</strong>
+                                    <strong>Défilés :</strong>                 
                                     <ul>
                                         {% for defile in lemannequin.defiles %}
                                             <li>{{ defile.nomD }}</li>
                                         {% endfor %}
                                     </ul>
                                 </p>
+                                <strong>Spécialisation:</strong> 
+                                {% if lemannequin.specialisation %}
+                                    {{ lemannequin.specialisation.nom }} 
+                                {% endif %}
                             </div>
                             {% if "ROLE_ADMIN" in app.user.roles %}
                                 <div class="card-footer">
@@ -309,9 +333,9 @@
                             {% endif %}
                         </div>
                     </div>
-                {% endif %}
-            {% else %}
-                <div class="col">
+                {# {% endif %} #}
+            {# {% else %} #}
+                {# <div class="col">
                     <div class="card shadow-lg border-0 rounded-4">
                         <div class="card-body">
                             <h5 class="card-title">{{ lemannequin.Nom }} - {{ lemannequin.Prenom }}</h5>
@@ -322,12 +346,17 @@
                                 <strong>Nationalité:</strong> {{ lemannequin.Nationalite }}<br>
                                 <strong>Biographie:</strong> {{ lemannequin.biographieM }}<br>
                                 <strong>Défilés :</strong>
+                               
                                 <ul>
                                     {% for defile in lemannequin.defiles %}
                                         <li>{{ defile.nomD }}</li>
                                     {% endfor %}
                                 </ul>
                             </p>
+                              <strong>Spécialisation:</strong> 
+                                {% if lemannequin.specialisation %}
+                                    {{ lemannequin.specialisation.nom }} 
+                                {% endif %}
                         </div>
                         {% if "ROLE_ADMIN" in app.user.roles %}
                             <div class="card-footer">
@@ -344,7 +373,7 @@
                         {% endif %}
                     </div>
                 </div>
-            {% endif %}
+            {% endif %} #}
         {% endfor %}
     </div>
     <div class="d-flex justify-content-center mt-4">

@@ -28,14 +28,14 @@ class MannequinsRepository extends ServiceEntityRepository
      * @param string $search
      * @return Query
      */
-    public function findBySearchQuery(string $search)
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.Nom LIKE :search')
-            ->setParameter('search', $search . '%')  
-            ->orderBy('m.Nom', 'ASC')  
-            ->getQuery();
-    }
+    // public function findBySearchQuery(string $search)
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->where('m.Nom LIKE :search')
+    //         ->setParameter('search', $search . '%')  
+    //         ->orderBy('m.Nom', 'ASC')  
+    //         ->getQuery();
+    // }
 
     /**
      * Retourne tous les mannequins triés par nom
@@ -54,13 +54,32 @@ class MannequinsRepository extends ServiceEntityRepository
      *
      * @return Query
      */
-    public function listeMannequinsCompletePaginee()
+    public function listeMannequinsCompletePaginee(?string $nom = "", ?int $specialisationId = null)
     {
-        return $this->createQueryBuilder('a')
-            ->select('a') 
-            ->orderBy('a.Nom', 'ASC')  
-            ->getQuery();
+        $qb = $this->createQueryBuilder('m')
+                   ->leftJoin('m.specialisation', 's') // Jointure avec Specialisation
+                   ->select('m', 's');
+    
+        // Filtrage par nom
+        if ($nom) {
+            $qb->andWhere('m.Nom LIKE :search')
+               ->setParameter('search', $nom . '%');
+        }
+    
+        // Filtrage par spécialisation
+        if ($specialisationId) {
+            $qb->andWhere('s.id = :specialisation')
+               ->setParameter('specialisation', $specialisationId);
+        }
+    
+        // Ordre des résultats
+        $qb->orderBy('m.Nom', 'ASC')
+           ->addOrderBy('s.nom', 'ASC');
+    
+        return $qb->getQuery();
     }
+
+
 
     public function findByDefile($defileId)
 {
@@ -71,6 +90,22 @@ class MannequinsRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
 }
+
+ /**
+     * Recherche des mannequins par spécialisation
+     *
+     * @param int $specialisationId
+     * @return Query
+     */
+    public function findBySpecialisation($specialisationId)
+    {
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.specialisation', 's')
+            ->andWhere('s.id = :specialisationId')
+            ->setParameter('specialisationId', $specialisationId)
+            ->getQuery()
+            ->getResult();
+    }
 
     // Méthode supplémentaire si nécessaire pour d'autres requêtes
     // public function findOneBySomeField($value): ?Mannequins

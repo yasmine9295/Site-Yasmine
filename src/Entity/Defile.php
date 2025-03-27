@@ -47,6 +47,13 @@ class Defile
     #[ORM\ManyToOne(inversedBy: 'defiles')]
     private ?Theme $theme = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datedefiles = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pays = null;
+
+
     public function __construct()
     {
         $this->mannequin = new ArrayCollection();
@@ -171,6 +178,30 @@ class Defile
     public function setTheme(?Theme $theme): static
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getDatedefiles(): ?\DateTimeInterface
+    {
+        return $this->datedefiles;
+    }
+
+    public function setDatedefiles(?\DateTimeInterface $datedefiles): static
+    {
+        $this->datedefiles = $datedefiles;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?string $pays): static
+    {
+        $this->pays = $pays;
 
         return $this;
     }

@@ -13,6 +13,7 @@ use App\Repository\MannequinsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\DefileController;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\SpecialisationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,18 +23,34 @@ class MannequinsController extends AbstractController
 {
     #[Route('/mannequins', name: 'admin_mannequins' , methods:"GET")]
 
-    public function listeMannequins(MannequinsRepository $repo, PaginatorInterface $paginator, Request $request)
+    public function listeMannequins(MannequinsRepository $repo,SpecialisationRepository $specialisationRepository, PaginatorInterface $paginator, Request $request)
     {
-        $mannequins=$paginator->paginate(
-            $repo->listeMannequinsCompletePaginee(),
+        
+         
+        // Pagination des spécialisations
+        $specialisations = $paginator->paginate(
+            $specialisationRepository->findAll(), // Utiliser findAll pour récupérer toutes les spécialisations
             $request->query->getInt('page', 1),
             9
         );
+        $nom=$request->query->get('search');
+        $specialisationId = $request->query->get('specialisation');
+
+
+        $mannequins=$paginator->paginate(
+            $repo->listeMannequinsCompletePaginee($nom, $specialisationId),
+            $request->query->getInt('page', 1),
+            9
+        );
+        // dd($mannequins);
         return $this->render('admin/Mannequins/listeMannequins.html.twig', [
-            'lesmannequins' => $mannequins
+            'lesmannequins' => $mannequins,
+            'specialisations' => $specialisations
         ]);
     }
-        
+
+
+
     #[Route('/mannequin/{id}', name: 'ficheMannequin' , methods:"GET")]
 
     public function ficheMannequin(Mannequins $mannequin)
